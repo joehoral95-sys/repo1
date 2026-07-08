@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Lint + tests + golden deck (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12"]
+        exclude:
+          # Windows job exists to catch path/encoding issues; one Python is enough
+          - os: windows-latest
+            python-version: "3.11"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Ruff
+        run: ruff check src tests
+      - name: Tests
+        run: pytest -q
+      - name: Build golden deck
+        run: deckstudio build decks/_example-quarterly
+      - name: Upload golden deck artifact
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-deck
+          path: output/*.pptx

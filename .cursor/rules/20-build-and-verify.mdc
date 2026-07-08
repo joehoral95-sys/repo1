@@ -1,0 +1,29 @@
+---
+description: Building decks and reading validation output
+globs:
+  - "src/deckstudio/**"
+  - "decks/**"
+alwaysApply: false
+---
+
+Build loop:
+1. `deckstudio validate <deck>` — schema errors name the slide id and field,
+   and say what to do; fix the spec, not the schema.
+2. `deckstudio build <deck>` — writes `output/<name>_vN.pptx`. Versions
+   auto-increment and old versions are NEVER overwritten (Joe may have
+   hand-edited them). `build_log.md` in the deck folder maps versions to
+   repo state.
+3. Build warnings (e.g. missing icon asset, animation skipped) are printed —
+   relay anything Joe would care about.
+4. If the post-build smoke-check fails, it's an ENGINE bug (slide/chart count
+   mismatch, chart without embedded workbook). Report it; never work around
+   it by changing the spec.
+5. Optional visual check: `deckstudio build <deck> --preview` renders PNGs
+   via LibreOffice if installed; absence is fine, not an error.
+
+Charts are native PowerPoint charts with embedded editable data — that is a
+guarantee this repo makes. Anything that would replace a chart with an image
+is wrong.
+
+`deckstudio doctor` diagnoses environment problems (missing fonts, template,
+logo assets).

@@ -1,0 +1,28 @@
+---
+description: Translating Joe's feedback into spec edits
+alwaysApply: false
+---
+
+Feedback maps to spec edits by slide `id`; rebuild produces a NEW version
+(old files stay untouched). Common translations:
+
+- "make slide N punchier" → rewrite title as a sharper assertion; cut bullets
+  to ≤3; consider promoting the key number to `big_number` or adding a
+  `highlight:` to the chart.
+- "too busy / too much text" → split into two slides, or move detail to
+  `notes:`; check the ~40-word ceiling.
+- "make it pop / more visual" → replace `content` with `big_number`,
+  `icon_row`, `comparison`, `timeline`, or `chart` per the slide-type
+  catalog; add `animate: build` where sequencing helps.
+- "the numbers changed / change 18 to 19" → edit the value in the spec,
+  rebuild. Mention Joe can also right-click → Edit Data directly in
+  PowerPoint (his charts are live).
+- "add a slide about X" → insert with a fresh `id`; ids never shift, so
+  later feedback stays unambiguous.
+- "tone it down" → set `animate: none` / `deck.animations: off`; swap quote
+  or big_number drama for content/table restraint.
+- Ambiguous feedback (two plausible readings) → ask Joe, don't guess.
+
+If Joe hand-edited an output version in PowerPoint: that file is his. Ask
+before regenerating the slides he touched, and fold his wording back into
+the spec so the next rebuild keeps it.

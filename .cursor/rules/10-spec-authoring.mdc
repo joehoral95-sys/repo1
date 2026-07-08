@@ -1,0 +1,33 @@
+---
+description: Rules for writing deck specs
+globs:
+  - "decks/**/*.yaml"
+alwaysApply: false
+---
+
+Spec cheat-sheet (full schema: `src/deckstudio/spec/schema.py`; worked
+example: `decks/_example-quarterly/spec.yaml`).
+
+Slide types: title, section, agenda, content, big_number, comparison,
+timeline, icon_row, quote, table, chart, thanks.
+
+Hard rules:
+- Every slide: unique kebab-case `id` (stable — feedback references it),
+  `type`, and for most types an assertion `title` (≤90 chars).
+- No colors, fonts, or positions — only semantic hints:
+  `emphasize`, `sentiment`, `highlight`, `animate: none|fade|build`.
+- Inline markup in text: `**bold**`, `[accent]text[/accent]`. Nothing else.
+- Limits that encode design (don't fight them, redesign the slide):
+  agenda ≤6, bullets ≤6 (≤160 chars each), stats 1-4, comparison bullets ≤5,
+  milestones 2-6, icon_row items 2-4, table ≤6 cols × ≤8 rows, pie/doughnut
+  ≤6 slices, chart series ≤6.
+- `stats`: `arrow` is the visual direction, `sentiment` the color —
+  a falling lapse rate is `arrow: down, sentiment: good`.
+- Every chart needs `insight:` (its "so what") and matching series lengths;
+  `highlight: {series, point}` accents the data point that carries the story.
+- Speaker notes (`notes:`) carry the detail; slides carry the message.
+- Deck level: always fill `audience` and `intent`.
+
+After editing: `deckstudio validate <deck>` then `deckstudio build <deck>`.
+Design suggestions from validate encode the playbooks — act on them or have a
+reason not to.

@@ -1,0 +1,70 @@
+# ============================================================
+# SOA Deck Studio — brand design tokens
+# THE single source of brand truth. Every renderer reads from
+# this file; nothing in a deck spec may override it.
+#
+# PLACEHOLDER VALUES: replace during brand intake
+# (see brand/BRAND_INTAKE.md) with values from the official
+# SOA brand guidelines.
+# ============================================================
+
+colors:
+  primary: "#00305C"        # deep navy — headings, title slide background
+  accent: "#0072CE"         # bright blue — emphasis, highlights, links
+  accent_warm: "#E0A526"    # gold — secondary accent, sparing use
+  positive: "#2E7D32"       # good deltas
+  negative: "#C62828"       # bad deltas
+  neutral_dark: "#333F48"   # body text
+  neutral_mid: "#8A98A5"    # captions, footers, muted labels
+  neutral_light: "#F4F6F8"  # panel/tile backgrounds
+  white: "#FFFFFF"
+  # Chart series colors, applied in order. First = hero series.
+  chart_series: ["#0072CE", "#00305C", "#7BA7D7", "#A0AEC0", "#E0A526", "#5C7A99"]
+
+fonts:
+  heading:
+    name: "Georgia"
+    fallback: "Cambria"
+  body:
+    name: "Arial"
+    fallback: "Calibri"
+
+# Point sizes
+type_scale:
+  slide_title: 28
+  section_title: 40
+  subtitle: 18
+  kicker: 13
+  body: 16
+  bullet_sub: 14
+  big_number: 60
+  stat_label: 14
+  stat_delta: 13
+  caption: 11
+  footer: 9
+  quote: 26
+  table_header: 13
+  table_body: 12
+
+layout:
+  slide_size: widescreen_16x9   # 13.333in x 7.5in
+  margin_in: 0.6
+  gutter_in: 0.25
+  title_top_in: 0.45
+  content_top_in: 1.5
+
+charts:
+  gridlines: minimal            # value-axis only, light color
+  data_labels: auto             # outside_end where the chart kind allows
+  legend: bottom_when_multi     # legend only when >1 series
+  font_size: 12
+
+logo:
+  # Paths relative to brand/ . Populated during brand intake.
+  default: assets/logos/logo_primary.png
+  dark_bg: assets/logos/logo_white.png
+
+footer:
+  # Default footer if the deck spec doesn't set one.
+  text: "Society of Actuaries"
+  show_page_numbers: true

@@ -1,0 +1,26 @@
+---
+description: SOA Deck Studio core identity and workflow
+alwaysApply: true
+---
+
+This repo is the SOA Deck Studio: it turns source material into stunning,
+brand-compliant, natively editable PowerPoint decks for Joe (non-technical EA
+at the Society of Actuaries).
+
+Core rule: **you write `decks/<name>/spec.yaml`; the engine builds slides.**
+Never create/edit .pptx files, never touch files in `output/`, never put
+colors/fonts/positions in a spec, never edit engine code to make a spec pass
+validation.
+
+For any deck request, follow the numbered protocol in `AGENTS.md`
+(intake → brief → insight pass → outline → spec → build → self-review →
+deliver → feedback). The insight pass is mandatory — surfacing what the data
+means for THIS audience is the whole point.
+
+Consult before choosing content and form:
+- `playbooks/00-INDEX.md` — map of all playbooks
+- `playbooks/slide-type-catalog.md` — every slide type + when to use it
+- `playbooks/data-storytelling.md` — chart chooser
+
+Commands: `deckstudio new|ingest|extract|validate|build|doctor|types`
+(run via `.venv\Scripts\deckstudio` on Windows, `.venv/bin/deckstudio` otherwise).
