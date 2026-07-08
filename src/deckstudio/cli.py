@@ -11,6 +11,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import typer
@@ -22,6 +23,20 @@ from .tokens import REPO_ROOT, load_tokens
 app = typer.Typer(add_completion=False, no_args_is_help=True,
                   help="SOA Deck Studio — spec in, stunning editable deck out.")
 console = Console()
+
+
+def _stdout_can_encode(text: str) -> bool:
+    enc = getattr(sys.stdout, "encoding", None) or "ascii"
+    try:
+        text.encode(enc)
+        return True
+    except (LookupError, UnicodeEncodeError):
+        return False
+
+
+# Legacy Windows consoles (cp1252) can't encode ✓/✗ — fall back to ASCII
+# so the CLI never crashes over a status glyph.
+OK, BAD = ("✓", "✗") if _stdout_can_encode("✓✗") else ("OK", "X")
 
 DECKS_DIR = REPO_ROOT / "decks"
 OUTPUT_DIR = REPO_ROOT / "output"
@@ -83,7 +98,7 @@ def validate(deck: str = typer.Argument(help="Deck name or path")):
     """Schema validation + design lint. Exit code 1 on schema errors."""
     deck_dir = _deck_dir(deck)
     loaded = _load(deck_dir)
-    console.print(f"[green]✓ spec is valid[/green] — {len(loaded.spec.slides)} slides")
+    console.print(f"[green]{OK} spec is valid[/green] — {len(loaded.spec.slides)} slides")
 
     from .validate.spec_lint import lint
 
@@ -93,7 +108,7 @@ def validate(deck: str = typer.Argument(help="Deck name or path")):
         for w in warnings:
             console.print(f"  [yellow]•[/yellow] {w}")
     else:
-        console.print("[green]✓ no design suggestions[/green]")
+        console.print(f"[green]{OK} no design suggestions[/green]")
 
 
 @app.command()
@@ -126,11 +141,11 @@ def build(
         console.print("[red]Build smoke-check FAILED (engine bug — do not edit the "
                       "spec to work around this):[/red]")
         for p in problems:
-            console.print(f"  [red]✗[/red] {p}")
+            console.print(f"  [red]{BAD}[/red] {p}")
         raise typer.Exit(1)
 
     _log_build(deck_dir, result)
-    console.print(f"[green]✓ built[/green] {result.output_path.relative_to(REPO_ROOT)} "
+    console.print(f"[green]{OK} built[/green] {result.output_path.relative_to(REPO_ROOT)} "
                   f"({result.slide_count} slides, v{result.version})")
 
     if preview:
@@ -144,7 +159,7 @@ def build(
             console.print("[yellow]LibreOffice could not convert the deck — "
                           "previews skipped (the deck itself is fine).[/yellow]")
         else:
-            console.print(f"[green]✓ previews:[/green] {images[0].parent}")
+            console.print(f"[green]{OK} previews:[/green] {images[0].parent}")
 
 
 @app.command()
@@ -162,7 +177,7 @@ def ingest(
             console.print(f"[red]{f} does not exist[/red]")
             raise typer.Exit(2)
         out = ingest_file(f, sources)
-        console.print(f"[green]✓[/green] {f.name} -> {out.relative_to(REPO_ROOT)}")
+        console.print(f"[green]{OK}[/green] {f.name} -> {out.relative_to(REPO_ROOT)}")
 
 
 @app.command()
@@ -178,8 +193,8 @@ def extract(
         console.print(f"[red]{pptx_file} does not exist[/red]")
         raise typer.Exit(2)
     yaml_path, report_path = extract_pptx(pptx_file, deck_dir)
-    console.print(f"[green]✓ extracted[/green] {yaml_path.relative_to(REPO_ROOT)}")
-    console.print(f"[green]✓ gap report[/green] {report_path.relative_to(REPO_ROOT)}")
+    console.print(f"[green]{OK} extracted[/green] {yaml_path.relative_to(REPO_ROOT)}")
+    console.print(f"[green]{OK} gap report[/green] {report_path.relative_to(REPO_ROOT)}")
     console.print("Next: read the report, re-outline with better slide types, and "
                   "write the real spec.yaml (do NOT just build extracted.yaml as-is).")
 
@@ -192,14 +207,14 @@ def doctor():
 
     try:
         tokens = load_tokens()
-        console.print("[green]✓ brand/tokens.yaml loads[/green]")
+        console.print(f"[green]{OK} brand/tokens.yaml loads[/green]")
     except Exception as e:
-        console.print(f"[red]✗ brand/tokens.yaml failed to load: {e}[/red]")
+        console.print(f"[red]{BAD} brand/tokens.yaml failed to load: {e}[/red]")
         raise typer.Exit(1) from None
 
     template = tokens.brand_dir / "template.pptx"
     if template.exists():
-        console.print("[green]✓ brand/template.pptx present[/green]")
+        console.print(f"[green]{OK} brand/template.pptx present[/green]")
     else:
         console.print("[yellow]• brand/template.pptx missing — building on a clean "
                       "16:9 base (fine until brand intake).[/yellow]")
@@ -208,7 +223,7 @@ def doctor():
         console.print("[yellow]• no logo asset yet — slides will simply omit the "
                       "logo (add during brand intake).[/yellow]")
     else:
-        console.print("[green]✓ logo assets found[/green]")
+        console.print(f"[green]{OK} logo assets found[/green]")
 
     installed = _installed_fonts()
     if installed is None:
@@ -217,20 +232,20 @@ def doctor():
     else:
         for role, spec in (("heading", tokens.heading_font), ("body", tokens.body_font)):
             if spec.name in installed:
-                console.print(f"[green]✓ {role} font '{spec.name}' installed[/green]")
+                console.print(f"[green]{OK} {role} font '{spec.name}' installed[/green]")
             elif spec.fallback in installed:
                 console.print(f"[yellow]• {role} font '{spec.name}' NOT installed — "
                               f"PowerPoint will substitute; fallback '{spec.fallback}' "
                               "is available. Ask IT to install the brand font.[/yellow]")
             else:
                 ok = False
-                console.print(f"[red]✗ neither {role} font '{spec.name}' nor fallback "
+                console.print(f"[red]{BAD} neither {role} font '{spec.name}' nor fallback "
                               f"'{spec.fallback}' is installed.[/red]")
 
     from .validate.render import soffice_available
 
     if soffice_available():
-        console.print("[green]✓ LibreOffice found — visual previews available[/green]")
+        console.print(f"[green]{OK} LibreOffice found — visual previews available[/green]")
     else:
         console.print("[yellow]• LibreOffice not found — previews unavailable "
                       "(optional; decks build fine without it).[/yellow]")
