@@ -77,7 +77,6 @@ deck:
   title: "TODO — deck title"
   audience: "TODO — who will see this?"
   intent: "TODO — what must it achieve?"
-  animations: subtle
 
 slides:
   - id: cover

@@ -57,8 +57,10 @@ Write `decks/<name>/spec.yaml`.
 - Every title is an **assertion** (what to conclude), not a topic label.
   See `playbooks/executive-communication.md`.
 - Detail goes in `notes:` (speaker notes), not on the slide.
-- Set `animate: build` only where sequencing helps the story
-  (KPI reveals, option comparisons); `fade` for gentle polish; default none.
+- Animations are OFF by default and stay off unless Joe says the deck will
+  be PRESENTED from desktop PowerPoint (then `animations: subtle` at deck
+  level, `animate: build` only where sequencing helps). Phone previews and
+  emailed decks mis-render animated slides — never enable for those.
 - Charts: every chart gets an `insight:` line and, when it earns it, a
   `highlight:` on the data point that carries the story.
 

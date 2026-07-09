@@ -35,14 +35,19 @@ per comparison/table.
 
 ## Animation discipline
 
-Animation is seasoning, not sauce:
+**Animations are OFF by default and opt-in per deck** (`animations: subtle`).
+Hard compatibility fact: renderers other than desktop PowerPoint — iOS
+Quick Look, phone previews, some web viewers — mis-composite animated
+slides (ghosted shapes, hidden panels). Only enable animations for a deck
+that will be PRESENTED from desktop PowerPoint, never for anything that
+will be emailed, previewed on a phone, or read as a document.
+
+When they are enabled:
 - `build` when the *sequence* is the point — options revealed one at a time,
   KPIs landing one by one, a list where each item deserves its beat.
 - `fade` for gentle polish on a slide whose content arrives as one thought.
-- `none` is the correct default. Never animate section dividers, tables, or
-  anything the audience should study.
-- Deck-level `animations: off` for: printed/emailed decks, committee packets,
-  anything the audience drives themselves.
+- `none` is the correct per-slide default. Never animate section dividers,
+  tables, or anything the audience should study.
 
 ## Brand application (liberal but compliant)
 

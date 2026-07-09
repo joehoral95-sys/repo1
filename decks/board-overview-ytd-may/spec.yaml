@@ -5,7 +5,6 @@ deck:
   tone: "confident, data-forward, no spin"
   date: "Updated June 17, 2026"
   footer: "Society of Actuaries · Board Overview · YTD May 2026"
-  animations: subtle
 
 slides:
   - id: cover
@@ -27,7 +26,6 @@ slides:
     type: big_number
     title: "The organization is out-earning its plan"
     kicker: "The headline"
-    animate: build
     stats:
       - value: "+$1.7M"
         label: "Net operating margin YTD"
@@ -90,7 +88,6 @@ slides:
     type: big_number
     title: "Education demand is the engine"
     kicker: "Demand signals"
-    animate: build
     stats:
       - value: "+10%"
         label: "Exam P registrations YTD"

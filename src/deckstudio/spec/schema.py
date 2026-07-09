@@ -37,7 +37,10 @@ class DeckMeta(StrictModel):
     tone: str | None = None
     date: str | None = None
     footer: str | None = Field(None, description="Overrides brand default footer")
-    animations: Literal["off", "subtle"] = "subtle"
+    animations: Literal["off", "subtle"] = Field(
+        "off", description="Animations are OPT-IN: some renderers (iOS Quick "
+        "Look, web previews) mis-composite animated slides. Enable 'subtle' "
+        "only for decks presented from desktop PowerPoint.")
 
 
 # --------------------------------------------------------------------

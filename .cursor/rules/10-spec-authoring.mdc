@@ -15,7 +15,9 @@ Hard rules:
 - Every slide: unique kebab-case `id` (stable — feedback references it),
   `type`, and for most types an assertion `title` (≤90 chars).
 - No colors, fonts, or positions — only semantic hints:
-  `emphasize`, `sentiment`, `highlight`, `animate: none|fade|build`.
+  `emphasize`, `sentiment`, `highlight`, `animate: none|fade|build`
+  (animations require deck-level `animations: subtle` — desktop-PowerPoint
+  presentations only; previews/phones mis-render them).
 - Inline markup in text: `**bold**`, `[accent]text[/accent]`. Nothing else.
 - Limits that encode design (don't fight them, redesign the slide):
   agenda ≤6, bullets ≤6 (≤160 chars each), stats 1-4, comparison bullets ≤5,
