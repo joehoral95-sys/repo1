@@ -28,7 +28,8 @@ def render(slide, model: AgendaSlide, ctx) -> None:
              bold=True, shrink_to_fit=True)
     if add_brand_art(slide, tokens, "swash_sky", Box(m, 3.6, 2.4, 0.33)) is None:
         add_accent_bar(slide, m, 3.65, 0.9, tokens, color="accent_warm", height_in=0.06)
-    add_logo(slide, tokens, dark_bg=True, left_in=m, bottom_in=7.0, height_in=0.4)
+    add_logo(slide, tokens, dark_bg=True, center_at_in=BAND_W / 2,
+             bottom_in=7.0, height_in=0.4)
 
     # Numbered items on the white side.
     items_area = Box(BAND_W + 0.55, 0.9, SLIDE_W_IN - BAND_W - 0.55 - m, SLIDE_H_IN - 1.8)

@@ -69,28 +69,36 @@ def fill_background(slide, tokens: Tokens, color: str) -> None:
 
 
 def add_logo(slide, tokens: Tokens, *, dark_bg: bool = False,
-             left_in: float | None = None, bottom_in: float = 7.18,
-             height_in: float = 0.32):
-    """Place the brand logo BOTTOM-LEFT (the SOA template convention);
-    silently skip if no asset exists."""
+             left_in: float | None = None, center_at_in: float | None = None,
+             bottom_in: float = 7.18, height_in: float = 0.32):
+    """Place the brand logo BOTTOM-LEFT (the SOA template convention), or
+    centered on `center_at_in` for symmetric compositions; silently skip if
+    no asset exists."""
     path = tokens.logo_dark_bg if dark_bg else tokens.logo_default
     if not path:
         return None
     left = Inches(left_in if left_in is not None else tokens.margin_in)
     pic = slide.shapes.add_picture(str(path), left, Emu(0), height=Inches(height_in))
+    if center_at_in is not None:
+        pic.left = Inches(center_at_in) - pic.width // 2
     pic.top = Inches(bottom_in) - pic.height
     return pic
 
 
+def chip_width(text: str) -> float:
+    """Estimated pill width (inches) for layout math at chip point size."""
+    return 0.125 * len(text) + 0.38
+
+
 def add_chip(slide, left_in: float, top_in: float, text: str, tokens: Tokens, *,
              fill: str = "accent_warm", text_color: str = "primary",
-             height_in: float = 0.3):
+             height_in: float = 0.36):
     """A small pill badge ('RECOMMENDED', '▼ 7.1% vs Q1'). Returns the shape."""
     from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 
     from .text import add_text
 
-    width_in = 0.105 * len(text) + 0.34
+    width_in = chip_width(text)
     pill = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left_in), Inches(top_in),
         Inches(width_in), Inches(height_in))
@@ -100,7 +108,7 @@ def add_chip(slide, left_in: float, top_in: float, text: str, tokens: Tokens, *,
     pill.line.fill.background()
     pill.shadow.inherit = False
     add_text(slide, Box(left_in, top_in + 0.02, width_in, height_in - 0.04),
-             text, tokens, scale="caption", color=text_color, bold=True,
+             text, tokens, scale="stat_delta", color=text_color, bold=True,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
     return pill
 

@@ -31,7 +31,7 @@ def _solo_hero(slide, area, stat, tokens) -> None:
     from pptx.util import Pt
 
     from ..infographics import ARROWS
-    from ..shapes import add_brand_art, add_chip
+    from ..shapes import add_brand_art, add_chip, chip_width
     from ..text import add_text
 
     cx = area.left_in
@@ -50,7 +50,7 @@ def _solo_hero(slide, area, stat, tokens) -> None:
              align=PP_ALIGN.CENTER)
     if stat.delta:
         text = f"{ARROWS[stat.arrow]} {stat.delta}".strip()
-        chip_w = 0.105 * len(text) + 0.34
+        chip_w = chip_width(text)
         fill = {"good": "positive", "bad": "negative", "neutral": "neutral_mid"}[stat.sentiment]
         add_chip(slide, cx + (area.width_in - chip_w) / 2, value_box.bottom_in + 1.15,
                  text, tokens, fill=fill, text_color="white")

@@ -14,7 +14,7 @@ from ...spec.schema import ChartSlide
 from ..charts import add_chart
 from ..geometry import Box, inset
 from ..registry import renderer
-from ..shapes import add_accent_bar, add_chip, add_rect
+from ..shapes import add_accent_bar, add_chip, add_rect, chip_width
 from ..text import add_text
 from ._common import add_title_band
 
@@ -57,7 +57,7 @@ def _annotate_highlight(slide, model: ChartSlide, chart_box: Box, tokens) -> Non
     arrow = "▼" if pct < 0 else "▲"
     label = model.chart.categories[hl.point]
     text = f"{label}: {arrow} {abs(pct):.1f}%"
-    width_est = 0.105 * len(text) + 0.34
+    width_est = chip_width(text)
     add_chip(slide, chart_box.right_in - width_est - 0.1, chart_box.top_in + 0.02,
              text, tokens, fill="highlight", text_color="primary")
 

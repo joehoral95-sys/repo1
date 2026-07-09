@@ -39,4 +39,5 @@ def render(slide, model: TitleSlide, ctx) -> None:
     if meta_bits:
         add_text(slide, Box(m, SLIDE_H_IN - 1.75, text_w, 0.6),
                  "  ·  ".join(meta_bits), tokens, scale="stat_label", color="white")
-    add_logo(slide, tokens, dark_bg=True, left_in=m, bottom_in=7.0, height_in=0.5)
+    add_logo(slide, tokens, dark_bg=True, center_at_in=BAND_LEFT / 2,
+             bottom_in=7.0, height_in=0.5)

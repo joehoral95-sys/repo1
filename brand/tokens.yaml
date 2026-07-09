@@ -37,22 +37,22 @@ fonts:
     name: "Tenorite Regular"
     fallback: "Calibri"
 
-# Point sizes
+# Point sizes. Floor is 14pt except footnote-class text (caption, footer).
 type_scale:
   slide_title: 28
   section_title: 40
   subtitle: 18
-  kicker: 13
+  kicker: 14
   body: 16
   bullet_sub: 14
   big_number: 60
   stat_label: 14
-  stat_delta: 13
-  caption: 11
-  footer: 9
+  stat_delta: 14
+  caption: 12     # footnote class: chart sources, target context lines
+  footer: 10      # footnote class: slide footer & page number
   quote: 26
-  table_header: 13
-  table_body: 12
+  table_header: 14
+  table_body: 14
 
 layout:
   slide_size: widescreen_16x9   # matches the SOA template (12192000 x 6858000 EMU)

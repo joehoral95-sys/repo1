@@ -18,7 +18,7 @@ def render(slide, model: TableSlide, ctx) -> None:
     nrows = len(model.rows) + 1
     ncols = len(model.columns)
     # Short tables get roomier rows so they don't huddle under the title.
-    row_h = 0.58 if len(model.rows) <= 5 else 0.42
+    row_h = 0.62 if len(model.rows) <= 5 else 0.5
     height = min(area.height_in, 0.55 + row_h * len(model.rows))
     shape = slide.shapes.add_table(nrows, ncols, area.left, area.top,
                                    area.width, Inches(height))

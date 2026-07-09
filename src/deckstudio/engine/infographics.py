@@ -51,7 +51,7 @@ def add_stat_tile(slide, box: Box, stat: Stat, tokens: Tokens, *, hero: bool = F
 
     pad = inset(box, x_in=0.3, y_in=0.24)
     add_text(slide, Box(pad.left_in, pad.top_in, pad.width_in - 0.25, 0.55),
-             stat.label.upper(), tokens, scale="caption",
+             stat.label.upper(), tokens, scale="stat_label",
              color=label_color, bold=True, letter_spacing_pt=1.0,
              shrink_to_fit=True)
 
@@ -128,8 +128,8 @@ def add_progress_ring(slide, box: Box, fraction: float, label: str, tokens: Toke
     add_text(slide, pct_box, f"{round(fraction * 100)}%", tokens, scale="section_title",
              role="heading", color="primary", bold=True, align=PP_ALIGN.CENTER,
              shrink_to_fit=True)
-    label_box = Box(cx + hole_off, pct_box.bottom_in, hole_size, hole_size * 0.25)
-    add_text(slide, label_box, label, tokens, scale="caption", color="neutral_mid",
+    label_box = Box(cx + hole_off, pct_box.bottom_in, hole_size, hole_size * 0.28)
+    add_text(slide, label_box, label, tokens, scale="stat_label", color="neutral_mid",
              align=PP_ALIGN.CENTER, shrink_to_fit=True)
 
 
