@@ -1,4 +1,4 @@
-# The shipped worked example — also the CI golden deck.
+# The shipped worked example – also the CI golden deck.
 # Exercises every slide type the engine supports.
 deck:
   title: "Q2 2026 Membership & Exam Update"
@@ -28,7 +28,7 @@ slides:
     type: section
     title: "Membership"
     number: 1
-    subtitle: "The longest growth streak since 2019 — and where it comes from."
+    subtitle: "The longest growth streak since 2019 – and where it comes from."
     preview:
       - {label: "Total members", value: "33,412", status: on_track}
       - {label: "New FSAs YTD", value: "1,204", status: on_track}
@@ -68,7 +68,7 @@ slides:
 
   - id: exam-trend
     type: chart
-    title: "Exam sittings dipped — but only in prelims"
+    title: "Exam sittings dipped – but only in prelims"
     kicker: "Exam volumes · 1 of 2"
     animate: fade
     chart:
@@ -81,7 +81,7 @@ slides:
           values: [2210, 2190, 2260, 2300]
       highlight: {series: "Preliminary exams", point: 3}
       number_format: "#,##0"
-    insight: "Fellowship demand is stable — the dip is an entry-pipeline issue, not retention."
+    insight: "Fellowship demand is stable – the dip is an entry-pipeline issue, not retention."
     source: "SOA exam registration system, 2026-06-30"
     notes: "If asked: prelim dip correlates with the university calendar shift."
 
@@ -95,7 +95,7 @@ slides:
       series:
         - name: "Candidates"
           values: [66, 24, 10]
-    insight: "Our university partnerships are now the front door — protect them."
+    insight: "Our university partnerships are now the front door – protect them."
 
   - id: exam-detail
     type: table
@@ -164,7 +164,7 @@ slides:
       - {label: "Fee model & pricing", percent: 90}
       - {label: "Member comms plan", percent: 65}
       - {label: "Registration systems", percent: 40}
-    caption: "Percent complete as of July 2026 — all workstreams on schedule for the January effective date."
+    caption: "Percent complete as of July 2026 – all workstreams on schedule for the January effective date."
 
   - id: ask
     type: quote

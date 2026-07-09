@@ -69,8 +69,8 @@ def extract_pptx(path: Path, deck_dir: Path) -> tuple[Path, Path]:
     draft = {
         "deck": {
             "title": path.stem,
-            "audience": "TODO — ask Joe",
-            "intent": "TODO — ask Joe",
+            "audience": "TODO - ask Joe",
+            "intent": "TODO - ask Joe",
         },
         "slides": slides_out,
     }
@@ -100,7 +100,7 @@ def _walk_shape(shape, slide, title, bullets, entry, media_dir, slide_no):
         try:
             entry["chart"] = _chart_to_spec(chart)
         except Exception as e:
-            flags.append(f"chart could not be read ({e}) — redesign it from source data")
+            flags.append(f"chart could not be read ({e}) - redesign it from source data")
         return title, bullets, flags
 
     if st == MSO_SHAPE_TYPE.TABLE:
@@ -115,14 +115,14 @@ def _walk_shape(shape, slide, title, bullets, entry, media_dir, slide_no):
             media_dir.mkdir(parents=True, exist_ok=True)
             fname = f"slide{slide_no}_{shape.shape_id}.{image.ext}"
             (media_dir / fname).write_bytes(image.blob)
-            flags.append(f"picture saved to sources/extracted_media/{fname} — "
+            flags.append(f"picture saved to sources/extracted_media/{fname} - "
                          "decide whether it earns its place")
         except Exception:
             flags.append("picture could not be exported")
         return title, bullets, flags
 
     if st == MSO_SHAPE_TYPE.GROUP:
-        flags.append("grouped shapes (possibly SmartArt/diagram) — content below may "
+        flags.append("grouped shapes (possibly SmartArt/diagram) - content below may "
                      "be partial; consider redesigning with icon_row/timeline/comparison")
         for sub in shape.shapes:
             title, bullets, extra = _walk_shape(

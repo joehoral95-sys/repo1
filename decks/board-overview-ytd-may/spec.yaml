@@ -78,11 +78,11 @@ slides:
           values: [153, 124, 99, 96]
       highlight: {series: "Percent of YTD target achieved", point: 0}
       number_format: "0\"%\""
-    insight: "PD revenue is the standout at 153% of target — ReFocus and PD Edge are carrying it. Retention sits just under pace; it reappears on the watch list."
+    insight: "PD revenue is the standout at 153% of target – ReFocus and PD Edge are carrying it. Retention sits just under pace; it reappears on the watch list."
     source: "Board Overview packet, 6/17/2026 (YTD actual ÷ YTD target)"
     notes: >
       Computed from packet values: PD $2.3M/$1.5M=153%; Research 234K/188K=124%;
-      Education 33.6K/34.0K=99%; Retention 35.5%/37.0%=96%. NOM excluded — its
+      Education 33.6K/34.0K=99%; Retention 35.5%/37.0%=96%. NOM excluded – its
       YTD budget is $0K so a ratio is undefined; it's the headline slide instead.
 
   - id: demand
@@ -117,14 +117,14 @@ slides:
           values: [10, 7, 6, 1]
       highlight: {series: "First-time candidate growth, YTD", point: 0}
       number_format: "0\"%\""
-    insight: "4.2K first-time candidates YTD — and the growth is broad-based, with MEASA fastest at +10%."
+    insight: "4.2K first-time candidates YTD – and the growth is broad-based, with MEASA fastest at +10%."
     source: "Board Overview packet, 6/17/2026"
 
   - id: sec-watch
     type: section
     title: "The watch list"
     number: 2
-    subtitle: "Two metrics below pace — both pace questions, not panic questions."
+    subtitle: "Two metrics below pace – both pace questions, not panic questions."
     preview:
       - {label: "Membership count", value: "35.7K", status: watch}
       - {label: "Candidate retention", value: "35.5%", status: watch}
@@ -142,7 +142,7 @@ slides:
           values: [35600, 35700, 36200]
       highlight: {series: "Members", point: 1}
       number_format: "#,##0"
-    insight: "July drops will decide this one — and the new paid-dues rule already tightened the target by 400."
+    insight: "July drops will decide this one – and the new paid-dues rule already tightened the target by 400."
     source: "Board Overview packet, 6/17/2026"
     notes: >
       New for 2026: recently credentialed ASAs are not counted until dues are
@@ -179,13 +179,13 @@ slides:
       - {label: "FSA sittings 2 & 3", date: "Jul · Nov 2026"}
       - {label: "Essential initiatives review", date: "Dec 2026"}
     notes: >
-      Member and candidate satisfaction are survey-based and simply pending —
+      Member and candidate satisfaction are survey-based and simply pending – 
       first of two surveys each in summer 2026. Essential initiatives (95%
       completion target) is a year-end metric.
 
   - id: takeaway
     type: quote
-    text: "Five months in: financially ahead, demand strong, and two pace metrics to watch into Q3 — with July as the next real signal."
+    text: "Five months in: financially ahead, demand strong, and two pace metrics to watch into Q3 – with July as the next real signal."
     attribution: "Board Overview · YTD May 2026"
 
   - id: close

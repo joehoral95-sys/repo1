@@ -7,7 +7,7 @@ Duarte's resonate structure.
 ## Lead with the answer (BLUF)
 
 Executives read the first slide and decide whether to keep paying attention.
-- The deck's core message appears within the first 3 slides — never "build up
+- The deck's core message appears within the first 3 slides – never "build up
   to it" across 20 slides.
 - If a decision is requested, name it early ("We're asking for approval of X
   today") and repeat it verbatim at the end (`quote` slide works well).
@@ -17,13 +17,13 @@ Executives read the first slide and decide whether to keep paying attention.
 ## Titles are assertions, not topics
 
 The single highest-leverage habit. A reader who only reads titles should get
-the whole argument (the "title test": read only the titles in order — do they
+the whole argument (the "title test": read only the titles in order – do they
 form a coherent story?).
 
 | Topic title (bad) | Assertion title (good) |
 |---|---|
 | Membership update | Membership grew for the 6th straight quarter |
-| Exam volumes | Exam sittings dipped — but only in prelims |
+| Exam volumes | Exam sittings dipped – but only in prelims |
 | Fee proposal | A 4% raise still leaves us below peer bodies |
 | Next steps | Approval today puts new fees in place by spring |
 
@@ -47,7 +47,7 @@ itself a mini-conclusion over its evidence.
 - Make the ask unmissable: its own slide (`quote` type renders it as a
   statement of record), concrete ("approve the 4% adjustment effective
   January 2027"), with the decision criteria already addressed in prior slides.
-- Pre-empt the top objection explicitly — one slide that names it and answers
+- Pre-empt the top objection explicitly – one slide that names it and answers
   it beats hoping it doesn't come up (`comparison` is built for this).
 
 ## Words
@@ -57,3 +57,21 @@ itself a mini-conclusion over its evidence.
 - Cut throat-clearing: "It should be noted that," "As you can see," "In terms of."
 - Numbers: round to what the decision needs (33,412 for a KPI tile is fine;
   "about a third" in a bullet often reads better than 32.7%).
+
+## Sound human, not machine-written
+
+Executives read a lot of AI copy now; the tells cost credibility. Rules:
+
+- **No em dashes.** Use a spaced en dash instead (the dash Word gives you
+  when you type word-dash-word-space: "prelims dipped – but only in Q2").
+  The validate lint flags em dashes.
+- Skip the boilerplate verbs and adjectives: delve, leverage, seamless,
+  unlock, empower, elevate, harness, holistic, synergy, transformative,
+  game-changing, cutting-edge. Say the plain thing: "use," "improve,"
+  "saves $0.9M."
+- Skip the filler frames: "in today's fast-paced world," "ever-evolving
+  landscape," "it's not just X, it's Y." Make the claim directly.
+- Vary sentence and bullet rhythm; three perfectly parallel triads in a row
+  reads generated. One bullet can be two words; the next can be twelve.
+- Prefer specific numbers and named things over abstract nouns. "P and FM
+  carry the dip" beats "certain exams are underperforming."

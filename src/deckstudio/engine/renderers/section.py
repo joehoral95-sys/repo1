@@ -1,4 +1,4 @@
-"""Section divider — variants:
+"""Section divider - variants:
 
   chip     navy: sky number chip, swash title, optional metric preview
   giant    navy: oversized sky numeral, swash title
@@ -132,7 +132,7 @@ def _minimal(slide, model: SectionSlide, ctx) -> None:
 
 
 def _preview_panel(slide, metrics, tokens, panel: Box, *, dark: bool) -> None:
-    """Metric teaser rows with status dots — on navy (dark) or white."""
+    """Metric teaser rows with status dots - on navy (dark) or white."""
     from pptx.enum.shapes import MSO_SHAPE
 
     label_color = "white" if dark else "neutral_dark"

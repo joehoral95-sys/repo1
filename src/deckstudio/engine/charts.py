@@ -1,7 +1,7 @@
 """Native PowerPoint charts, restyled to brand.
 
 THE RULE: charts are created exclusively with python-pptx's add_chart(), which
-embeds a real editable workbook — Joe can right-click -> Edit Data in
+embeds a real editable workbook - Joe can right-click -> Edit Data in
 PowerPoint and the graph updates. Never render a chart as an image.
 """
 
@@ -113,7 +113,7 @@ def _style_axes(chart, spec: ChartSpec, tokens: Tokens) -> None:
     try:
         vaxis = chart.value_axis
         if spec.kind in ("bar_clustered", "bar_stacked", "bar_horizontal", "area"):
-            # honesty rule: bars/areas always start at zero — no dramatic
+            # honesty rule: bars/areas always start at zero - no dramatic
             # differences faked by a truncated axis
             vaxis.minimum_scale = 0.0
         vaxis.has_major_gridlines = True
@@ -168,7 +168,7 @@ def _apply_data_labels(chart, spec: ChartSpec, tokens: Tokens) -> None:
 
 
 def _apply_highlight(chart, spec: ChartSpec, tokens: Tokens) -> None:
-    """Recolor one data point to SOA yellow — the 'look here' cue (distinct
+    """Recolor one data point to SOA yellow - the 'look here' cue (distinct
     from every series color in the palette)."""
     accent = tokens.color("highlight")
     idx = next(i for i, s in enumerate(spec.series) if s.name == spec.highlight.series)

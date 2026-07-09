@@ -35,7 +35,7 @@ def digest_xlsx(path: Path) -> Digest:
         digest.add("")
         if truncated:
             digest.warn(f"sheet '{ws.title}' truncated at {MAX_ROWS} rows "
-                        f"(has {ws.max_row}) — ask for the specific range if more is needed.")
+                        f"(has {ws.max_row}) - ask for the specific range if more is needed.")
     wb.close()
     return digest
 

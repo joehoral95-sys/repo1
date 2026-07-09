@@ -1,7 +1,7 @@
 # SOA Deck Studio
 
-Turn whatever you have — a rough PowerPoint, Word docs, spreadsheets, a few
-notes — into a polished, on-brand SOA presentation. Built for Joe; driven by
+Turn whatever you have – a rough PowerPoint, Word docs, spreadsheets, a few
+notes – into a polished, on-brand SOA presentation. Built for Joe; driven by
 the AI agent in Cursor; no coding required.
 
 ## For Joe: how to use it
@@ -12,7 +12,7 @@ the AI agent in Cursor; no coding required.
    (it installs everything and checks your machine).
 
 **Making a deck:**
-1. Drop your files into the `inbox/` folder — an old deck to beautify,
+1. Drop your files into the `inbox/` folder – an old deck to beautify,
    Word/PDF/Excel source material, anything.
 2. Open Cursor's chat and say what you want, for example:
    > "Make a deck from the files in inbox for the July board meeting.
@@ -21,9 +21,9 @@ the AI agent in Cursor; no coding required.
    Your deck appears in `output/` (e.g. `q3-board-update_v1.pptx`).
 4. Want changes? Just say so: *"Make slide 3 punchier"*, *"the member count
    changed to 33,500"*, *"add a slide about the new study platform."*
-   Each rebuild is a new file — your old versions are never touched.
+   Each rebuild is a new file – your old versions are never touched.
 
-**Editing decks yourself:** everything is real PowerPoint — text is text, and
+**Editing decks yourself:** everything is real PowerPoint – text is text, and
 charts are live: right-click a chart → **Edit Data**, change a number, and
 the graph updates. No images of charts, ever.
 
@@ -46,7 +46,7 @@ The AI agent never draws slides. It writes a small, human-readable
 `spec.yaml` describing each slide's content and intent; the deterministic
 Python engine (`deckstudio build`) compiles that spec against the brand
 tokens into a .pptx with native, editable objects. Brand compliance and
-visual quality are enforced by code; the agent contributes judgment —
+visual quality are enforced by code; the agent contributes judgment – 
 summarizing sources, finding the insights, choosing the story.
 
 ```
@@ -60,7 +60,7 @@ Engine commands (`deckstudio --help`): `new`, `ingest`, `extract`,
 
 - Brand values are extracted from the **official SOA PowerPoint template**
   (June 2026): real theme colors, Tenorite fonts, logo assets, and all 31
-  official slide layouts ship in `brand/` — see `brand/BRAND_INTAKE.md`.
+  official slide layouts ship in `brand/` – see `brand/BRAND_INTAKE.md`.
 - Animations are tasteful-by-default (`subtle`), and can be disabled per deck
   or per build (`--no-animations`).
 

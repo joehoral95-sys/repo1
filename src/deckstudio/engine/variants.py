@@ -1,8 +1,8 @@
 """Layout variants: composition × chrome, chosen smartly.
 
 Two axes:
-- **composition** — how the slide's content is arranged (per type below).
-- **chrome** — how the title band is treated (`left`, `centered`, `banner`,
+- **composition** - how the slide's content is arranged (per type below).
+- **chrome** - how the title band is treated (`left`, `centered`, `banner`,
   `tint`) for the eight standard-chrome types.
 
 A variant string is `composition` for full-bleed types and
@@ -12,7 +12,7 @@ the chrome is auto-picked). 101 variants total.
 Selection is SMART, not random: `smart_candidates` filters to compositions
 that suit the actual content (long timeline labels need the vertical rail;
 four stat cards crowd a hero; wordy icon rows read better stacked...), and
-a deck-seeded hash breaks the remaining tie deterministically — so choices
+a deck-seeded hash breaks the remaining tie deterministically - so choices
 are justified AND different decks still look different.
 """
 
@@ -91,7 +91,7 @@ def resolve_variant(slide_type: str, requested: str | None, deck_title: str,
             return f"{comp}/{_pick(chrome_opts, deck_title, slide_type, 'chrome')}"
         if warn:
             warn(f"unknown variant '{requested}' for {slide_type} "
-                 f"(compositions: {comps}) — using a smart default")
+                 f"(compositions: {comps}) - using a smart default")
 
     comp_opts = smart_candidates(slide_type, model) or comps
     slide_id = getattr(model, "id", "") if model is not None else ""

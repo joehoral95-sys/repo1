@@ -3,7 +3,7 @@
 Every type the engine builds, when to use it, and a minimal spec snippet.
 Full worked example: `decks/_example-quarterly/spec.yaml`.
 
-## title — deck opener
+## title – deck opener
 Every deck starts with one. Title = the deck's core assertion when possible.
 ```yaml
 - id: cover
@@ -13,7 +13,7 @@ Every deck starts with one. Title = the deck's core assertion when possible.
   presenter: "Prepared by the CEO's Office"
 ```
 
-## agenda — the roadmap
+## agenda – the roadmap
 Decks ≥6 slides. 2-6 items, a few words each.
 ```yaml
 - id: agenda
@@ -21,7 +21,7 @@ Decks ≥6 slides. 2-6 items, a few words each.
   items: ["Membership trend", "Exam volumes", "Fee proposal", "Decision needed"]
 ```
 
-## section — chapter divider
+## section – chapter divider
 Every 3-6 slides in longer decks; `number` gives a progress cue.
 ```yaml
 - id: sec-membership
@@ -31,9 +31,9 @@ Every 3-6 slides in longer decks; `number` gives a progress cue.
   subtitle: "The longest growth streak since 2019"
 ```
 
-## big_number — KPIs / the hero stat
+## big_number – KPIs / the hero stat
 1 stat = hero tile (the star of the deck); 2-4 = tile row where the FIRST
-stat gets the navy hero tile — order stats by importance. `arrow` is the
+stat gets the navy hero tile – order stats by importance. `arrow` is the
 direction drawn; `sentiment` picks the color (falling lapse rate =
 `arrow: down, sentiment: good`).
 ```yaml
@@ -44,8 +44,8 @@ direction drawn; `sentiment` picks the color (falling lapse rate =
     - {value: "33,412", label: "Total members", delta: "+2.1% vs Q1", arrow: up, sentiment: good}
 ```
 
-## chart — evidence
-Native, Edit-Data-able. Always give `insight:` — it renders as a navy
+## chart – evidence
+Native, Edit-Data-able. Always give `insight:` – it renders as a navy
 "SO WHAT" takeaway panel beside the chart (the exhibit layout); without it
 the chart runs full-width. `highlight:` accents the point that proves the
 title. Kinds: bar_clustered, bar_stacked, bar_horizontal, line, area, pie,
@@ -53,7 +53,7 @@ doughnut, scatter. Chooser: `data-storytelling.md`.
 ```yaml
 - id: exam-trend
   type: chart
-  title: "Exam sittings dipped — but only in prelims"
+  title: "Exam sittings dipped – but only in prelims"
   chart:
     kind: bar_clustered
     categories: ["Q3 25", "Q4 25", "Q1 26", "Q2 26"]
@@ -62,11 +62,11 @@ doughnut, scatter. Chooser: `data-storytelling.md`.
       - {name: "Fellowship exams", values: [2210, 2190, 2260, 2300]}
     highlight: {series: "Preliminary exams", point: 3}
     number_format: "#,##0"
-  insight: "Fellowship demand is stable — it's a pipeline issue, not retention."
+  insight: "Fellowship demand is stable – it's a pipeline issue, not retention."
   source: "SOA exam registration system"
 ```
 
-## comparison — two options / before-after
+## comparison – two options / before-after
 The decision slide. `emphasize:` marks the recommendation.
 ```yaml
 - id: fee-paths
@@ -77,7 +77,7 @@ The decision slide. `emphasize:` marks the recommendation.
   emphasize: right
 ```
 
-## timeline — sequence / rollout
+## timeline – sequence / rollout
 2-6 milestones; `done: true` fills completed nodes.
 ```yaml
 - id: rollout
@@ -88,9 +88,9 @@ The decision slide. `emphasize:` marks the recommendation.
     - {label: "New fees effective", date: "Jan 2027"}
 ```
 
-## icon_row — 2-4 parallel factors
+## icon_row – 2-4 parallel factors
 Reasons, pillars, pressures. Icon files from `brand/assets/icons/`
-(falls back to a branded initial disc — fine).
+(falls back to a branded initial disc – fine).
 ```yaml
 - id: why-now
   type: icon_row
@@ -100,7 +100,7 @@ Reasons, pillars, pressures. Icon files from `brand/assets/icons/`
     - {heading: "Peer benchmark", text: "Fees sit 8-15% below peer bodies."}
 ```
 
-## table — exact values
+## table – exact values
 When the audience will *read* numbers (committees, appendices).
 `emphasize_col` highlights the column that carries the story.
 ```yaml
@@ -112,7 +112,7 @@ When the audience will *read* numbers (committees, appendices).
   emphasize_col: 3
 ```
 
-## quote — the big statement / the ask
+## quote – the big statement / the ask
 Full-bleed drama for one sentence: the formal ask, a member quote, a rallying
 line. ≤280 chars.
 ```yaml
@@ -122,7 +122,7 @@ line. ≤280 chars.
   attribution: "Decision requested today"
 ```
 
-## content — plain bullets (escape hatch)
+## content – plain bullets (escape hatch)
 When nothing above fits. 1-6 bullets, optional `sub`, optional `kicker`
 eyebrow. If you're using it three slides in a row, redesign.
 ```yaml
@@ -135,7 +135,7 @@ eyebrow. If you're using it three slides in a row, redesign.
     - {text: "Two cohorts affected", sub: ["Class of '25", "Class of '26"]}
 ```
 
-## thanks — closer
+## thanks – closer
 ```yaml
 - id: close
   type: thanks
@@ -143,7 +143,7 @@ eyebrow. If you're using it three slides in a row, redesign.
   contact: "questions@soa.org"
 ```
 
-## progress — how far along are we
+## progress – how far along are we
 1-4 donut gauges. Use for execution status, plan completion, adoption.
 ```yaml
 - id: readiness
@@ -156,20 +156,20 @@ eyebrow. If you're using it three slides in a row, redesign.
 ```
 
 ## Adaptive type
-Type scales UP automatically when content is short — a title under ~22
+Type scales UP automatically when content is short – a title under ~22
 chars renders at 34pt instead of 28, short timeline labels at 18pt instead
 of 14, a one-line quote at 32pt, brief agenda items at 22pt. Capped per
 element (never comic-sized) and body text never drops below the 14pt floor
 (captions 12 / footers 10 are the only footnote exceptions). Nothing to
-configure — write short, punchy labels and they get the presence they earn.
+configure – write short, punchy labels and they get the presence they earn.
 
 ## Universal fields
 Every slide: `id` (unique kebab-case, stable), optional `kicker:` (small
 letter-spaced eyebrow, e.g. "AT A GLANCE" or "KPI METRICS · 1 OF 2"),
-optional `notes:` (speaker notes — put the detail here), optional
+optional `notes:` (speaker notes – put the detail here), optional
 `animate: none|fade|build` (build reveals in at most 3 clicks).
 
-## Layout variants (`variant:`) — 101 total
+## Layout variants (`variant:`) – 101 total
 Two axes: a **composition** per type, and for the eight standard-chrome
 types a **title chrome** (`left`, `centered`, `banner` = navy title band,
 `tint` = pale-sky title band), written `composition/chrome` (a bare
@@ -184,11 +184,11 @@ Set it only when a specific look serves the slide.
 
 | type | compositions | chrome axis |
 |---|---|---|
-| title | band, band-left, watermark, minimal | — |
-| section | chip, giant, band, minimal | — |
-| agenda | band, list, grid | — |
-| quote | card, dark, light | — |
-| thanks | circle, band, minimal | — |
+| title | band, band-left, watermark, minimal | – |
+| section | chip, giant, band, minimal | – |
+| agenda | band, list, grid | – |
+| quote | card, dark, light | – |
+| thanks | circle, band, minimal | – |
 | big_number | cards (navy hero first), uniform, dark | ×4 |
 | chart | exhibit (panel right), panel-left, strip | ×4 |
 | comparison | panels, open | ×4 |
@@ -204,7 +204,7 @@ Example: `variant: exhibit/banner`, `variant: numbered/tint`, or just
 ## Status & context extras
 - `big_number` stats take `target:` ("FY target 34.0K") and
   `status: on_track|watch|pending` (colored dot in the card corner).
-- `section` slides take `preview:` — up to 6 `{label, value, status}` rows
+- `section` slides take `preview:` – up to 6 `{label, value, status}` rows
   rendered as a right-side teaser panel of the section's metrics.
 - `chart.highlight` renders the data point in SOA yellow AND pins an
   auto-computed delta chip to the chart.

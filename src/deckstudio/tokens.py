@@ -1,6 +1,6 @@
 """Load brand/tokens.yaml into a typed object every renderer consumes.
 
-Design rule: renderers never hard-code colors, fonts, or sizes — they ask
+Design rule: renderers never hard-code colors, fonts, or sizes - they ask
 the Tokens object. Rebranding the studio = editing brand/tokens.yaml.
 """
 

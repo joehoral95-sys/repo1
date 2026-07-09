@@ -65,10 +65,10 @@ def load_spec(path: Path | str) -> LoadedSpec:
         spec = DeckSpec.model_validate(raw)
     except ValidationError as e:
         lines = [_loc_to_message(err, raw) for err in e.errors()]
-        bullet = "\n  - ".join(lines)
+        bullet = "\n - ".join(lines)
         raise SpecError(
             f"{path} failed validation ({len(lines)} problem{'s' if len(lines) != 1 else ''}):\n"
-            f"  - {bullet}"
+            f" - {bullet}"
         ) from e
 
     return LoadedSpec(spec=spec, path=path, raw=raw)

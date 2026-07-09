@@ -1,4 +1,4 @@
-"""Icon row — compositions:
+"""Icon row - compositions:
 
   columns  icon discs above centered text columns
   rows     stacked rows: icon left, heading + text right
@@ -57,7 +57,7 @@ def _icon_path(tokens, item: IconItem):
 def _draw_icon(slide, tokens, ctx, item: IconItem, box: Box, index: int) -> None:
     path = _icon_path(tokens, item)
     if path is None and item.icon:
-        ctx.warn(f"icon '{item.icon}' not found in brand/assets/icons — using fallback disc")
+        ctx.warn(f"icon '{item.icon}' not found in brand/assets/icons - using fallback disc")
     if path:
         add_picture_fitted(slide, str(path), box)
         return

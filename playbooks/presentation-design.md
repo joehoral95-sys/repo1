@@ -31,18 +31,18 @@ per comparison/table.
 - `section` dividers every 3-6 slides give the audience a mental table of
   contents; number them for decks longer than ~10 slides.
 - Open strong (title → agenda → the headline) and close with the ask or the
-  takeaway — never trail off into an appendix.
+  takeaway – never trail off into an appendix.
 
 ## Animation discipline
 
 Subtle animations are on by default. Hard compatibility fact: renderers
-other than desktop PowerPoint — iOS Quick Look, phone previews, some web
-viewers — mis-composite animated slides (ghosted shapes, hidden panels).
+other than desktop PowerPoint – iOS Quick Look, phone previews, some web
+viewers – mis-composite animated slides (ghosted shapes, hidden panels).
 Set `animations: off` for any deck that will be read on a phone, emailed
 as a document, or printed.
 
 Per-slide choices:
-- `build` when the *sequence* is the point — options revealed one at a time,
+- `build` when the *sequence* is the point – options revealed one at a time,
   KPIs landing one by one, a list where each item deserves its beat.
 - `fade` for gentle polish on a slide whose content arrives as one thought.
 - `none` is the correct per-slide default. Never animate section dividers,
@@ -50,32 +50,32 @@ Per-slide choices:
 
 ## Brand application (liberal but compliant)
 
-- All colors/fonts/spacing come from `brand/tokens.yaml` via the engine —
+- All colors/fonts/spacing come from `brand/tokens.yaml` via the engine – 
   a spec can't go off-brand, so be *bold* with the forms: hero stats, full-bleed
   section slides, accent highlights. Restraint should be editorial, not visual
   timidity.
-- Accent (gold/blue) means "look here" — the moment it's everywhere it means
+- Accent (gold/blue) means "look here" – the moment it's everywhere it means
   nothing. The engine already rations it; don't fight that with markup abuse
   (`[accent]` on whole sentences).
 - **SOA-specific rules** (from the official 2026 SOA PowerPoint template):
   - Logo sits **bottom-left** on every slide; page number bottom-right in
-    brand blue. The engine does this automatically — never add extra logos.
+    brand blue. The engine does this automatically – never add extra logos.
   - On navy backgrounds use the sky-blue shield mark alone (the navy wordmark
     would vanish); on white use the full-color logo. Never stretch, recolor,
     or add effects to either.
-  - Slide titles render in SOA bright blue (#0051B8) — the template's own
+  - Slide titles render in SOA bright blue (#0051B8) – the template's own
     convention.
   - Brand red (#FF383C) is reserved for negative values and alerts; lime
     (#B3CE36) is an energy accent, used sparingly.
   - Brand fonts are Tenorite Bold / Tenorite Regular (Microsoft 365 cloud
-    fonts). Machines without them substitute Segoe UI / Calibri —
+    fonts). Machines without them substitute Segoe UI / Calibri – 
     `deckstudio doctor` warns when that will happen.
   - SOA's hand-drawn accent marks (`brand/assets/patterns/`): the sky
     **swash** underlines divider titles; the sky **circle** wraps the
     thank-you words. The engine places both automatically. Use them ONLY on
     dark full-bleed slides, never behind or over content.
   - The template's geometric background pattern (WMF, on layouts like
-    '1_Blank') is decorative page art — it must NEVER sit behind slide
+    '1_Blank') is decorative page art – it must NEVER sit behind slide
     content. The engine refuses decorated layouts; don't fight that.
 
 ## Editability (why the engine works the way it does)

@@ -1,9 +1,9 @@
-# Playbooks — index
+# Playbooks – index
 
 Decision-oriented references the agent consults while making a deck. Read the
 one that matches the decision you're facing; don't guess from memory.
 
-| When you're deciding… | Read |
+| When you're deciding... | Read |
 |---|---|
 | What the deck should say and in what order | `executive-communication.md` |
 | What this audience cares about and how to frame for them | `audience-adaptation.md` |

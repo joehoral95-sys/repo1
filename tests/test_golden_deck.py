@@ -28,7 +28,7 @@ def test_every_chart_is_natively_editable(built_example):
 
 
 def test_chart_values_round_trip(built_example, example_spec):
-    """Values written to the chart can be read back — proves real data binding."""
+    """Values written to the chart can be read back - proves real data binding."""
     prs = Presentation(str(built_example.output_path))
     chart_slides = {i: s for i, s in enumerate(example_spec.slides) if s.type == "chart"}
     for i, model in chart_slides.items():

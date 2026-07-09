@@ -1,7 +1,7 @@
 """Composed-shape infographic components.
 
 Used when data is 1-4 numbers and a default chart would underserve it.
-Everything here is native shapes and text — editable in PowerPoint like any
+Everything here is native shapes and text - editable in PowerPoint like any
 other object. (These are not data-linked like charts; the spec is the edit
 path for regenerating them.)
 """

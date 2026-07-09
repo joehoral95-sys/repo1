@@ -1,5 +1,5 @@
 """Animations are on by default (subtle) and disabled per deck with
-animations: off — required for decks read on phones/web previews, whose
+animations: off - required for decks read on phones/web previews, whose
 renderers mis-composite animated slides."""
 
 from lxml import etree

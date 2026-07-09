@@ -1,7 +1,7 @@
 """The engine must never build on a decorated layout.
 
 The SOA template ships 'blank-ish' layouts (e.g. '1_Blank ') carrying a
-full-slide WMF pattern that PowerPoint renders BEHIND slide content — and
+full-slide WMF pattern that PowerPoint renders BEHIND slide content - and
 LibreOffice previews don't show WMF at all, so this only surfaces on a real
 machine. These tests lock in the fix.
 """

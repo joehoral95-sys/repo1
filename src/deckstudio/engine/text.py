@@ -24,7 +24,7 @@ def adaptive_pt(base_pt: int, texts: str | list[str],
                 tiers: list[tuple[int, int]]) -> int:
     """Scale type UP when content is short (never below base_pt).
 
-    tiers: (max_chars, pt) pairs, ascending by max_chars — the first tier
+    tiers: (max_chars, pt) pairs, ascending by max_chars - the first tier
     whose max_chars covers the LONGEST text wins. Example:
     adaptive_pt(14, labels, [(14, 20), (22, 17)]) → 20pt when every label is
     ≤14 chars, 17pt when ≤22, else 14pt. Markup is stripped before counting.
@@ -172,7 +172,7 @@ def add_bullets(
 
 
 def _apply_bullet_char(paragraph, level: int, tokens: Tokens) -> None:
-    """Give paragraphs a clean brand bullet (— for level 0, · for level 1)."""
+    """Give paragraphs a clean brand bullet (en dash level 0, · level 1)."""
     from lxml import etree
 
     pPr = paragraph._p.get_or_add_pPr()
@@ -183,7 +183,7 @@ def _apply_bullet_char(paragraph, level: int, tokens: Tokens) -> None:
     buFont = etree.SubElement(pPr, f"{ns}buFont")
     buFont.set("typeface", "Arial")
     buChar = etree.SubElement(pPr, f"{ns}buChar")
-    buChar.set("char", "—" if level == 0 else "·")
+    buChar.set("char", "–" if level == 0 else "·")
     pPr.set("indent", "-182880")  # 0.2in hanging indent
     pPr.set("marL", str(182880 if level == 0 else 457200))
 

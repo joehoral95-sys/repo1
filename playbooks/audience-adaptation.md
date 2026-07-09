@@ -8,7 +8,7 @@ The same data makes a different deck for different rooms. Fill `audience` and
 ### Board of Directors
 - **Care about:** strategy, risk, money, member trust, "are we on plan."
 - **Framing:** decision-first (BLUF), options with a recommendation,
-  objections pre-answered. They are numbers-fluent — don't over-explain, but
+  objections pre-answered. They are numbers-fluent – don't over-explain, but
   do state materiality ("-$1.2M vs plan").
 - **Length/density:** short deck, high stakes per slide. `comparison` for the
   decision, `big_number` for status, one `chart` per claim that needs proof.
@@ -18,19 +18,19 @@ The same data makes a different deck for different rooms. Fill `audience` and
 ### All-staff / town hall
 - **Care about:** what it means for them, momentum, being trusted with real
   news, recognition.
-- **Framing:** story arc over pyramid — where we were, what happened, where
+- **Framing:** story arc over pyramid – where we were, what happened, where
   we're going. Celebrate concretely (name teams). Deliver bad news plainly
   with the response plan next to it.
 - **Length/density:** more visual variety (`icon_row`, `quote`, `timeline`,
   hero `big_number`), `animate: build` welcome. Fewer decimals: "about
   two-thirds," not 66.4%.
-- **Avoid:** board-speak ("EBITDA-adjusted"), walls of bullets, spin —
+- **Avoid:** board-speak ("EBITDA-adjusted"), walls of bullets, spin – 
   staff detect it instantly.
 
 ### Members / external professional audience
 - **Care about:** the profession's health, what SOA does for them, credibility.
 - **Framing:** evidence-forward, sources cited (`source:` on charts),
-  measured tone. The SOA brand carries formality — lean classy.
+  measured tone. The SOA brand carries formality – lean classy.
 - **Avoid:** internal metrics that don't touch members, triumphalism.
 
 ### Committees / working groups

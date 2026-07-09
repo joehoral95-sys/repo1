@@ -1,5 +1,5 @@
 """The spec -> pptx compiler. Deterministic: same spec + tokens + template
-in, same deck out. All styling decisions live here and in renderers/tokens —
+in, same deck out. All styling decisions live here and in renderers/tokens -
 never in the spec.
 """
 

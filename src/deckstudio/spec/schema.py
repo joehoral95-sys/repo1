@@ -1,4 +1,4 @@
-"""The deck spec schema — the contract between the agent and the engine.
+"""The deck spec schema - the contract between the agent and the engine.
 
 Design rules encoded here on purpose:
 - No colors, fonts, or positions. Only semantic hints (emphasize, sentiment,
@@ -56,7 +56,7 @@ class SlideBase(StrictModel):
     variant: str | None = Field(
         None, description="Layout variant for this slide type (see "
         "playbooks/slide-type-catalog.md). Omit for a deck-deterministic "
-        "default — different decks automatically get different compositions.")
+        "default - different decks automatically get different compositions.")
     notes: str | None = Field(None, description="Speaker notes")
     animate: Animate = "none"
 
@@ -66,7 +66,7 @@ class SlideBase(StrictModel):
         if v and len(v) > MAX_TITLE_CHARS:
             raise ValueError(
                 f"title is {len(v)} chars (max {MAX_TITLE_CHARS}). "
-                "Titles should be one crisp assertion — trim it."
+                "Titles should be one crisp assertion - trim it."
             )
         return v
 
@@ -76,7 +76,7 @@ def _check_bullets(bullets: list[str], where: str) -> list[str]:
         if len(b) > MAX_BULLET_CHARS:
             raise ValueError(
                 f"{where} bullet {i + 1} is {len(b)} chars (max {MAX_BULLET_CHARS}). "
-                "Slides aren't documents — move detail to speaker notes."
+                "Slides aren't documents - move detail to speaker notes."
             )
     return bullets
 
@@ -134,7 +134,7 @@ class Bullet(StrictModel):
 
 
 class ContentSlide(SlideBase):
-    """Title + bullets. The escape hatch — prefer a more visual type when one fits."""
+    """Title + bullets. The escape hatch - prefer a more visual type when one fits."""
 
     type: Literal["content"]
     title: str
@@ -185,7 +185,7 @@ class ComparisonSlide(SlideBase):
     emphasize: Literal["left", "right", "none"] = "none"
     badge: str | None = Field(
         None, max_length=24,
-        description="Chip on the emphasized panel, e.g. 'Recommended' — omit for no chip")
+        description="Chip on the emphasized panel, e.g. 'Recommended' - omit for no chip")
 
 
 class Milestone(StrictModel):
@@ -226,7 +226,7 @@ class ProgressItem(StrictModel):
 
 
 class ProgressSlide(SlideBase):
-    """Progress rings — 'how far along are we' as a visual, not a number list."""
+    """Progress rings - 'how far along are we' as a visual, not a number list."""
 
     type: Literal["progress"]
     title: str
@@ -291,13 +291,13 @@ class ChartSpec(StrictModel):
             if len(s.values) != ncats:
                 raise ValueError(
                     f"series '{s.name}' has {len(s.values)} values but there are "
-                    f"{ncats} categories — they must match")
+                    f"{ncats} categories - they must match")
         if self.kind in ("pie", "doughnut"):
             if len(self.series) != 1:
                 raise ValueError(f"{self.kind} charts take exactly 1 series")
             if ncats > 6:
                 raise ValueError(
-                    f"{self.kind} with {ncats} slices is unreadable (max 6) — "
+                    f"{self.kind} with {ncats} slices is unreadable (max 6) - "
                     "use bar_horizontal for many categories")
         if self.highlight is not None:
             names = [s.name for s in self.series]
@@ -317,7 +317,7 @@ class ChartSlide(SlideBase):
     chart: ChartSpec
     insight: str | None = Field(
         None, max_length=200,
-        description="The 'so what' — rendered as an accent callout under the chart")
+        description="The 'so what' - rendered as an accent callout under the chart")
     source: str | None = Field(None, description="Data source, rendered as a caption")
 
 
@@ -348,7 +348,7 @@ class DeckSpec(StrictModel):
         for i, s in enumerate(self.slides):
             if s.id in seen:
                 raise ValueError(
-                    f"duplicate slide id '{s.id}' (slides {seen[s.id] + 1} and {i + 1}) — "
+                    f"duplicate slide id '{s.id}' (slides {seen[s.id] + 1} and {i + 1}) - "
                     "ids must be unique")
             seen[s.id] = i
         return self

@@ -1,5 +1,5 @@
 """Quote / big-statement slide: white card floating on the navy gradient,
-giant sky quote mark breaking the card's top edge — editorial, not flat."""
+giant sky quote mark breaking the card's top edge - editorial, not flat."""
 
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ def render(slide, model: QuoteSlide, ctx) -> None:
     if model.attribution:
         add_text(slide, Box(card.left_in + 0.1, card.bottom_in + 0.35,
                             card.width_in - 0.2, 0.5),
-                 f"—  {model.attribution}", tokens, scale="subtitle",
+                 f"–  {model.attribution}", tokens, scale="subtitle",
                  color="accent_warm", bold=True)
 
 
@@ -70,5 +70,5 @@ def _bare(slide, model: QuoteSlide, ctx, *, dark: bool) -> None:
              shrink_to_fit=True, size_pt=_quote_pt(tokens, model.text))
     if model.attribution:
         add_text(slide, Box(m, 5.3, SLIDE_W_IN - 2 * m, 0.6),
-                 f"\u2014  {model.attribution}", tokens, scale="subtitle",
+                 f"\u2013  {model.attribution}", tokens, scale="subtitle",
                  color="accent_warm" if dark else "accent", bold=True)

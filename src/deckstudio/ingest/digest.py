@@ -81,5 +81,5 @@ def ingest_file(path: Path, sources_dir: Path) -> Path:
     else:
         raise ValueError(
             f"Don't know how to ingest '{path.name}' ({suffix}). "
-            "Supported: .pdf .docx .xlsx .xlsm .md .txt — and .pptx via `deckstudio extract`.")
+            "Supported: .pdf .docx .xlsx .xlsm .md .txt - and .pptx via `deckstudio extract`.")
     return digest.write(sources_dir)

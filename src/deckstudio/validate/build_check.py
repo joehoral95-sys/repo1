@@ -1,7 +1,7 @@
 """Post-build smoke check: reopen the produced deck and assert invariants.
 
 Runs automatically after every build. Failures here mean an engine bug, not a
-spec problem — they should be reported, not 'fixed' by editing the spec.
+spec problem - they should be reported, not 'fixed' by editing the spec.
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ def check_build(pptx_path: Path, spec: DeckSpec) -> list[str]:
                 if xlsx_part is None:
                     problems.append(
                         f"chart on slide {prs.slides.index(slide) + 1} has no embedded "
-                        "workbook — Edit Data would not work")
+                        "workbook - Edit Data would not work")
     if found_charts != expected_charts:
         problems.append(
             f"chart count mismatch: spec has {expected_charts}, output has {found_charts}")

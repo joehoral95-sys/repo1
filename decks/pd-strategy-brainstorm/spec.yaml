@@ -18,15 +18,15 @@ slides:
     title: "Today"
     items:
       - "Why we're here"
-      - "Diagnosis — what's really happening"
-      - "Guiding policy — the choices we make"
-      - "Coherent action — what we actually do"
+      - "Diagnosis – what's really happening"
+      - "Guiding policy – the choices we make"
+      - "Coherent action – what we actually do"
       - "Impact to products"
       - "Next steps"
 
   - id: why-here
     type: content
-    title: "The questions keep coming up — today we face them together"
+    title: "The questions keep coming up – today we face them together"
     kicker: "Meeting background"
     bullets:
       - "Will meetings beyond **ImpACT** change in the near future?"
@@ -48,10 +48,10 @@ slides:
         text: "Know where we are, what we know, and what we only hypothesize."
       - icon: people
         heading: "All perspectives"
-        text: "Candor and transparency are welcome — that's the point of this room."
+        text: "Candor and transparency are welcome – that's the point of this room."
       - icon: target
         heading: "Direction, not answers"
-        text: "We leave with agreement, open questions, and clear next steps — not final documents."
+        text: "We leave with agreement, open questions, and clear next steps – not final documents."
 
   - id: sec-diagnosis
     type: section
@@ -65,7 +65,7 @@ slides:
     attribution: "Goal of the diagnosis"
     notes: >
       Prompts: What is the biggest obstacle to doubling revenue and relevance?
-      Which issues are symptoms vs. root problem? Where is PD most vulnerable —
+      Which issues are symptoms vs. root problem? Where is PD most vulnerable – 
       financially, competitively, operationally? What evidence supports the
       diagnosis? If we had to name ONE problem, what is it?
 
@@ -104,7 +104,7 @@ slides:
       - "In-person events go **premium**: networking, workshops, exec roundtables"
       - "Virtual events become **purpose-built experiences**, not filmed meetings"
       - "**PD Edge as the year-round hub** for learning"
-      - "Build a **sustainable content engine** — faster turns, clearer volunteer roles"
+      - "Build a **sustainable content engine** – faster turns, clearer volunteer roles"
       - "Develop an **international-specific strategy** from research, not assumption"
     notes: >
       Additional threads: partner/co-locate with other actuarial organizations;
@@ -120,7 +120,7 @@ slides:
 
   - id: action-goal
     type: content
-    title: "Pick 3-5 actions that reinforce each other — then concentrate"
+    title: "Pick 3-5 actions that reinforce each other – then concentrate"
     kicker: "Goal of this block"
     bullets:
       - "Which actions have the **biggest impact** on growth and sustainability?"
@@ -137,7 +137,7 @@ slides:
       - "Score every format against the policy: in-person, virtual, webinars, PD Edge"
       - "Adjust **pricing, packaging, delivery** where the role changes"
       - "**Retire** products that no longer fit or can't meet margin targets"
-      - "Spot the new offerings the policy unlocks — cohorts, micro-credentials, employer academies"
+      - "Spot the new offerings the policy makes possible – cohorts, micro-credentials, employer academies"
     notes: >
       Underserved segments named in session: small firms, Tier 2/3 countries,
       mid-career actuaries. Accept deliberate cannibalization where margin

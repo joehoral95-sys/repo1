@@ -25,7 +25,7 @@ def digest_pdf(path: Path) -> Digest:
         digest.add(f"## Page {i}\n\n{text}\n")
     if thin_pages:
         digest.warn(
-            f"pages {thin_pages} had little or no extractable text — they may be "
+            f"pages {thin_pages} had little or no extractable text - they may be "
             "scans or images. Ask Joe for the source Word/Excel file if numbers "
             "are missing.")
     if not digest.sections:

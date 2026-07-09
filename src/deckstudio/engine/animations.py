@@ -1,10 +1,10 @@
 """Tasteful, contained PowerPoint animations via p:timing OOXML injection.
 
-Exactly two recipes, both entrance fades (presetID 10 — PowerPoint's "Fade"):
+Exactly two recipes, both entrance fades (presetID 10 - PowerPoint's "Fade"):
 
-  fade  — all content shapes fade in automatically when the slide appears,
+  fade - all content shapes fade in automatically when the slide appears,
           with a subtle 120ms cascade.
-  build — content shapes appear one per click, in z-order (the order
+  build - content shapes appear one per click, in z-order (the order
           renderers created them), so the presenter reveals the story.
 
 Rules that keep this safe:

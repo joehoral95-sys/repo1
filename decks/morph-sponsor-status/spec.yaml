@@ -1,5 +1,5 @@
 deck:
-  title: "Project Morph & Personify Upgrade — Executive Sponsor Status"
+  title: "Project Morph & Personify Upgrade – Executive Sponsor Status"
   audience: "Executive sponsors (session with Rose)"
   intent: "Frame the December sponsor discussion: risks to align on, held-code go-live plans, and where the live plans live"
   tone: "working session, candid"
@@ -17,7 +17,7 @@ slides:
     type: agenda
     title: "Today"
     items:
-      - "Risks & issues — to align with Rose"
+      - "Risks & issues – to align with Rose"
       - "Held code: go-live plans"
       - "Where the live plans live"
 
@@ -37,7 +37,7 @@ slides:
         - "Decide which risks rise to sponsor visibility"
     notes: >
       Source deck contained empty Risk/Issue/Mitigation tables marked "to
-      discuss with Rose what goes here" for both projects — this slide makes
+      discuss with Rose what goes here" for both projects – this slide makes
       that discussion the explicit agenda item rather than presenting empty
       tables.
 
@@ -47,17 +47,17 @@ slides:
     kicker: "Bonus for December"
     columns: ["Workstream", "Status note"]
     rows:
-      - ["Sales Tax", "—"]
-      - ["Certificates", "—"]
+      - ["Sales Tax", " – "]
+      - ["Certificates", " – "]
       - ["Global Access Pricing", "On pre-QA, ready for testing"]
-      - ["Membership Future Features", "—"]
-      - ["PDE+ eCommerce", "—"]
+      - ["Membership Future Features", " – "]
+      - ["PDE+ eCommerce", " – "]
       - ["Profile Permissions", "More people into SF; ready to move up"]
       - ["PDE Badging Fixes", "OC fix for nested badges"]
       - ["ListServ fix + ConnectBot change", "Communities"]
     emphasize_col: 1
     notes: >
-      Expected go-live dates were blank in the source deck — populate from
+      Expected go-live dates were blank in the source deck – populate from
       the Morph project plan before circulating. Original also listed
       Join/Leave ListServ and ConnectBot as separate rows (combined here).
 

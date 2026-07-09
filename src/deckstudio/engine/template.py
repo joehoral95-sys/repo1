@@ -50,7 +50,7 @@ def layout_by_name(prs, name: str):
 def blank_layout(prs):
     """The layout renderers draw on. It must be genuinely blank: corporate
     templates often ship decorated 'blank-ish' layouts whose background art
-    (EMF/WMF patterns) renders behind everything in PowerPoint — and preview
+    (EMF/WMF patterns) renders behind everything in PowerPoint - and preview
     tools may not show it. So we require zero picture/graphic shapes, prefer
     a layout literally named 'Blank' (whitespace/case-insensitive), and fall
     back to the least-decorated layout."""
@@ -73,7 +73,7 @@ def blank_layout(prs):
     layout, decorations, _ = candidates[0]
     if decorations > 0:
         raise TemplateError(
-            "No undecorated layout found in the template — every layout carries "
+            "No undecorated layout found in the template - every layout carries "
             "background art that would render behind slide content. Add a truly "
             f"blank layout to brand/template.pptx. (Least decorated: '{layout.name}' "
             f"with {decorations} graphic(s).)")

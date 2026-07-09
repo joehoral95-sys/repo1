@@ -1,4 +1,4 @@
-"""Agenda — variants:
+"""Agenda - variants:
 
   band  navy band left with swash title, numbered items right
   list  white: blue title left, numbered rows full width

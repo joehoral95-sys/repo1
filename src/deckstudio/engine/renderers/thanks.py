@@ -34,7 +34,7 @@ def render(slide, model: ThanksSlide, ctx) -> None:
     add_text(slide, Box(m, 2.95, text_w, 1.2),
              title, tokens, scale="section_title",
              role="heading", color="white", bold=True, anchor=MSO_ANCHOR.TOP)
-    # SOA's own Thank You layout hand-circles the words — replicate that.
+    # SOA's own Thank You layout hand-circles the words - replicate that.
     # The ring is STRETCHED around the text block (as in the template) and
     # extends above/below the title line, so the message sits lower.
     circle_w = max(3.0, min(0.36 * len(title) + 0.9, 7.0))

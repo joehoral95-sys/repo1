@@ -1,4 +1,4 @@
-"""Content slide — variants:
+"""Content slide - variants:
 
   bullets   classic single-column bullets
   columns   bullets split across two columns

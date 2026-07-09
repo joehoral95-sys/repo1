@@ -33,7 +33,7 @@ def test_extract_round_trip(built_example, example_spec, tmp_path):
 
 def test_extracted_yaml_is_structurally_sound(built_example, tmp_path):
     """The draft spec is a starting point the agent must redesign, not build
-    as-is — dense slides may exceed design limits (e.g. >6 bullets), and that's
+    as-is - dense slides may exceed design limits (e.g. >6 bullets), and that's
     fine. But it must be parseable YAML with ids/types, and any validation
     errors must be design-limit errors, never structural ones."""
     from pydantic import ValidationError

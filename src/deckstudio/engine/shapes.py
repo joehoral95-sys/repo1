@@ -49,7 +49,7 @@ def add_accent_bar(slide, left_in: float, top_in: float, width_in: float,
 
 def fill_background(slide, tokens: Tokens, color: str) -> None:
     """Dark slide background with a subtle diagonal gradient (deep navy
-    lifting toward blue) — reads richer than a flat fill. Falls back to
+    lifting toward blue) - reads richer than a flat fill. Falls back to
     solid if the gradient API is unavailable."""
     bg = slide.background
     if color == "primary":
@@ -117,7 +117,7 @@ def add_brand_art(slide, tokens: Tokens, name: str, box: Box, *, stretch: bool =
     """Place a brand accent graphic (brand/assets/patterns/<name>.png) inside
     `box`. stretch=True fills the box exactly (how the SOA template applies
     its hand-drawn marks); otherwise fit preserving aspect ratio. Silently
-    skips if the asset doesn't exist — art is garnish, never load-bearing."""
+    skips if the asset doesn't exist - art is garnish, never load-bearing."""
     path = tokens.brand_dir / "assets" / "patterns" / f"{name}.png"
     if not path.exists():
         return None

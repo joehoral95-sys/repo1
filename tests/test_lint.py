@@ -52,6 +52,26 @@ def test_wall_of_bullets_flagged():
     assert any("slides aren't documents" in w.lower() for w in lint(spec))
 
 
+def test_em_dash_flagged():
+    spec = make([{"id": "d", "type": "content", "title": "Costs rose 12% since 2024",
+                  "bullets": ["Vendor costs — the largest line — rose again"]}])
+    assert any("em dash" in w for w in lint(spec))
+
+
+def test_ai_boilerplate_flagged():
+    spec = make([{"id": "a", "type": "content", "title": "We must leverage synergies",
+                  "bullets": ["Seamlessly unlock game-changing value"]}])
+    warns = [w for w in lint(spec) if "AI boilerplate" in w]
+    assert len(warns) >= 2  # title and bullet each get one nudge
+
+
+def test_plain_business_copy_not_flagged():
+    spec = make([{"id": "ok", "type": "content", "title": "Fees sit 8% below peers",
+                  "bullets": ["Raising 4% covers proctoring costs",
+                              "Members told us price is not the barrier"]}])
+    assert not any("AI boilerplate" in w or "em dash" in w for w in lint(spec))
+
+
 def test_bullet_slide_run_flagged():
     slides = [
         {"id": f"b{i}", "type": "content", "title": f"Assertion number {i} here",

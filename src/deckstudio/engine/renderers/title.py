@@ -1,9 +1,9 @@
-"""Title slide — variants:
+"""Title slide - variants:
 
   band       two-tone: navy field + bright-blue right band, white shield
   band-left  mirror: blue band on the left, text right
   watermark  full navy with the oversized shield watermark
-  minimal    white, blue title, swash — the quiet open
+  minimal    white, blue title, swash - the quiet open
 """
 
 from __future__ import annotations

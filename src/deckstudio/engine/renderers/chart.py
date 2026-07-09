@@ -2,7 +2,7 @@
 
 When the spec provides an `insight`, the slide uses the exhibit layout:
 chart on the left two-thirds, a navy takeaway panel on the right carrying
-the "so what" — visually distinct from every other slide family. Without an
+the "so what" - visually distinct from every other slide family. Without an
 insight the chart takes the full width.
 """
 
@@ -68,7 +68,7 @@ def render(slide, model: ChartSlide, ctx) -> None:
 
 def _annotate_highlight(slide, model: ChartSlide, chart_box: Box, tokens) -> None:
     """When a point is highlighted, pin an auto-computed delta chip to the
-    chart's top-right — the editorial 'look here' annotation."""
+    chart's top-right - the editorial 'look here' annotation."""
     hl = model.chart.highlight
     if hl is None or hl.point == 0:
         return

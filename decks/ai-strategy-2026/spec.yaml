@@ -20,7 +20,7 @@ slides:
     items:
       - icon: target
         heading: "Exam & Candidate"
-        text: "Use AI to enhance the exam lifecycle — delivery, grading, and especially candidate feedback."
+        text: "Use AI to enhance the exam lifecycle – delivery, grading, and especially candidate feedback."
       - icon: idea
         heading: "Learning Content"
         text: "Expand SOA's position as the trusted hub for actuarial AI thought leadership and learning."
@@ -93,7 +93,7 @@ slides:
     title: "Research culminates in a future-of-work story for the board"
     kicker: "Focus 2 · Milestones"
     bullets:
-      - "**AI Skills & Role Framework** from 50+ professionals — June board meeting"
+      - "**AI Skills & Role Framework** from 50+ professionals – June board meeting"
       - "**Future-of-actuarial-work report** concludes in October"
       - "AI programming at all six major meetings; four new PD Edge+ courses"
       - "Standards voice with **NIST, NAIC, MIT, IAA**"
@@ -114,11 +114,11 @@ slides:
     title: "Adoption with guardrails, not experiments"
     kicker: "Focus 3 · Deliverables"
     bullets:
-      - "**Standardized adoption playbook** — evaluate, pilot, scale with clear decision criteria"
-      - "**Tool & use-case portfolio** — prioritized pipeline; retire tools that stop earning their keep"
-      - "**Staff training & change support** — raise adoption, reduce change fatigue"
-      - "**Governance & data stewardship** — privacy, security, acceptable use, exam-standard alignment"
-      - "**Operational impact metrics** — time saved, quality, stakeholder satisfaction"
+      - "**Standardized adoption playbook** – evaluate, pilot, scale with clear decision criteria"
+      - "**Tool & use-case portfolio** – prioritized pipeline; retire tools that stop earning their keep"
+      - "**Staff training & change support** – raise adoption, reduce change fatigue"
+      - "**Governance & data stewardship** – privacy, security, acceptable use, exam-standard alignment"
+      - "**Operational impact metrics** – time saved, quality, stakeholder satisfaction"
 
   - id: board-rhythm
     type: timeline
