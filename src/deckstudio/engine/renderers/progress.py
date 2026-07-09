@@ -8,7 +8,7 @@ from ...spec.schema import ProgressSlide
 from ..geometry import Box, columns, vcenter
 from ..infographics import add_progress_ring
 from ..registry import renderer
-from ..text import add_text
+from ..text import adaptive_pt, add_text
 from ._common import add_title_band
 
 
@@ -51,6 +51,9 @@ def _bars(slide, model: ProgressSlide, ctx, chrome: str = "left") -> None:
                    area.height_in - caption_pad - 0.5)
     label_w = 3.1
     track_w = bar_area.width_in - label_w - 1.15
+    label_pt = adaptive_pt(int(tokens.pt("stat_label").pt),
+                           [i.label for i in model.items],
+                           [(14, 18), (24, 16)])
     for item, row in zip(model.items,
                          grid_rows(bar_area, max(len(model.items), 3), 0.25),
                          strict=False):
@@ -59,7 +62,7 @@ def _bars(slide, model: ProgressSlide, ctx, chrome: str = "left") -> None:
         add_text(slide, Box(bar_area.left_in, bar_top - 0.05, label_w - 0.2,
                             bar_h + 0.1),
                  item.label, tokens, scale="stat_label", color="neutral_dark",
-                 anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+                 anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True, size_pt=label_pt)
         track = slide.shapes.add_shape(
             MSO_SHAPE.ROUNDED_RECTANGLE, Inches(bar_area.left_in + label_w),
             Inches(bar_top), Inches(track_w), Inches(bar_h))

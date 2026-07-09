@@ -16,9 +16,14 @@ from ...spec.schema import AgendaSlide
 from ..geometry import SLIDE_H_IN, SLIDE_W_IN, Box, columns, inset, rows
 from ..registry import renderer
 from ..shapes import add_accent_bar, add_brand_art, add_logo, add_rect
-from ..text import add_text
+from ..text import adaptive_pt, add_text
 
 BAND_W = 4.3
+
+
+def _item_pt(tokens, items: list[str]) -> int:
+    """Bigger row type when every agenda item is short."""
+    return adaptive_pt(int(tokens.pt("subtitle").pt), items, [(18, 22), (32, 20)])
 
 
 @renderer("agenda")
@@ -48,10 +53,11 @@ def _band(slide, model: AgendaSlide, ctx) -> None:
 
     items_area = Box(BAND_W + 0.55, 0.9, SLIDE_W_IN - BAND_W - 0.55 - m,
                      SLIDE_H_IN - 1.8)
+    item_pt = _item_pt(tokens, model.items)
     for i, (item, row) in enumerate(
             zip(model.items, rows(items_area, max(len(model.items), 3), 0.12),
                 strict=False), start=1):
-        _numbered_row(slide, tokens, i, item, row)
+        _numbered_row(slide, tokens, i, item, row, size_pt=item_pt)
 
 
 def _list(slide, model: AgendaSlide, ctx) -> None:
@@ -62,10 +68,11 @@ def _list(slide, model: AgendaSlide, ctx) -> None:
              role="heading", color="accent", bold=True)
     add_accent_bar(slide, m, tokens.title_top_in + 0.92, 0.9, tokens)
     items_area = Box(m, 1.85, SLIDE_W_IN - 2 * m, SLIDE_H_IN - 2.6)
+    item_pt = _item_pt(tokens, model.items)
     for i, (item, row) in enumerate(
             zip(model.items, rows(items_area, max(len(model.items), 3), 0.1),
                 strict=False), start=1):
-        _numbered_row(slide, tokens, i, item, row)
+        _numbered_row(slide, tokens, i, item, row, size_pt=item_pt)
     add_logo(slide, tokens, left_in=m, bottom_in=7.18, height_in=0.32)
 
 
@@ -78,6 +85,8 @@ def _grid(slide, model: AgendaSlide, ctx) -> None:
     add_accent_bar(slide, (SLIDE_W_IN - 0.9) / 2, tokens.title_top_in + 0.92,
                    0.9, tokens)
     area = Box(m + 0.4, 2.0, SLIDE_W_IN - 2 * m - 0.8, 4.4)
+    card_pt = adaptive_pt(int(tokens.pt("stat_label").pt), model.items,
+                          [(20, 18), (40, 16)])
     n = len(model.items)
     ncols = 2 if n <= 4 else 3
     nrows = (n + ncols - 1) // ncols
@@ -97,12 +106,13 @@ def _grid(slide, model: AgendaSlide, ctx) -> None:
             add_text(slide, Box(pad.left_in, pad.top_in + 0.55, pad.width_in,
                                 pad.height_in - 0.55),
                      model.items[idx], tokens, scale="stat_label",
-                     color="neutral_dark", shrink_to_fit=True)
+                     color="neutral_dark", shrink_to_fit=True, size_pt=card_pt)
             idx += 1
     add_logo(slide, tokens, left_in=m, bottom_in=7.18, height_in=0.32)
 
 
-def _numbered_row(slide, tokens, i: int, item: str, row: Box) -> None:
+def _numbered_row(slide, tokens, i: int, item: str, row: Box,
+                  size_pt: int | None = None) -> None:
     sq = 0.62
     sq_top = row.top_in + (row.height_in - sq) / 2
     add_rect(slide, Box(row.left_in, sq_top, sq, sq), tokens,
@@ -113,7 +123,7 @@ def _numbered_row(slide, tokens, i: int, item: str, row: Box) -> None:
     add_text(slide, Box(row.left_in + sq + 0.4, row.top_in,
                         row.width_in - sq - 0.4, row.height_in), item, tokens,
              scale="subtitle", color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE,
-             shrink_to_fit=True)
+             shrink_to_fit=True, size_pt=size_pt)
 
 
 def _page_number(slide, ctx) -> None:

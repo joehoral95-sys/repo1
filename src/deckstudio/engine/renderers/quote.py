@@ -10,7 +10,12 @@ from ...spec.schema import QuoteSlide
 from ..geometry import SLIDE_W_IN, Box, inset
 from ..registry import renderer
 from ..shapes import add_rect, fill_background
-from ..text import add_text
+from ..text import adaptive_pt, add_text
+
+
+def _quote_pt(tokens, text: str) -> int:
+    """A one-liner ask deserves more presence than a full paragraph."""
+    return adaptive_pt(int(tokens.pt("quote").pt), text, [(90, 32), (170, 29)])
 
 
 @renderer("quote")
@@ -29,7 +34,8 @@ def render(slide, model: QuoteSlide, ctx) -> None:
     pad = inset(card, x_in=0.7, y_in=0.45)
     add_text(slide, pad, model.text, tokens, scale="quote", role="heading",
              color="primary", bold=True, anchor=MSO_ANCHOR.MIDDLE,
-             align=PP_ALIGN.LEFT, line_spacing=1.15, shrink_to_fit=True)
+             align=PP_ALIGN.LEFT, line_spacing=1.15, shrink_to_fit=True,
+             size_pt=_quote_pt(tokens, model.text))
 
     # oversized quote mark straddling the card's top-left corner
     mark = add_text(slide, Box(card.left_in - 0.35, card.top_in - 1.25, 2.0, 1.9),
@@ -61,7 +67,7 @@ def _bare(slide, model: QuoteSlide, ctx, *, dark: bool) -> None:
              scale="quote", role="heading",
              color="white" if dark else "primary",
              anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.LEFT, line_spacing=1.15,
-             shrink_to_fit=True)
+             shrink_to_fit=True, size_pt=_quote_pt(tokens, model.text))
     if model.attribution:
         add_text(slide, Box(m, 5.3, SLIDE_W_IN - 2 * m, 0.6),
                  f"\u2014  {model.attribution}", tokens, scale="subtitle",

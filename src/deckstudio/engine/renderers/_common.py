@@ -7,7 +7,10 @@ from pptx.enum.text import PP_ALIGN
 from ...tokens import Tokens
 from ..geometry import SLIDE_W_IN, Box, content_area
 from ..shapes import add_accent_bar
-from ..text import add_text
+from ..text import adaptive_pt, add_text
+
+# Short titles earn bigger type; long ones stay at the token size.
+TITLE_TIERS = [(22, 34), (36, 31)]
 
 
 def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = None,
@@ -26,6 +29,7 @@ def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = No
 
     m = tokens.margin_in
     two_lines = len(title) > 52
+    title_pt = adaptive_pt(int(tokens.pt("slide_title").pt), title, TITLE_TIERS)
 
     if style in ("banner", "tint"):
         band_h = (1.6 if two_lines else 1.3) + (0.3 if kicker else 0.0)
@@ -42,7 +46,8 @@ def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = No
             top += 0.32
         add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, band_h - top - 0.15),
                  title, tokens, scale="slide_title", role="heading",
-                 color=title_color, bold=True, shrink_to_fit=True)
+                 color=title_color, bold=True, shrink_to_fit=True,
+                 size_pt=title_pt)
         return content_area(m, band_h + 0.3)
 
     centered = style == "centered"
@@ -56,7 +61,7 @@ def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = No
     title_h = 1.35 if two_lines else 0.85
     add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, title_h), title, tokens,
              scale="slide_title", role="heading", color="accent", bold=True,
-             shrink_to_fit=True, align=align)
+             shrink_to_fit=True, align=align, size_pt=title_pt)
     bar_top = top + title_h + 0.07
     bar_left = (SLIDE_W_IN - 0.9) / 2 if centered else m
     add_accent_bar(slide, bar_left, bar_top, 0.9, tokens)

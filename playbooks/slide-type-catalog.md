@@ -155,6 +155,14 @@ eyebrow. If you're using it three slides in a row, redesign.
   caption: "Percent complete as of July 2026"
 ```
 
+## Adaptive type
+Type scales UP automatically when content is short — a title under ~22
+chars renders at 34pt instead of 28, short timeline labels at 18pt instead
+of 14, a one-line quote at 32pt, brief agenda items at 22pt. Capped per
+element (never comic-sized) and body text never drops below the 14pt floor
+(captions 12 / footers 10 are the only footnote exceptions). Nothing to
+configure — write short, punchy labels and they get the presence they earn.
+
 ## Universal fields
 Every slide: `id` (unique kebab-case, stable), optional `kicker:` (small
 letter-spaced eyebrow, e.g. "AT A GLANCE" or "KPI METRICS · 1 OF 2"),

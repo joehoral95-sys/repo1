@@ -15,7 +15,7 @@ from ..geometry import columns as grid_columns
 from ..geometry import rows as grid_rows
 from ..registry import renderer
 from ..shapes import add_rect
-from ..text import add_bullets, add_text
+from ..text import adaptive_pt, add_bullets, add_text
 from ._common import add_title_band
 
 
@@ -31,16 +31,26 @@ def render(slide, model: ContentSlide, ctx) -> None:
             items.append((b.text, b.sub) if b.sub else b.text)
         else:
             items.append(b)
+    top_texts = [(i[0] if isinstance(i, tuple) else i) for i in items]
+    has_subs = any(isinstance(i, tuple) for i in items)
+    # Few short bullets in a big canvas → bigger type (subs keep their scale,
+    # so skip the bump when sub-bullets would end up disproportionately small).
+    bullet_pt = None
+    if not has_subs and len(items) <= 5:
+        bullet_pt = adaptive_pt(int(tokens.pt("body").pt), top_texts,
+                                [(35, 20), (65, 18)])
 
     if variant == "columns" and len(items) >= 4:
         half = (len(items) + 1) // 2
         left, right = grid_columns(area, 2, 0.6)
-        add_bullets(slide, left, items[:half], tokens)
-        add_bullets(slide, right, items[half:], tokens)
+        add_bullets(slide, left, items[:half], tokens, size_pt=bullet_pt)
+        add_bullets(slide, right, items[half:], tokens, size_pt=bullet_pt)
         return
 
     if variant == "numbered":
-        flat = [(i[0] if isinstance(i, tuple) else i) for i in items]
+        flat = top_texts
+        row_pt = adaptive_pt(int(tokens.pt("body").pt), flat,
+                             [(28, 20), (55, 18)])
         for n, (text, row) in enumerate(
                 zip(flat, grid_rows(area, max(len(flat), 3), 0.12), strict=False),
                 start=1):
@@ -55,11 +65,13 @@ def render(slide, model: ContentSlide, ctx) -> None:
             add_text(slide, Box(row.left_in + sq + 0.35, row.top_in,
                                 row.width_in - sq - 0.35, row.height_in),
                      text, tokens, scale="body", color="neutral_dark",
-                     anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+                     anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True,
+                     size_pt=row_pt)
         return
 
     if variant == "cards":
-        flat = [(i[0] if isinstance(i, tuple) else i) for i in items]
+        flat = top_texts
+        card_pt = adaptive_pt(int(tokens.pt("body").pt), flat, [(40, 18)])
         ncols = 2
         nrows = (len(flat) + ncols - 1) // ncols
         idx = 0
@@ -73,8 +85,9 @@ def render(slide, model: ContentSlide, ctx) -> None:
                 add_text(slide, Box(col.left_in + 0.3, col.top_in + 0.15,
                                     col.width_in - 0.6, col.height_in - 0.3),
                          flat[idx], tokens, scale="body", color="neutral_dark",
-                         anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+                         anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True,
+                         size_pt=card_pt)
                 idx += 1
         return
 
-    add_bullets(slide, area, items, tokens)
+    add_bullets(slide, area, items, tokens, size_pt=bullet_pt)

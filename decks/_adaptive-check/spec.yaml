@@ -1,0 +1,45 @@
+deck:
+  title: "Adaptive Type Check"
+  audience: "internal"
+  intent: "verify short content scales up"
+  animations: "off"
+
+slides:
+  - id: tl-short
+    type: timeline
+    variant: spine/left
+    title: "Short labels"
+    milestones:
+      - {label: "Kickoff", date: "Jan", done: true}
+      - {label: "Build", date: "Mar", done: true}
+      - {label: "Pilot", date: "Jun"}
+      - {label: "Launch", date: "Sep"}
+
+  - id: tl-long
+    type: timeline
+    variant: spine/left
+    title: "Longer labels stay at the fourteen point floor exactly"
+    milestones:
+      - {label: "Board approval and budget sign-off", date: "Jan 2026", done: true}
+      - {label: "Vendor selection and contracting", date: "Mar 2026"}
+      - {label: "Pilot with the exam committee", date: "Jun 2026"}
+
+  - id: ag-short
+    type: agenda
+    variant: band
+    items: ["Momentum", "Headwinds", "The ask", "Next steps"]
+
+  - id: q-short
+    type: quote
+    variant: card
+    text: "Approve the 4% fee adjustment."
+    attribution: "Decision requested today"
+
+  - id: c-short
+    type: content
+    variant: bullets/left
+    title: "Three short points"
+    bullets:
+      - "Costs are up 12%"
+      - "Peers charge more"
+      - "Members support it"

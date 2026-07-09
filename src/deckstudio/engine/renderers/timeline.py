@@ -9,7 +9,7 @@ from pptx.util import Inches, Pt
 from ...spec.schema import TimelineSlide
 from ..geometry import Box
 from ..registry import renderer
-from ..text import add_text
+from ..text import adaptive_pt, add_text
 from ._common import add_title_band
 
 
@@ -37,6 +37,13 @@ def render(slide, model: TimelineSlide, ctx) -> None:
 
     step = (area.width_in - 0.4 - node_d) / max(n - 1, 1)
     next_idx = next((i for i, ms in enumerate(model.milestones) if not ms.done), None)
+    # Short labels earn bigger type (one size for the whole spine).
+    label_pt = adaptive_pt(int(tokens.pt("stat_label").pt),
+                           [ms.label for ms in model.milestones],
+                           [(12, 18), (20, 16)])
+    date_pt = adaptive_pt(int(tokens.pt("caption").pt),
+                          [ms.date or "" for ms in model.milestones],
+                          [(10, 14)])
     for i, ms in enumerate(model.milestones):
         cx = area.left_in + 0.2 + i * step
         node = slide.shapes.add_shape(
@@ -67,7 +74,8 @@ def render(slide, model: TimelineSlide, ctx) -> None:
         if ms.date:
             date_top = spine_y - 0.58 if above else spine_y + 0.3
             add_text(slide, Box(label_left, date_top, label_w, 0.3), ms.date, tokens,
-                     scale="caption", color="accent", bold=True, align=PP_ALIGN.CENTER)
+                     scale="caption", color="accent", bold=True, align=PP_ALIGN.CENTER,
+                     size_pt=date_pt)
         if above:
             label_box = Box(label_left, spine_y - 1.85, label_w, 1.2)
             anchor = MSO_ANCHOR.BOTTOM
@@ -76,7 +84,7 @@ def render(slide, model: TimelineSlide, ctx) -> None:
             anchor = MSO_ANCHOR.TOP
         add_text(slide, label_box, ms.label, tokens,
                  scale="stat_label", color="neutral_dark", align=PP_ALIGN.CENTER,
-                 anchor=anchor, shrink_to_fit=True)
+                 anchor=anchor, shrink_to_fit=True, size_pt=label_pt)
 
 
 def _vertical(slide, model: TimelineSlide, ctx, chrome: str = "left") -> None:
@@ -88,6 +96,9 @@ def _vertical(slide, model: TimelineSlide, ctx, chrome: str = "left") -> None:
     node_d = 0.3
     rail_x = area.left_in + 2.15
     next_idx = next((i for i, ms in enumerate(model.milestones) if not ms.done), None)
+    label_pt = adaptive_pt(int(tokens.pt("body").pt),
+                           [ms.label for ms in model.milestones],
+                           [(16, 20), (30, 18)])
     mrows = grid_rows(area, max(len(model.milestones), 3), 0.12)
     rail = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE, Inches(rail_x + node_d / 2 - 0.015),
@@ -127,4 +138,4 @@ def _vertical(slide, model: TimelineSlide, ctx, chrome: str = "left") -> None:
         add_text(slide, Box(rail_x + node_d + 0.35, cy - 0.3,
                             area.right_in - rail_x - node_d - 0.35, 0.6),
                  ms.label, tokens, scale="body", color="neutral_dark",
-                 anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+                 anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True, size_pt=label_pt)

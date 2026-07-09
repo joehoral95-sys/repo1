@@ -18,10 +18,16 @@ from ..geometry import Box, columns, inset
 from ..geometry import rows as grid_rows
 from ..registry import renderer
 from ..shapes import add_picture_fitted, add_rect
-from ..text import add_text
+from ..text import adaptive_pt, add_text
 from ._common import add_title_band
 
 DISC_STYLES = [("accent", "white"), ("primary", "white"), ("accent_warm", "primary")]
+
+
+def _text_pt(tokens, model: IconRowSlide) -> int:
+    """Modest bump for the body text when every item is brief."""
+    return adaptive_pt(int(tokens.pt("stat_label").pt),
+                       [i.text for i in model.items], [(60, 16)])
 
 
 @renderer("icon_row")
@@ -72,6 +78,7 @@ def _draw_icon(slide, tokens, ctx, item: IconItem, box: Box, index: int) -> None
 
 def _columns(slide, model: IconRowSlide, ctx, area: Box) -> None:
     tokens = ctx.tokens
+    text_pt = _text_pt(tokens, model)
     icon_d = 1.0
     for i, (item, col) in enumerate(
             zip(model.items, columns(area, len(model.items), 0.4), strict=True)):
@@ -85,11 +92,13 @@ def _columns(slide, model: IconRowSlide, ctx, area: Box) -> None:
         add_text(slide, Box(col.left_in + 0.1, icon_top + icon_d + 0.8,
                             col.width_in - 0.2, col.height_in - icon_d - 1.1),
                  item.text, tokens, scale="stat_label", color="neutral_dark",
-                 align=PP_ALIGN.CENTER, line_spacing=1.15, shrink_to_fit=True)
+                 align=PP_ALIGN.CENTER, line_spacing=1.15, shrink_to_fit=True,
+                 size_pt=text_pt)
 
 
 def _rows(slide, model: IconRowSlide, ctx, area: Box) -> None:
     tokens = ctx.tokens
+    text_pt = _text_pt(tokens, model)
     icon_d = 0.85
     for i, (item, row) in enumerate(
             zip(model.items, grid_rows(area, max(len(model.items), 2), 0.2),
@@ -106,11 +115,12 @@ def _rows(slide, model: IconRowSlide, ctx, area: Box) -> None:
                             row.width_in - icon_d - 0.45,
                             row.height_in * 0.72 - 0.5),
                  item.text, tokens, scale="stat_label", color="neutral_dark",
-                 line_spacing=1.1, shrink_to_fit=True)
+                 line_spacing=1.1, shrink_to_fit=True, size_pt=text_pt)
 
 
 def _cards(slide, model: IconRowSlide, ctx, area: Box) -> None:
     tokens = ctx.tokens
+    text_pt = _text_pt(tokens, model)
     n = len(model.items)
     icon_d = 0.8
     if n == 4:
@@ -130,4 +140,4 @@ def _cards(slide, model: IconRowSlide, ctx, area: Box) -> None:
         add_text(slide, Box(pad.left_in, pad.top_in + icon_d + 0.6, pad.width_in,
                             pad.height_in - icon_d - 0.6),
                  item.text, tokens, scale="stat_label", color="neutral_dark",
-                 line_spacing=1.1, shrink_to_fit=True)
+                 line_spacing=1.1, shrink_to_fit=True, size_pt=text_pt)

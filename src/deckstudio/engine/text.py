@@ -20,6 +20,24 @@ from ..tokens import Tokens
 _TOKEN_RE = re.compile(r"(\*\*.+?\*\*|\[accent\].+?\[/accent\])", re.DOTALL)
 
 
+def adaptive_pt(base_pt: int, texts: str | list[str],
+                tiers: list[tuple[int, int]]) -> int:
+    """Scale type UP when content is short (never below base_pt).
+
+    tiers: (max_chars, pt) pairs, ascending by max_chars — the first tier
+    whose max_chars covers the LONGEST text wins. Example:
+    adaptive_pt(14, labels, [(14, 20), (22, 17)]) → 20pt when every label is
+    ≤14 chars, 17pt when ≤22, else 14pt. Markup is stripped before counting.
+    """
+    if isinstance(texts, str):
+        texts = [texts]
+    longest = max((len(strip_markup(t)) for t in texts), default=0)
+    for max_chars, pt in tiers:
+        if longest <= max_chars:
+            return max(pt, base_pt)
+    return base_pt
+
+
 @dataclass
 class Segment:
     text: str
@@ -79,8 +97,11 @@ def add_text(
     line_spacing: float | None = None,
     shrink_to_fit: bool = False,
     letter_spacing_pt: float | None = None,
+    size_pt: int | None = None,
 ):
-    """Add a text box at `box` with brand styling. Returns the shape."""
+    """Add a text box at `box` with brand styling. Returns the shape.
+
+    size_pt overrides the scale's point size (used by adaptive sizing)."""
     shape = slide.shapes.add_textbox(box.left, box.top, box.width, box.height)
     tf = shape.text_frame
     tf.word_wrap = True
@@ -96,7 +117,8 @@ def add_text(
         p.alignment = align
         if line_spacing:
             p.line_spacing = line_spacing
-        set_runs(p, line, font=font, size=tokens.pt(scale),
+        set_runs(p, line, font=font,
+                 size=Pt(size_pt) if size_pt else tokens.pt(scale),
                  color=tokens.color(color), accent_color=tokens.color("accent"),
                  bold=bold, letter_spacing_pt=letter_spacing_pt)
     if shrink_to_fit:
@@ -113,8 +135,11 @@ def add_bullets(
     scale: str = "body",
     color: str = "neutral_dark",
     space_after_pt: int = 10,
+    size_pt: int | None = None,
 ):
-    """Bulleted text block. Accepts strings or (text, sub_items) tuples."""
+    """Bulleted text block. Accepts strings or (text, sub_items) tuples.
+
+    size_pt overrides the top-level bullet size (adaptive sizing)."""
     shape = slide.shapes.add_textbox(box.left, box.top, box.width, box.height)
     tf = shape.text_frame
     tf.word_wrap = True
@@ -130,7 +155,8 @@ def add_bullets(
         p.level = level
         p.space_after = Pt(space_after_pt if level == 0 else max(4, space_after_pt - 4))
         p.line_spacing = 1.1
-        set_runs(p, text, font=font, size=tokens.pt(size_key),
+        size = Pt(size_pt) if (size_pt and level == 0) else tokens.pt(size_key)
+        set_runs(p, text, font=font, size=size,
                  color=tokens.color(color), accent_color=tokens.color("accent"))
         _apply_bullet_char(p, level, tokens)
 
