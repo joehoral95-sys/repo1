@@ -1,4 +1,5 @@
-"""Section divider: primary background, oversized number, gold rule."""
+"""Section divider: navy background, oversized number, hand-drawn sky swash
+under the title (the official SOA divider layouts use exactly this mark)."""
 
 from __future__ import annotations
 
@@ -8,7 +9,7 @@ from pptx.util import Pt
 from ...spec.schema import SectionSlide
 from ..geometry import SLIDE_H_IN, SLIDE_W_IN, Box
 from ..registry import renderer
-from ..shapes import add_accent_bar, add_logo, fill_background
+from ..shapes import add_accent_bar, add_brand_art, add_logo, fill_background
 from ..text import add_text
 
 
@@ -27,10 +28,14 @@ def render(slide, model: SectionSlide, ctx) -> None:
             for run in para.runs:
                 run.font.size = Pt(110)
 
-    add_accent_bar(slide, m, 3.55, 1.1, tokens, color="accent_warm", height_in=0.07)
-    add_text(slide, Box(m, 3.8, SLIDE_W_IN - 2 * m, 1.6), model.title, tokens,
+    add_text(slide, Box(m, 3.7, SLIDE_W_IN - 2 * m, 1.1), model.title, tokens,
              scale="section_title", role="heading", color="white", bold=True,
              anchor=MSO_ANCHOR.TOP, shrink_to_fit=True)
+    # SOA's brush-stroke underline; falls back to a straight rule if the
+    # asset is missing.
+    if add_brand_art(slide, tokens, "swash_sky", Box(m, 4.75, 3.0, 0.41)) is None:
+        add_accent_bar(slide, m, 4.85, 1.1, tokens, color="accent_warm", height_in=0.07)
+
     if model.subtitle:
         add_text(slide, Box(m, SLIDE_H_IN - 2.0, SLIDE_W_IN - 2 * m, 0.9),
                  model.subtitle, tokens, scale="subtitle", color="white",

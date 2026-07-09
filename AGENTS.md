@@ -70,15 +70,21 @@ Write `decks/<name>/spec.yaml`.
   owner. Do not contort the spec to dodge it.
 
 ### 7. Self-review (before showing Joe)
-Run this checklist; fix and rebuild if any answer is no:
+**Look at the deck like a human.** If LibreOffice is installed,
+`deckstudio build <name> --preview` renders PNGs — open EVERY slide image
+and check it: overlapping text? anything clipped or colliding? does each
+slide make sense at a glance? This step is not optional when previews are
+available. (Known blind spot: LibreOffice does not render EMF/WMF template
+graphics — after any change to `brand/template.pptx`, someone must open a
+built deck once in real PowerPoint.)
+
+Then run the checklist; fix and rebuild if any answer is no:
 - [ ] Is every content-slide title an assertion someone could disagree with?
 - [ ] Is any slide carrying more than ~40 words? (Move it to notes.)
 - [ ] Is each chart the right form for its data (per data-storytelling)?
 - [ ] Is at least one genuine insight surfaced prominently?
 - [ ] Do three consecutive slides look the same? (Vary the rhythm.)
 - [ ] Does the flow answer the audience's "so what?" in the first 3 slides?
-If LibreOffice is installed, `deckstudio build <name> --preview` renders
-PNGs — look at them.
 
 ### 8. Deliver
 Tell Joe: the output file path, a 3-bullet summary of the deck's argument,

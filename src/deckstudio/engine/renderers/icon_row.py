@@ -20,7 +20,10 @@ def render(slide, model: IconRowSlide, ctx) -> None:
     tokens = ctx.tokens
     area = add_title_band(slide, tokens, model.title)
     icon_d = 1.0
-    for item, col in zip(model.items, columns(area, len(model.items), 0.4), strict=True):
+    # disc color cycles through brand blues so the row reads designed
+    disc_styles = [("accent", "white"), ("primary", "white"), ("accent_warm", "primary")]
+    for i, (item, col) in enumerate(
+            zip(model.items, columns(area, len(model.items), 0.4), strict=True)):
         cx = col.left_in + (col.width_in - icon_d) / 2
         icon_top = col.top_in + 0.25
         icon_path = None
@@ -33,15 +36,16 @@ def render(slide, model: IconRowSlide, ctx) -> None:
         if icon_path:
             add_picture_fitted(slide, str(icon_path), Box(cx, icon_top, icon_d, icon_d))
         else:
+            disc_fill, initial_color = disc_styles[i % len(disc_styles)]
             disc = slide.shapes.add_shape(
                 MSO_SHAPE.OVAL, Inches(cx), Inches(icon_top), Inches(icon_d), Inches(icon_d))
             disc.fill.solid()
-            disc.fill.fore_color.rgb = tokens.color("accent")
+            disc.fill.fore_color.rgb = tokens.color(disc_fill)
             disc.line.fill.background()
             disc.shadow.inherit = False
             add_text(slide, Box(cx, icon_top + 0.22, icon_d, 0.6),
                      item.heading[:1].upper(), tokens, scale="slide_title",
-                     role="heading", color="white", bold=True, align=PP_ALIGN.CENTER,
+                     role="heading", color=initial_color, bold=True, align=PP_ALIGN.CENTER,
                      anchor=MSO_ANCHOR.MIDDLE)
 
         add_text(slide, Box(col.left_in, icon_top + icon_d + 0.2, col.width_in, 0.55),

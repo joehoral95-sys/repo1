@@ -21,5 +21,6 @@ def render(slide, model: BigNumberSlide, ctx) -> None:
         add_stat_tile(slide, tile, model.stats[0], tokens, hero=True)
         return
     tile_h = min(3.2, area.height_in - 0.3)
-    for stat, col in zip(model.stats, columns(area, n, tokens.gutter_in), strict=True):
-        add_stat_tile(slide, vcenter(col, tile_h), stat, tokens)
+    for i, (stat, col) in enumerate(
+            zip(model.stats, columns(area, n, tokens.gutter_in), strict=True)):
+        add_stat_tile(slide, vcenter(col, tile_h), stat, tokens, accent_index=i)

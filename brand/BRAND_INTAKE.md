@@ -45,6 +45,9 @@ editing) — run it once, then every deck is on-brand automatically.
    machine, logo paths resolve, template loads), then
    `deckstudio build _example-quarterly --preview` and eyeball the sample
    deck against the guidelines with Joe.
+   **Important**: LibreOffice previews do NOT render EMF/WMF graphics that
+   corporate templates often use for background art — after any template
+   change, open a built deck once in real PowerPoint before calling it done.
 5. **Record rules the engine can't encode** (logo clear space, photo style,
    "never put the logo on gold", …) in `playbooks/presentation-design.md`
    under "SOA-specific rules" so the agent respects them when speccing.

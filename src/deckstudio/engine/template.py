@@ -20,7 +20,7 @@ class TemplateError(Exception):
     pass
 
 
-BLANK_CANDIDATES = ("Blank", "blank")
+BLANK_CANDIDATES = ("blank",)  # matched against name.strip().lower()
 
 
 def open_template(template_path: Path | None):
@@ -48,23 +48,42 @@ def layout_by_name(prs, name: str):
 
 
 def blank_layout(prs):
-    """The layout renderers draw on. Prefer one literally named Blank, else the
-    layout with the fewest placeholders."""
-    for name in BLANK_CANDIDATES:
-        try:
-            return layout_by_name(prs, name)
-        except TemplateError:
-            pass
-    best = None
-    best_count = 10 ** 9
+    """The layout renderers draw on. It must be genuinely blank: corporate
+    templates often ship decorated 'blank-ish' layouts whose background art
+    (EMF/WMF patterns) renders behind everything in PowerPoint — and preview
+    tools may not show it. So we require zero picture/graphic shapes, prefer
+    a layout literally named 'Blank' (whitespace/case-insensitive), and fall
+    back to the least-decorated layout."""
+    candidates = []
     for master in prs.slide_masters:
         for layout in master.slide_layouts:
-            n = len(layout.placeholders)
-            if n < best_count:
-                best, best_count = layout, n
-    if best is None:
+            decorations = sum(
+                1 for sh in layout.shapes
+                if not getattr(sh, "is_placeholder", False) and _is_graphic(sh))
+            candidates.append((layout, decorations, len(layout.placeholders)))
+    if not candidates:
         raise TemplateError("Template has no slide layouts at all.")
-    return best
+
+    named_clean = [c for c in candidates
+                   if c[0].name.strip().lower() in BLANK_CANDIDATES and c[1] == 0]
+    if named_clean:
+        return named_clean[0][0]
+
+    candidates.sort(key=lambda c: (c[1], c[2]))
+    layout, decorations, _ = candidates[0]
+    if decorations > 0:
+        raise TemplateError(
+            "No undecorated layout found in the template — every layout carries "
+            "background art that would render behind slide content. Add a truly "
+            f"blank layout to brand/template.pptx. (Least decorated: '{layout.name}' "
+            f"with {decorations} graphic(s).)")
+    return layout
+
+
+def _is_graphic(shape) -> bool:
+    from pptx.enum.shapes import MSO_SHAPE_TYPE
+
+    return shape.shape_type in (MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.LINKED_PICTURE)
 
 
 def add_blank_slide(prs):

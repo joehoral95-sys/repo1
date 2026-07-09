@@ -67,6 +67,20 @@ def add_logo(slide, tokens: Tokens, *, dark_bg: bool = False,
     return pic
 
 
+def add_brand_art(slide, tokens: Tokens, name: str, box: Box, *, stretch: bool = False):
+    """Place a brand accent graphic (brand/assets/patterns/<name>.png) inside
+    `box`. stretch=True fills the box exactly (how the SOA template applies
+    its hand-drawn marks); otherwise fit preserving aspect ratio. Silently
+    skips if the asset doesn't exist — art is garnish, never load-bearing."""
+    path = tokens.brand_dir / "assets" / "patterns" / f"{name}.png"
+    if not path.exists():
+        return None
+    if stretch:
+        return slide.shapes.add_picture(str(path), box.left, box.top,
+                                        width=box.width, height=box.height)
+    return add_picture_fitted(slide, str(path), box)
+
+
 def add_picture_fitted(slide, path: str, box: Box):
     """Place a picture centered inside `box`, preserving aspect ratio."""
     from PIL import Image

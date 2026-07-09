@@ -22,16 +22,32 @@ ARROWS = {"up": "▲", "down": "▼", "flat": "▬", "none": ""}
 SENTIMENT_COLOR = {"good": "positive", "bad": "negative", "neutral": "neutral_mid"}
 
 
-def add_stat_tile(slide, box: Box, stat: Stat, tokens: Tokens, *, hero: bool = False) -> None:
+TILE_ACCENTS = ["accent", "accent_warm", "primary", "accent"]
+
+
+def add_stat_tile(slide, box: Box, stat: Stat, tokens: Tokens, *, hero: bool = False,
+                  accent_index: int = 0) -> None:
     """A KPI tile: big number, label, optional delta with arrow.
 
     hero=True renders the tile on the primary brand color (used when a slide
-    has a single stat to make it the star).
+    has a single stat to make it the star). Non-hero tiles carry a short
+    accent tick (color cycles per tile) so a row reads designed, not cloned.
     """
     fill = "primary" if hero else "neutral_light"
     value_color = "white" if hero else "primary"
     label_color = "white" if hero else "neutral_dark"
     add_rect(slide, box, tokens, fill=fill, rounded=True, corner=0.06)
+    if not hero:
+        tick_w = 0.55
+        tick = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            Inches(box.left_in + (box.width_in - tick_w) / 2),
+            Inches(box.top_in + 0.22), Inches(tick_w), Inches(0.055))
+        tick.adjustments[0] = 0.5
+        tick.fill.solid()
+        tick.fill.fore_color.rgb = tokens.color(TILE_ACCENTS[accent_index % len(TILE_ACCENTS)])
+        tick.line.fill.background()
+        tick.shadow.inherit = False
     pad = inset(box, x_in=0.25, y_in=0.2)
 
     # Vertical stack: value (dominant), label, delta.

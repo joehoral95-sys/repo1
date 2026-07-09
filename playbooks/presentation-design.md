@@ -66,6 +66,13 @@ Animation is seasoning, not sauce:
   - Brand fonts are Tenorite Bold / Tenorite Regular (Microsoft 365 cloud
     fonts). Machines without them substitute Segoe UI / Calibri —
     `deckstudio doctor` warns when that will happen.
+  - SOA's hand-drawn accent marks (`brand/assets/patterns/`): the sky
+    **swash** underlines divider titles; the sky **circle** wraps the
+    thank-you words. The engine places both automatically. Use them ONLY on
+    dark full-bleed slides, never behind or over content.
+  - The template's geometric background pattern (WMF, on layouts like
+    '1_Blank') is decorative page art — it must NEVER sit behind slide
+    content. The engine refuses decorated layouts; don't fight that.
 
 ## Editability (why the engine works the way it does)
 
