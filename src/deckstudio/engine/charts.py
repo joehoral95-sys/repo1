@@ -112,6 +112,10 @@ def _style_axes(chart, spec: ChartSpec, tokens: Tokens) -> None:
     grid_color = _LIGHT_GRID
     try:
         vaxis = chart.value_axis
+        if spec.kind in ("bar_clustered", "bar_stacked", "bar_horizontal", "area"):
+            # honesty rule: bars/areas always start at zero — no dramatic
+            # differences faked by a truncated axis
+            vaxis.minimum_scale = 0.0
         vaxis.has_major_gridlines = True
         vaxis.major_gridlines.format.line.color.rgb = grid_color
         vaxis.major_gridlines.format.line.width = Pt(0.5)

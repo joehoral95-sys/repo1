@@ -1,11 +1,196 @@
 deck:
-  title: "TODO — deck title"
-  audience: "TODO — who will see this?"
-  intent: "TODO — what must it achieve?"
+  title: "YTD May 2026: Ahead of Plan, Two Metrics to Watch"
+  audience: "SOA Board of Directors"
+  intent: "Confident, honest YTD read: ahead financially, strong demand, two watch items"
+  tone: "confident, data-forward, no spin"
+  date: "Updated June 17, 2026"
+  footer: "Society of Actuaries · Board Overview · YTD May 2026"
   animations: subtle
 
 slides:
   - id: cover
     type: title
-    title: "TODO — an assertion, not a topic"
-    subtitle: ""
+    title: "Five Months In: Ahead of Plan, Two Metrics to Watch"
+    subtitle: "HOI Metrics & KPIs · YTD May 2026 vs. 2025"
+    presenter: "Board Overview"
+
+  - id: agenda
+    type: agenda
+    title: "Today"
+    items:
+      - "The headline: financial strength"
+      - "Health of the organization"
+      - "The watch list, honestly framed"
+      - "What lands next"
+
+  - id: headline
+    type: big_number
+    title: "The organization is out-earning its plan"
+    kicker: "The headline"
+    animate: build
+    stats:
+      - value: "+$1.7M"
+        label: "Net operating margin YTD"
+        delta: "+$1.7M vs YTD budget"
+        arrow: up
+        sentiment: good
+        target: "YTD budget $0K · FY target +$0.7M"
+        status: on_track
+      - value: "$2.3M"
+        label: "PD revenue"
+        delta: "153% of YTD target"
+        arrow: up
+        sentiment: good
+        target: "YTD target $1.5M · FY $9.5M"
+        status: on_track
+      - value: "33.6K"
+        label: "Education registrations"
+        delta: "on pace"
+        arrow: up
+        sentiment: good
+        target: "YTD target 34.0K · FY 81.0K"
+        status: on_track
+    notes: >
+      NOM drivers: strong exam registrations (prelim and FSA), ReFocus margin
+      +$500K variance (attendance and sponsorships), webcast/seminar +$266K
+      (PD Edge). Sourced from packet page 1.
+
+  - id: sec-health
+    type: section
+    title: "Health of the organization"
+    number: 1
+    subtitle: "Every operating metric is at or above its YTD target."
+    preview:
+      - {label: "Education registrations", value: "33.6K", status: on_track}
+      - {label: "PD revenue", value: "$2.3M", status: on_track}
+      - {label: "Research scorecard", value: "234K", status: on_track}
+      - {label: "Net operating margin", value: "+$1.7M", status: on_track}
+      - {label: "Member satisfaction", value: "pending", status: pending}
+
+  - id: pace-vs-target
+    type: chart
+    title: "Every measurable HOI metric is at or above YTD pace"
+    kicker: "HOI metrics · progress vs YTD target"
+    chart:
+      kind: bar_horizontal
+      categories: ["PD revenue", "Research scorecard", "Education registrations", "Candidate retention"]
+      series:
+        - name: "Percent of YTD target achieved"
+          values: [153, 124, 99, 96]
+      highlight: {series: "Percent of YTD target achieved", point: 0}
+      number_format: "0\"%\""
+    insight: "PD revenue is the standout at 153% of target — ReFocus and PD Edge are carrying it. Retention sits just under pace; it reappears on the watch list."
+    source: "Board Overview packet, 6/17/2026 (YTD actual ÷ YTD target)"
+    notes: >
+      Computed from packet values: PD $2.3M/$1.5M=153%; Research 234K/188K=124%;
+      Education 33.6K/34.0K=99%; Retention 35.5%/37.0%=96%. NOM excluded — its
+      YTD budget is $0K so a ratio is undefined; it's the headline slide instead.
+
+  - id: demand
+    type: big_number
+    title: "Education demand is the engine"
+    kicker: "Demand signals"
+    animate: build
+    stats:
+      - value: "+10%"
+        label: "Exam P registrations YTD"
+        arrow: up
+        sentiment: good
+        status: on_track
+      - value: "3K+"
+        label: "March FSA sitting registrations"
+        target: "First of three 2026 sittings"
+        status: on_track
+      - value: "3"
+        label: "FSA sittings in 2026"
+        target: "First year ever with three"
+        status: on_track
+
+  - id: candidates-global
+    type: chart
+    title: "First-time candidate growth is coming from everywhere"
+    kicker: "Candidate pipeline"
+    chart:
+      kind: bar_horizontal
+      categories: ["MEASA", "United States", "Canada", "East/Southeast Asia"]
+      series:
+        - name: "First-time candidate growth, YTD"
+          values: [10, 7, 6, 1]
+      highlight: {series: "First-time candidate growth, YTD", point: 0}
+      number_format: "0\"%\""
+    insight: "4.2K first-time candidates YTD — and the growth is broad-based, with MEASA fastest at +10%."
+    source: "Board Overview packet, 6/17/2026"
+
+  - id: sec-watch
+    type: section
+    title: "The watch list"
+    number: 2
+    subtitle: "Two metrics below pace — both pace questions, not panic questions."
+    preview:
+      - {label: "Membership count", value: "35.7K", status: watch}
+      - {label: "Candidate retention", value: "35.5%", status: watch}
+      - {label: "All other measurable metrics", value: "on track", status: on_track}
+
+  - id: membership
+    type: chart
+    title: "Membership: above year-end, below pace to target"
+    kicker: "Watch item · 1 of 2"
+    chart:
+      kind: bar_clustered
+      categories: ["2025 total", "2026 YTD (May)", "2026 FY target"]
+      series:
+        - name: "Members"
+          values: [35600, 35700, 36200]
+      highlight: {series: "Members", point: 1}
+      number_format: "#,##0"
+    insight: "July drops will decide this one — and the new paid-dues rule already tightened the target by 400."
+    source: "Board Overview packet, 6/17/2026"
+    notes: >
+      New for 2026: recently credentialed ASAs are not counted until dues are
+      fully paid; the FY target was reduced by 400 to account for this.
+      Currently several hundred below historical pace to 36.2K.
+
+  - id: watch-context
+    type: comparison
+    title: "How to read the watch list"
+    left:
+      heading: "The gap"
+      bullets:
+        - "Membership several hundred below pace to 36.2K"
+        - "Retention 35.5% vs 37.0% YTD target"
+        - "July membership drops still pending"
+    right:
+      heading: "The context"
+      bullets:
+        - "Membership is still **above** year-end 2025"
+        - "Retention is **within historical range** for recent cohorts"
+        - "Relevant prelim retention is actually **up 2%** combined"
+    emphasize: right
+    notes: >
+      Frame honestly: these are pace concerns worth tracking into Q3, not
+      structural problems. Retention detail: FAM, SRM, PA, ALTAM/ASTAM cohorts.
+
+  - id: whats-next
+    type: timeline
+    title: "What lands between now and year-end"
+    kicker: "Looking ahead"
+    milestones:
+      - {label: "July membership drops", date: "Jul 2026"}
+      - {label: "First satisfaction surveys", date: "Summer 2026"}
+      - {label: "FSA sittings 2 & 3", date: "Jul · Nov 2026"}
+      - {label: "Essential initiatives review", date: "Dec 2026"}
+    notes: >
+      Member and candidate satisfaction are survey-based and simply pending —
+      first of two surveys each in summer 2026. Essential initiatives (95%
+      completion target) is a year-end metric.
+
+  - id: takeaway
+    type: quote
+    text: "Five months in: financially ahead, demand strong, and two pace metrics to watch into Q3 — with July as the next real signal."
+    attribution: "Board Overview · YTD May 2026"
+
+  - id: close
+    type: thanks
+    title: "Thank you"
+    message: "Full metric definitions and comments are in the source packet."
+    contact: "Board Overview · Updated June 17, 2026"

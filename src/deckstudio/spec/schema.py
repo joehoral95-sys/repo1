@@ -176,6 +176,9 @@ class ComparisonSlide(SlideBase):
     left: ComparisonSide
     right: ComparisonSide
     emphasize: Literal["left", "right", "none"] = "none"
+    badge: str | None = Field(
+        None, max_length=24,
+        description="Chip on the emphasized panel, e.g. 'Recommended' — omit for no chip")
 
 
 class Milestone(StrictModel):

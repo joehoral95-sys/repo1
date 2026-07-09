@@ -38,10 +38,10 @@ def render(slide, model: ComparisonSlide, ctx) -> None:
              role="heading", color="primary", bold=True, align=PP_ALIGN.CENTER,
              anchor=MSO_ANCHOR.MIDDLE)
 
-    # badge the recommendation
-    if model.emphasize != "none":
+    # badge the emphasized panel, only when the spec names the badge
+    if model.emphasize != "none" and model.badge:
         col = left_col if model.emphasize == "left" else right_col
-        add_chip(slide, col.left_in + 0.35, col.top_in - 0.15, "RECOMMENDED",
+        add_chip(slide, col.left_in + 0.35, col.top_in - 0.15, model.badge.upper(),
                  tokens, fill="accent_warm", text_color="primary")
 
 

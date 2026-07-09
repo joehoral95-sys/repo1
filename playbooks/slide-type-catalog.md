@@ -168,7 +168,7 @@ optional `notes:` (speaker notes — put the detail here), optional
   rendered as a right-side teaser panel of the section's metrics.
 - `chart.highlight` renders the data point in SOA yellow AND pins an
   auto-computed delta chip to the chart.
-- `comparison.emphasize` adds the navy panel, a RECOMMENDED chip, and a
-  "vs" badge on the seam.
+- `comparison.emphasize` adds the navy panel and a "vs" badge on the
+  seam; add `badge: "Recommended"` for a chip on the emphasized panel.
 - `icon_row` icons by name: growth, people, cost, clock, target, shield,
   idea, alert, doc, globe.

@@ -22,10 +22,14 @@ def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = No
                  tokens, scale="kicker", color="primary", bold=True,
                  letter_spacing_pt=1.6)
         top += 0.3
-    add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, 0.85), title, tokens,
+    # Long titles wrap to two lines; push the rule and content down so
+    # nothing collides.
+    two_lines = len(title) > 52
+    title_h = 1.35 if two_lines else 0.85
+    add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, title_h), title, tokens,
              scale="slide_title", role="heading", color="accent", bold=True,
              shrink_to_fit=True)
-    bar_top = top + 0.92
+    bar_top = top + title_h + 0.07
     add_accent_bar(slide, m, bar_top, 0.9, tokens)
     return content_area(m, bar_top + 0.28)
 
