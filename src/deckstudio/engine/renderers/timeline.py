@@ -15,7 +15,11 @@ from ._common import add_title_band
 
 @renderer("timeline")
 def render(slide, model: TimelineSlide, ctx) -> None:
+    """Variants: spine (horizontal) | vertical (stacked rows, long labels)."""
     tokens = ctx.tokens
+    if ctx.variant(model) == "vertical":
+        _vertical(slide, model, ctx)
+        return
     area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     n = len(model.milestones)
     spine_y = area.top_in + area.height_in * 0.42
@@ -71,3 +75,53 @@ def render(slide, model: TimelineSlide, ctx) -> None:
         add_text(slide, label_box, ms.label, tokens,
                  scale="stat_label", color="neutral_dark", align=PP_ALIGN.CENTER,
                  anchor=anchor, shrink_to_fit=True)
+
+
+def _vertical(slide, model: TimelineSlide, ctx) -> None:
+    from ..geometry import rows as grid_rows
+
+    tokens = ctx.tokens
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    node_d = 0.3
+    rail_x = area.left_in + 2.15
+    next_idx = next((i for i, ms in enumerate(model.milestones) if not ms.done), None)
+    mrows = grid_rows(area, max(len(model.milestones), 3), 0.12)
+    rail = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(rail_x + node_d / 2 - 0.015),
+        Inches(mrows[0].top_in + mrows[0].height_in / 2),
+        Inches(0.03),
+        Inches(mrows[len(model.milestones) - 1].top_in
+               + mrows[len(model.milestones) - 1].height_in / 2
+               - mrows[0].top_in - mrows[0].height_in / 2))
+    rail.fill.solid()
+    rail.fill.fore_color.rgb = tokens.color("neutral_mid")
+    rail.line.fill.background()
+    rail.shadow.inherit = False
+    for i, ms in enumerate(model.milestones):
+        row = mrows[i]
+        cy = row.top_in + row.height_in / 2
+        if ms.date:
+            add_text(slide, Box(area.left_in, cy - 0.18, 1.9, 0.36), ms.date,
+                     tokens, scale="stat_delta", color="accent", bold=True,
+                     align=PP_ALIGN.RIGHT, anchor=MSO_ANCHOR.MIDDLE)
+        node = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL, Inches(rail_x), Inches(cy - node_d / 2),
+            Inches(node_d), Inches(node_d))
+        node.shadow.inherit = False
+        if ms.done:
+            node.fill.solid()
+            node.fill.fore_color.rgb = tokens.color("accent")
+            node.line.fill.background()
+        elif i == next_idx:
+            node.fill.solid()
+            node.fill.fore_color.rgb = tokens.color("accent_warm")
+            node.line.fill.background()
+        else:
+            node.fill.solid()
+            node.fill.fore_color.rgb = tokens.color("white")
+            node.line.color.rgb = tokens.color("accent")
+            node.line.width = Pt(2)
+        add_text(slide, Box(rail_x + node_d + 0.35, cy - 0.3,
+                            area.right_in - rail_x - node_d - 0.35, 0.6),
+                 ms.label, tokens, scale="body", color="neutral_dark",
+                 anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)

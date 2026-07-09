@@ -16,22 +16,44 @@ from ..geometry import Box, inset
 from ..registry import renderer
 from ..shapes import add_accent_bar, add_chip, add_rect, chip_width
 from ..text import add_text
-from ._common import add_title_band
+from ._common import add_insight_strip, add_title_band
 
 
 @renderer("chart")
 def render(slide, model: ChartSlide, ctx) -> None:
+    """Variants (with insight): exhibit (panel right), panel-left, strip
+    (insight strip under a full-width chart). Without insight: full-width."""
     tokens = ctx.tokens
+    variant = ctx.variant(model)
     area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+
+    if model.insight and variant == "strip":
+        strip_pad = 0.6 + (0.25 if model.source else 0.0)
+        chart_box = Box(area.left_in, area.top_in, area.width_in,
+                        area.height_in - strip_pad)
+        add_chart(slide, model.chart, chart_box, tokens)
+        _annotate_highlight(slide, model, chart_box, tokens)
+        add_insight_strip(slide, area, model.insight, tokens)
+        if model.source:
+            add_text(slide, Box(area.left_in, area.bottom_in + 0.05, area.width_in, 0.22),
+                     f"Source: {model.source}", tokens, scale="caption",
+                     color="neutral_mid", align=PP_ALIGN.RIGHT)
+        return
 
     if model.insight:
         panel_w = 3.4
-        chart_box = Box(area.left_in, area.top_in,
-                        area.width_in - panel_w - 0.35, area.height_in - 0.3)
+        if variant == "panel-left":
+            chart_box = Box(area.left_in + panel_w + 0.35, area.top_in,
+                            area.width_in - panel_w - 0.35, area.height_in - 0.3)
+            panel_box = Box(area.left_in, area.top_in, panel_w, area.height_in - 0.3)
+        else:  # exhibit
+            chart_box = Box(area.left_in, area.top_in,
+                            area.width_in - panel_w - 0.35, area.height_in - 0.3)
+            panel_box = Box(area.right_in - panel_w, area.top_in, panel_w,
+                            area.height_in - 0.3)
         add_chart(slide, model.chart, chart_box, tokens)
         _annotate_highlight(slide, model, chart_box, tokens)
-        _takeaway_panel(slide, model, tokens,
-                        Box(area.right_in - panel_w, area.top_in, panel_w, area.height_in - 0.3))
+        _takeaway_panel(slide, model, tokens, panel_box)
         return
 
     bottom_pad = 0.3 if model.source else 0.0

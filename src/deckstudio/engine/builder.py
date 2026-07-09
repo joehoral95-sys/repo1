@@ -33,6 +33,13 @@ class RenderContext:
     def warn(self, message: str) -> None:
         self.warnings.append(message)
 
+    def variant(self, model) -> str:
+        """The layout variant to render for this slide (spec override or
+        deck-deterministic default)."""
+        from .variants import resolve_variant
+
+        return resolve_variant(model.type, model.variant, self.deck.title, self.warn)
+
 
 @dataclass
 class BuildResult:

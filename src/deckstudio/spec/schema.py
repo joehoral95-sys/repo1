@@ -53,6 +53,10 @@ class SlideBase(StrictModel):
     kicker: str | None = Field(
         None, description="Small letter-spaced eyebrow above the title, "
         "e.g. 'AT A GLANCE' or 'KPI METRICS · 2 OF 2'")
+    variant: str | None = Field(
+        None, description="Layout variant for this slide type (see "
+        "playbooks/slide-type-catalog.md). Omit for a deck-deterministic "
+        "default — different decks automatically get different compositions.")
     notes: str | None = Field(None, description="Speaker notes")
     animate: Animate = "none"
 

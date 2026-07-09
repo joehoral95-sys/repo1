@@ -18,6 +18,8 @@ Hard rules:
   `emphasize`, `sentiment`, `highlight`, `animate: none|fade|build`
   (animations require deck-level `animations: subtle` — desktop-PowerPoint
   presentations only; previews/phones mis-render them).
+- `variant:` picks a layout composition per slide (see the catalog's
+  variant table). Usually omit it — defaults vary by deck automatically.
 - Inline markup in text: `**bold**`, `[accent]text[/accent]`. Nothing else.
 - Limits that encode design (don't fight them, redesign the slide):
   agenda ≤6, bullets ≤6 (≤160 chars each), stats 1-4, comparison bullets ≤5,

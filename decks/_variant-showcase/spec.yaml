@@ -1,0 +1,65 @@
+# Internal showcase: exercises the NON-canonical variants for visual review.
+deck:
+  title: "Variant Showcase"
+  audience: "internal"
+  intent: "visual QA of layout variants"
+  animations: off
+
+slides:
+  - {id: t-minimal, type: title, variant: minimal, title: "The Quiet Open", subtitle: "title · minimal", presenter: "QA"}
+  - {id: t-bandleft, type: title, variant: band-left, title: "Band on the Left", subtitle: "title · band-left"}
+  - id: s-band
+    type: section
+    variant: band
+    title: "Band divider"
+    number: 3
+    subtitle: "section · band with light preview"
+    preview:
+      - {label: "Metric one", value: "42", status: on_track}
+      - {label: "Metric two", value: "7%", status: watch}
+  - {id: s-minimal, type: section, variant: minimal, title: "Minimal divider", number: 4, subtitle: "section · minimal"}
+  - {id: a-list, type: agenda, variant: list, title: "Agenda as list", items: ["First topic", "Second topic", "Third topic", "Fourth topic"]}
+  - {id: a-grid, type: agenda, variant: grid, title: "Agenda as grid", items: ["First topic", "Second topic", "Third topic", "Fourth topic"]}
+  - id: c-numbered
+    type: content
+    variant: numbered
+    title: "Content as numbered rows"
+    bullets: ["First point made plainly", "Second point with detail", "Third point to consider", "Fourth point to close"]
+  - id: tl-vertical
+    type: timeline
+    variant: vertical
+    title: "Vertical timeline handles long labels"
+    milestones:
+      - {label: "A milestone with a genuinely long descriptive label that wraps", date: "Mar 2026", done: true}
+      - {label: "Second milestone, also fairly wordy for testing", date: "Jun 2026"}
+      - {label: "Third milestone", date: "Oct 2026"}
+  - id: q-light
+    type: quote
+    variant: light
+    text: "The light quote variant keeps drama on a white canvas."
+    attribution: "quote · light"
+  - id: p-bars
+    type: progress
+    variant: bars
+    title: "Progress as bars"
+    items:
+      - {label: "Workstream one", percent: 85}
+      - {label: "Workstream two", percent: 45}
+      - {label: "Workstream three", percent: 20}
+  - id: cmp-open
+    type: comparison
+    variant: open
+    title: "Comparison, open style"
+    emphasize: right
+    badge: "Preferred"
+    left: {heading: "Option A", bullets: ["one", "two", "three"]}
+    right: {heading: "Option B", bullets: ["four", "five", "six"]}
+  - id: ir-rows
+    type: icon_row
+    variant: rows
+    title: "Icon row as stacked rows"
+    items:
+      - {icon: growth, heading: "Growth", text: "Longer explanatory text sits comfortably beside the icon in this layout."}
+      - {icon: shield, heading: "Safety", text: "Second row with its own explanation text."}
+      - {icon: idea, heading: "Ideas", text: "Third row closing out the set."}
+  - {id: th-band, type: thanks, variant: band, title: "Thank you", message: "thanks · band", contact: "qa@soa.org"}

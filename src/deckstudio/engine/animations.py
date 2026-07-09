@@ -27,6 +27,21 @@ P = f"{{{NSMAP_P}}}"
 CONTENT_TOP_EMU = Emu(int(1.3 * 914400))
 FADE_MS = 400
 CASCADE_MS = 120
+MAX_CLICKS = 3  # a build slide never needs more than 3 clicks to show everything
+
+
+def _chunk(shape_ids: list[int], n_groups: int) -> list[list[int]]:
+    """Split shapes into at most n_groups contiguous chunks. Shape ids are in
+    creation (z) order, which renderers emit column-by-column / card-by-card,
+    so contiguous chunks correspond to visual groups."""
+    n = min(n_groups, len(shape_ids))
+    base, extra = divmod(len(shape_ids), n)
+    chunks, start = [], 0
+    for i in range(n):
+        size = base + (1 if i < extra else 0)
+        chunks.append(shape_ids[start:start + size])
+        start += size
+    return chunks
 
 
 def apply(slide, mode: str) -> None:
@@ -94,10 +109,15 @@ def _build_timing(shape_ids: list[int], mode: str) -> etree._Element:
         ]
         main_children.append(_group(ids, effects, auto_start=True, main_seq_id=main_id))
     elif mode == "build":
-        # One click group per shape.
-        for spid in shape_ids:
+        # AT MOST 3 clicks per slide: shapes are chunked into up to 3 click
+        # groups (a whole card/column per click), cascading within each group.
+        for chunk in _chunk(shape_ids, MAX_CLICKS):
+            effects = [
+                (spid, "clickEffect" if i == 0 else "withEffect", i * CASCADE_MS)
+                for i, spid in enumerate(chunk)
+            ]
             main_children.append(
-                _group(ids, [(spid, "clickEffect", 0)], auto_start=False, main_seq_id=main_id))
+                _group(ids, effects, auto_start=False, main_seq_id=main_id))
     else:
         raise ValueError(f"unknown animation mode '{mode}'")
 

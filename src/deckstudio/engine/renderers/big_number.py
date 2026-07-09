@@ -11,18 +11,20 @@ from ._common import add_title_band
 
 @renderer("big_number")
 def render(slide, model: BigNumberSlide, ctx) -> None:
+    """Variants: cards (navy hero first), uniform (all light), dark (all navy)."""
     tokens = ctx.tokens
+    variant = ctx.variant(model)
     area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     n = len(model.stats)
     if n == 1:
         _solo_hero(slide, area, model.stats[0], tokens)
         return
-    # First stat gets the hero (navy) tile — order stats by importance.
     tile_h = min(3.2, area.height_in - 0.3)
     for i, (stat, col) in enumerate(
             zip(model.stats, columns(area, n, tokens.gutter_in), strict=True)):
+        hero = (variant == "dark") or (variant == "cards" and i == 0)
         add_stat_tile(slide, vcenter(col, tile_h), stat, tokens,
-                      hero=(i == 0), accent_index=i - 1)
+                      hero=hero, accent_index=i - 1)
 
 
 def _solo_hero(slide, area, stat, tokens) -> None:

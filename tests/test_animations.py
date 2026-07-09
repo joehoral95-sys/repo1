@@ -64,6 +64,21 @@ def test_timing_xml_is_wellformed_and_targets_real_shapes(tmp_path):
     assert found == 2
 
 
+def test_build_slides_need_at_most_three_clicks(built_example):
+    """A build slide never requires more than 3 clicks to reveal everything."""
+    prs = Presentation(str(built_example.output_path))
+    checked = 0
+    for slide in prs.slides:
+        timing = slide._element.find(f"{{{P_NS}}}timing")
+        if timing is None:
+            continue
+        clicks = sum(1 for el in timing.iter(f"{{{P_NS}}}cTn")
+                     if el.get("nodeType") == "clickEffect")
+        assert clicks <= 3, f"slide needs {clicks} clicks"
+        checked += 1
+    assert checked > 0
+
+
 def test_cli_kill_switch(tmp_path):
     spec = DeckSpec.model_validate(ANIMATED_SPEC)
     result = build_deck(spec, output_dir=tmp_path, deck_name="killed",

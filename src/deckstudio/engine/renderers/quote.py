@@ -15,7 +15,12 @@ from ..text import add_text
 
 @renderer("quote")
 def render(slide, model: QuoteSlide, ctx) -> None:
+    """Variants: card (white card on navy) | dark (bare on navy) | light."""
     tokens = ctx.tokens
+    variant = ctx.variant(model)
+    if variant in ("dark", "light"):
+        _bare(slide, model, ctx, dark=(variant == "dark"))
+        return
     fill_background(slide, tokens, "primary")
 
     card = Box(1.55, 1.95, SLIDE_W_IN - 3.1, 3.15)
@@ -39,3 +44,25 @@ def render(slide, model: QuoteSlide, ctx) -> None:
                             card.width_in - 0.2, 0.5),
                  f"—  {model.attribution}", tokens, scale="subtitle",
                  color="accent_warm", bold=True)
+
+
+def _bare(slide, model: QuoteSlide, ctx, *, dark: bool) -> None:
+    tokens = ctx.tokens
+    if dark:
+        fill_background(slide, tokens, "primary")
+    m = tokens.margin_in + 1.0
+    mark = add_text(slide, Box(m - 0.5, 0.9, 2.0, 1.6), "\u201c", tokens,
+                    scale="big_number", role="heading", color="accent_warm",
+                    bold=True)
+    for para in mark.text_frame.paragraphs:
+        for run in para.runs:
+            run.font.size = Pt(120)
+    add_text(slide, Box(m, 2.35, SLIDE_W_IN - 2 * m, 2.6), model.text, tokens,
+             scale="quote", role="heading",
+             color="white" if dark else "primary",
+             anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.LEFT, line_spacing=1.15,
+             shrink_to_fit=True)
+    if model.attribution:
+        add_text(slide, Box(m, 5.3, SLIDE_W_IN - 2 * m, 0.6),
+                 f"\u2014  {model.attribution}", tokens, scale="subtitle",
+                 color="accent_warm" if dark else "accent", bold=True)

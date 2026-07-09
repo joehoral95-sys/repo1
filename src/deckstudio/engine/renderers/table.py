@@ -13,7 +13,9 @@ from ._common import add_title_band
 
 @renderer("table")
 def render(slide, model: TableSlide, ctx) -> None:
+    """Variants: banded (striped rows) | open (clean white rows)."""
     tokens = ctx.tokens
+    banding = ctx.variant(model) == "banded"
     area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     nrows = len(model.rows) + 1
     ncols = len(model.columns)
@@ -39,7 +41,7 @@ def render(slide, model: TableSlide, ctx) -> None:
                  bold=True)
 
     for r, row in enumerate(model.rows, start=1):
-        banded = r % 2 == 0
+        banded = banding and r % 2 == 0
         for c, value in enumerate(row):
             cell = table.cell(r, c)
             cell.fill.solid()
