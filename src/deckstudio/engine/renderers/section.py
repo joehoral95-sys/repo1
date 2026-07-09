@@ -8,7 +8,7 @@ from pptx.util import Pt
 from ...spec.schema import SectionSlide
 from ..geometry import SLIDE_H_IN, SLIDE_W_IN, Box
 from ..registry import renderer
-from ..shapes import add_accent_bar, fill_background
+from ..shapes import add_accent_bar, add_logo, fill_background
 from ..text import add_text
 
 
@@ -35,3 +35,4 @@ def render(slide, model: SectionSlide, ctx) -> None:
         add_text(slide, Box(m, SLIDE_H_IN - 2.0, SLIDE_W_IN - 2 * m, 0.9),
                  model.subtitle, tokens, scale="subtitle", color="white",
                  shrink_to_fit=True)
+    add_logo(slide, tokens, dark_bg=True, left_in=m, bottom_in=7.0, height_in=0.4)

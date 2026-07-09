@@ -53,9 +53,19 @@ Animation is seasoning, not sauce:
 - Accent (gold/blue) means "look here" — the moment it's everywhere it means
   nothing. The engine already rations it; don't fight that with markup abuse
   (`[accent]` on whole sentences).
-- **SOA-specific rules** (populate during brand intake):
-  - _placeholder — logo clear space, photography style, co-branding rules,
-    any "never do X" from the official guidelines._
+- **SOA-specific rules** (from the official 2026 SOA PowerPoint template):
+  - Logo sits **bottom-left** on every slide; page number bottom-right in
+    brand blue. The engine does this automatically — never add extra logos.
+  - On navy backgrounds use the sky-blue shield mark alone (the navy wordmark
+    would vanish); on white use the full-color logo. Never stretch, recolor,
+    or add effects to either.
+  - Slide titles render in SOA bright blue (#0051B8) — the template's own
+    convention.
+  - Brand red (#FF383C) is reserved for negative values and alerts; lime
+    (#B3CE36) is an energy accent, used sparingly.
+  - Brand fonts are Tenorite Bold / Tenorite Regular (Microsoft 365 cloud
+    fonts). Machines without them substitute Segoe UI / Calibri —
+    `deckstudio doctor` warns when that will happen.
 
 ## Editability (why the engine works the way it does)
 

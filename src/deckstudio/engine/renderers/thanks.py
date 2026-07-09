@@ -27,5 +27,4 @@ def render(slide, model: ThanksSlide, ctx) -> None:
     if model.contact:
         add_text(slide, Box(m, 5.4, SLIDE_W_IN - 2 * m, 0.5), model.contact,
                  tokens, scale="stat_label", color="accent_warm", bold=True)
-    add_logo(slide, tokens, dark_bg=True, right_in=SLIDE_W_IN - tokens.margin_in,
-             top_in=6.4, height_in=0.5)
+    add_logo(slide, tokens, dark_bg=True, left_in=m, bottom_in=7.0, height_in=0.5)

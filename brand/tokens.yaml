@@ -3,30 +3,34 @@
 # THE single source of brand truth. Every renderer reads from
 # this file; nothing in a deck spec may override it.
 #
-# PLACEHOLDER VALUES: replace during brand intake
-# (see brand/BRAND_INTAKE.md) with values from the official
-# SOA brand guidelines.
+# Values extracted 2026-07 from the official SOA PowerPoint
+# template (2026.06.02__SOA_PPT_Template.pptx): theme1.xml
+# color scheme + font scheme, logo assets from ppt/media.
 # ============================================================
 
 colors:
-  primary: "#00305C"        # deep navy — headings, title slide background
-  accent: "#0072CE"         # bright blue — emphasis, highlights, links
-  accent_warm: "#E0A526"    # gold — secondary accent, sparing use
-  positive: "#2E7D32"       # good deltas
-  negative: "#C62828"       # bad deltas
-  neutral_dark: "#333F48"   # body text
-  neutral_mid: "#8A98A5"    # captions, footers, muted labels
-  neutral_light: "#F4F6F8"  # panel/tile backgrounds
+  primary: "#0E2841"        # SOA dark navy (theme dk2) — dark slide backgrounds, headings
+  accent: "#0051B8"         # SOA bright blue (theme accent2 / logo shield) — titles, emphasis
+  accent_warm: "#51C8FF"    # SOA sky blue (theme accent4 / shield-on-dark) — accents on navy, highlights
+  positive: "#2E7D32"       # good deltas (functional, not in SOA theme — chosen for legibility)
+  negative: "#FF383C"       # bad deltas (SOA theme accent6 red)
+  neutral_dark: "#0E2841"   # body text — SOA navy
+  neutral_mid: "#64748B"    # captions, footers, muted labels
+  neutral_light: "#F0F3F7"  # panel/tile backgrounds (light blue-gray tint)
   white: "#FFFFFF"
   # Chart series colors, applied in order. First = hero series.
-  chart_series: ["#0072CE", "#00305C", "#7BA7D7", "#A0AEC0", "#E0A526", "#5C7A99"]
+  # SOA theme accents: bright blue, navy, sky, periwinkle, lime, deep blue.
+  chart_series: ["#0051B8", "#0E2841", "#51C8FF", "#8F88F8", "#B3CE36", "#092369"]
 
 fonts:
+  # Exactly as named in the SOA theme (Microsoft cloud font family).
+  # PowerPoint substitutes the fallback silently if Tenorite is missing;
+  # `deckstudio doctor` warns when that will happen.
   heading:
-    name: "Georgia"
-    fallback: "Cambria"
+    name: "Tenorite Bold"
+    fallback: "Segoe UI"
   body:
-    name: "Arial"
+    name: "Tenorite Regular"
     fallback: "Calibri"
 
 # Point sizes
@@ -47,7 +51,7 @@ type_scale:
   table_body: 12
 
 layout:
-  slide_size: widescreen_16x9   # 13.333in x 7.5in
+  slide_size: widescreen_16x9   # matches the SOA template (12192000 x 6858000 EMU)
   margin_in: 0.6
   gutter_in: 0.25
   title_top_in: 0.45
@@ -60,9 +64,10 @@ charts:
   font_size: 12
 
 logo:
-  # Paths relative to brand/ . Populated during brand intake.
-  default: assets/logos/logo_primary.png
-  dark_bg: assets/logos/logo_white.png
+  # SOA convention (from the official template): logo sits BOTTOM-LEFT,
+  # page number bottom-right.
+  default: assets/logos/logo_primary.png   # full-color shield + wordmark (white bg)
+  dark_bg: assets/logos/shield_sky.png     # sky-blue shield mark (navy bg)
 
 footer:
   # Default footer if the deck spec doesn't set one.

@@ -6,24 +6,26 @@ from pptx.enum.text import PP_ALIGN
 
 from ...tokens import Tokens
 from ..geometry import SLIDE_W_IN, Box, content_area
-from ..shapes import add_accent_bar, add_logo
+from ..shapes import add_accent_bar
 from ..text import add_text
 
 
 def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = None) -> Box:
-    """Kicker + assertion title + accent rule + logo. Returns the content area below."""
+    """Kicker + assertion title + accent rule. Returns the content area below.
+
+    Titles render in SOA bright blue (the template convention); the logo is
+    added bottom-left by the builder's footer pass, not here."""
     m = tokens.margin_in
     top = tokens.title_top_in
     if kicker:
         add_text(slide, Box(m, top - 0.05, SLIDE_W_IN - 2 * m, 0.28), kicker.upper(),
-                 tokens, scale="kicker", color="accent", bold=True)
+                 tokens, scale="kicker", color="primary", bold=True)
         top += 0.3
-    add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m - 1.2, 0.85), title, tokens,
-             scale="slide_title", role="heading", color="primary", bold=True,
+    add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, 0.85), title, tokens,
+             scale="slide_title", role="heading", color="accent", bold=True,
              shrink_to_fit=True)
     bar_top = top + 0.92
     add_accent_bar(slide, m, bar_top, 0.9, tokens)
-    add_logo(slide, tokens, right_in=SLIDE_W_IN - tokens.margin_in)
     return content_area(m, bar_top + 0.28)
 
 

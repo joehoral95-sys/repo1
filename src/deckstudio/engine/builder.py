@@ -95,17 +95,23 @@ def build_deck(
 
 
 def _add_footer(slide, ctx: RenderContext, page_number: int) -> None:
+    """SOA chrome on content slides: logo bottom-left, footer text beside it,
+    page number bottom-right (the official template's convention)."""
+    from .shapes import add_logo
+
     tokens = ctx.tokens
+    logo = add_logo(slide, tokens)
     text = ctx.deck.footer if ctx.deck.footer is not None else tokens.footer_text
-    footer_box = Box(tokens.margin_in, SLIDE_H_IN - 0.42,
-                     SLIDE_W_IN - 2 * tokens.margin_in - 0.5, 0.3)
+    text_left = tokens.margin_in + (1.7 if logo is not None else 0.0)
+    footer_box = Box(text_left, SLIDE_H_IN - 0.42,
+                     SLIDE_W_IN - text_left - tokens.margin_in - 0.5, 0.3)
     if text:
         add_text(slide, footer_box, text, tokens, scale="footer", color="neutral_mid")
     if tokens.show_page_numbers:
         num_box = Box(SLIDE_W_IN - tokens.margin_in - 0.5, SLIDE_H_IN - 0.42, 0.5, 0.3)
         from pptx.enum.text import PP_ALIGN
         add_text(slide, num_box, str(page_number), tokens, scale="footer",
-                 color="neutral_mid", align=PP_ALIGN.RIGHT)
+                 color="accent", align=PP_ALIGN.RIGHT)
 
 
 _VERSION_RE = re.compile(r"_v(\d+)\.pptx$")

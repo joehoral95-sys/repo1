@@ -54,13 +54,16 @@ def fill_background(slide, tokens: Tokens, color: str) -> None:
 
 
 def add_logo(slide, tokens: Tokens, *, dark_bg: bool = False,
-             right_in: float = 12.83, top_in: float = 0.35, height_in: float = 0.45):
-    """Place the brand logo top-right if an asset exists; silently skip if not."""
+             left_in: float | None = None, bottom_in: float = 7.18,
+             height_in: float = 0.32):
+    """Place the brand logo BOTTOM-LEFT (the SOA template convention);
+    silently skip if no asset exists."""
     path = tokens.logo_dark_bg if dark_bg else tokens.logo_default
     if not path:
         return None
-    pic = slide.shapes.add_picture(str(path), Emu(0), Inches(top_in), height=Inches(height_in))
-    pic.left = Inches(right_in) - pic.width
+    left = Inches(left_in if left_in is not None else tokens.margin_in)
+    pic = slide.shapes.add_picture(str(path), left, Emu(0), height=Inches(height_in))
+    pic.top = Inches(bottom_in) - pic.height
     return pic
 
 

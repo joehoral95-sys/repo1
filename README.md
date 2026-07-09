@@ -58,8 +58,9 @@ Engine commands (`deckstudio --help`): `new`, `ingest`, `extract`,
 
 ## Status
 
-- Brand values are **placeholders** until the one-time brand intake is run
-  with the official SOA assets — see `brand/BRAND_INTAKE.md`.
+- Brand values are extracted from the **official SOA PowerPoint template**
+  (June 2026): real theme colors, Tenorite fonts, logo assets, and all 31
+  official slide layouts ship in `brand/` — see `brand/BRAND_INTAKE.md`.
 - Animations are tasteful-by-default (`subtle`), and can be disabled per deck
   or per build (`--no-animations`).
 

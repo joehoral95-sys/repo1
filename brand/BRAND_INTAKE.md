@@ -1,9 +1,18 @@
 # Brand intake — one-time setup with the real SOA brand assets
 
-Deck Studio ships with **placeholder** brand values. This checklist turns it
-into the real SOA brand. It's a conversation between Joe (who has the assets)
-and the agent (who does the editing) — run it once, then every deck is
-on-brand automatically.
+> **Status: COMPLETED (2026-07)** from the official SOA PowerPoint template
+> (`2026.06.02__SOA_PPT_Template.pptx`): theme colors and fonts extracted into
+> `tokens.yaml`, logo assets filed under `assets/logos/`, and the template
+> (slides stripped, all 31 layouts kept) installed as `template.pptx`.
+> Still welcome if they surface later: the formal brand-guidelines PDF
+> (clear-space and usage rules), a white/reversed full logo for dark
+> backgrounds, and any approved icon set → drop them in `inbox/` and rerun
+> the relevant steps below.
+
+Deck Studio ships with brand values extracted from the official template.
+This checklist documents how to (re)run the intake if assets change. It's a
+conversation between Joe (who has the assets) and the agent (who does the
+editing) — run it once, then every deck is on-brand automatically.
 
 ## What Joe drops into `inbox/`
 
