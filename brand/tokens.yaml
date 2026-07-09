@@ -17,6 +17,7 @@ colors:
   neutral_dark: "#0E2841"   # body text — SOA navy
   neutral_mid: "#64748B"    # captions, footers, muted labels
   neutral_light: "#F0F3F7"  # panel/tile backgrounds (light blue-gray tint)
+  accent_tint: "#DDF1FF"    # pale sky — highlighted table cells, soft emphasis
   white: "#FFFFFF"
   # Chart series colors, applied in order. First = hero series.
   # SOA theme accents: bright blue, navy, sky, periwinkle, lime, deep blue.

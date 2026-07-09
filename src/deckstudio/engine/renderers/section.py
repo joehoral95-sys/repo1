@@ -19,6 +19,8 @@ def render(slide, model: SectionSlide, ctx) -> None:
     fill_background(slide, tokens, "primary")
     m = tokens.margin_in + 0.4
 
+    add_brand_art(slide, tokens, "shield_watermark", Box(9.6, 3.2, 5.2, 5.2))
+
     if model.number is not None:
         num_box = Box(m, 1.15, 3.0, 2.2)
         shape = add_text(slide, num_box, f"{model.number:02d}", tokens,

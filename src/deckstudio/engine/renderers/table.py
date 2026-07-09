@@ -17,7 +17,9 @@ def render(slide, model: TableSlide, ctx) -> None:
     area = add_title_band(slide, tokens, model.title)
     nrows = len(model.rows) + 1
     ncols = len(model.columns)
-    height = min(area.height_in, 0.5 + 0.42 * len(model.rows))
+    # Short tables get roomier rows so they don't huddle under the title.
+    row_h = 0.58 if len(model.rows) <= 5 else 0.42
+    height = min(area.height_in, 0.55 + row_h * len(model.rows))
     shape = slide.shapes.add_table(nrows, ncols, area.left, area.top,
                                    area.width, Inches(height))
     table = shape.table
@@ -43,7 +45,9 @@ def render(slide, model: TableSlide, ctx) -> None:
             cell.fill.solid()
             emphasized = model.emphasize_col is not None and c == model.emphasize_col
             if emphasized:
-                cell.fill.fore_color.rgb = tokens.color("accent")
+                # soft highlight: pale sky fill + bold blue text, so the
+                # column draws the eye without shouting
+                cell.fill.fore_color.rgb = tokens.color("accent_tint")
             else:
                 cell.fill.fore_color.rgb = (tokens.color("neutral_light") if banded
                                             else tokens.color("white"))
@@ -53,6 +57,6 @@ def render(slide, model: TableSlide, ctx) -> None:
             p = cell.text_frame.paragraphs[0]
             p.alignment = PP_ALIGN.LEFT if c == 0 else PP_ALIGN.RIGHT
             set_runs(p, value, font=body_font, size=tokens.pt("table_body"),
-                     color=tokens.color("white") if emphasized else tokens.color("neutral_dark"),
+                     color=tokens.color("accent") if emphasized else tokens.color("neutral_dark"),
                      accent_color=tokens.color("accent"),
                      bold=c == 0 or emphasized)

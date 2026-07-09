@@ -7,7 +7,7 @@ from pptx.enum.text import MSO_ANCHOR
 from ...spec.schema import TitleSlide
 from ..geometry import SLIDE_H_IN, SLIDE_W_IN, Box
 from ..registry import renderer
-from ..shapes import add_accent_bar, add_logo, fill_background
+from ..shapes import add_accent_bar, add_brand_art, add_logo, fill_background
 from ..text import add_text
 
 
@@ -17,6 +17,9 @@ def render(slide, model: TitleSlide, ctx) -> None:
     fill_background(slide, tokens, "primary")
     m = tokens.margin_in + 0.4
 
+    # Oversized shield watermark, one shade lighter than the background,
+    # bleeding off the right edge — depth without noise.
+    add_brand_art(slide, tokens, "shield_watermark", Box(9.0, 0.9, 6.4, 6.4))
     add_logo(slide, tokens, dark_bg=True, left_in=m, bottom_in=7.0, height_in=0.5)
 
     add_accent_bar(slide, m, 2.55, 1.1, tokens, color="accent_warm", height_in=0.07)
