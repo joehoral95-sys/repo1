@@ -32,7 +32,8 @@ Every 3-6 slides in longer decks; `number` gives a progress cue.
 ```
 
 ## big_number — KPIs / the hero stat
-1 stat = hero tile (the star of the deck); 2-4 = tile row. `arrow` is the
+1 stat = hero tile (the star of the deck); 2-4 = tile row where the FIRST
+stat gets the navy hero tile — order stats by importance. `arrow` is the
 direction drawn; `sentiment` picks the color (falling lapse rate =
 `arrow: down, sentiment: good`).
 ```yaml
@@ -44,10 +45,11 @@ direction drawn; `sentiment` picks the color (falling lapse rate =
 ```
 
 ## chart — evidence
-Native, Edit-Data-able. Always give `insight:`; `highlight:` accents the
-point that proves the title. Kinds: bar_clustered, bar_stacked,
-bar_horizontal, line, area, pie, doughnut, scatter. Chooser:
-`data-storytelling.md`.
+Native, Edit-Data-able. Always give `insight:` — it renders as a navy
+"SO WHAT" takeaway panel beside the chart (the exhibit layout); without it
+the chart runs full-width. `highlight:` accents the point that proves the
+title. Kinds: bar_clustered, bar_stacked, bar_horizontal, line, area, pie,
+doughnut, scatter. Chooser: `data-storytelling.md`.
 ```yaml
 - id: exam-trend
   type: chart

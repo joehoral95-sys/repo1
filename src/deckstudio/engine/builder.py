@@ -43,7 +43,7 @@ class BuildResult:
 
 
 # Slide types that own their whole canvas: no footer/page number drawn on them.
-FULL_BLEED_TYPES = {"title", "section", "quote", "thanks"}
+FULL_BLEED_TYPES = {"title", "section", "quote", "thanks", "agenda"}
 
 
 def build_deck(

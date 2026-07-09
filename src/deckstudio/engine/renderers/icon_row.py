@@ -8,17 +8,23 @@ from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches
 
 from ...spec.schema import IconRowSlide
-from ..geometry import Box, columns
+from ..geometry import SLIDE_W_IN, Box, columns, content_area
 from ..registry import renderer
-from ..shapes import add_picture_fitted
+from ..shapes import add_accent_bar, add_picture_fitted
 from ..text import add_text
-from ._common import add_title_band
 
 
 @renderer("icon_row")
 def render(slide, model: IconRowSlide, ctx) -> None:
+    """Centered composition — its own family, distinct from the left-aligned
+    content chrome."""
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title)
+    m = tokens.margin_in
+    add_text(slide, Box(m, tokens.title_top_in + 0.15, SLIDE_W_IN - 2 * m, 0.85),
+             model.title, tokens, scale="slide_title", role="heading",
+             color="accent", bold=True, align=PP_ALIGN.CENTER, shrink_to_fit=True)
+    add_accent_bar(slide, (SLIDE_W_IN - 0.9) / 2, tokens.title_top_in + 1.1, 0.9, tokens)
+    area = content_area(m, tokens.title_top_in + 1.55)
     icon_d = 1.0
     # disc color cycles through brand blues so the row reads designed
     disc_styles = [("accent", "white"), ("primary", "white"), ("accent_warm", "primary")]

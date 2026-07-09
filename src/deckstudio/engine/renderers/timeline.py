@@ -30,6 +30,7 @@ def render(slide, model: TimelineSlide, ctx) -> None:
     spine.shadow.inherit = False
 
     step = (area.width_in - 0.4 - node_d) / max(n - 1, 1)
+    next_idx = next((i for i, ms in enumerate(model.milestones) if not ms.done), None)
     for i, ms in enumerate(model.milestones):
         cx = area.left_in + 0.2 + i * step
         node = slide.shapes.add_shape(
@@ -39,6 +40,11 @@ def render(slide, model: TimelineSlide, ctx) -> None:
         if ms.done:
             node.fill.solid()
             node.fill.fore_color.rgb = tokens.color("accent")
+            node.line.fill.background()
+        elif i == next_idx:
+            # "you are here": the next milestone pops in sky blue
+            node.fill.solid()
+            node.fill.fore_color.rgb = tokens.color("accent_warm")
             node.line.fill.background()
         else:
             node.fill.solid()

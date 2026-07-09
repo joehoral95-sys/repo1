@@ -20,7 +20,9 @@ def render(slide, model: BigNumberSlide, ctx) -> None:
                    area.top_in + 0.2, tile_w, min(3.4, area.height_in - 0.4))
         add_stat_tile(slide, tile, model.stats[0], tokens, hero=True)
         return
+    # First stat gets the hero (navy) tile — order stats by importance.
     tile_h = min(3.2, area.height_in - 0.3)
     for i, (stat, col) in enumerate(
             zip(model.stats, columns(area, n, tokens.gutter_in), strict=True)):
-        add_stat_tile(slide, vcenter(col, tile_h), stat, tokens, accent_index=i)
+        add_stat_tile(slide, vcenter(col, tile_h), stat, tokens,
+                      hero=(i == 0), accent_index=i - 1)
