@@ -16,7 +16,7 @@ from ._common import add_title_band
 @renderer("timeline")
 def render(slide, model: TimelineSlide, ctx) -> None:
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     n = len(model.milestones)
     spine_y = area.top_in + area.height_in * 0.42
     node_d = 0.34

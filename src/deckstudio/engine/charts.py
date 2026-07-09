@@ -164,8 +164,9 @@ def _apply_data_labels(chart, spec: ChartSpec, tokens: Tokens) -> None:
 
 
 def _apply_highlight(chart, spec: ChartSpec, tokens: Tokens) -> None:
-    """Recolor one data point to the accent color — the 'look here' cue."""
-    accent = tokens.color("accent_warm")
+    """Recolor one data point to SOA yellow — the 'look here' cue (distinct
+    from every series color in the palette)."""
+    accent = tokens.color("highlight")
     idx = next(i for i, s in enumerate(spec.series) if s.name == spec.highlight.series)
     series = chart.plots[0].series[idx] if spec.kind in ("pie", "doughnut") else chart.series[idx]
     point = series.points[spec.highlight.point]

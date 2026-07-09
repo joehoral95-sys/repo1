@@ -12,13 +12,10 @@ from ._common import add_title_band
 @renderer("big_number")
 def render(slide, model: BigNumberSlide, ctx) -> None:
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     n = len(model.stats)
     if n == 1:
-        tile_w = min(5.4, area.width_in)
-        tile = Box(area.left_in + (area.width_in - tile_w) / 2,
-                   area.top_in + 0.2, tile_w, min(3.4, area.height_in - 0.4))
-        add_stat_tile(slide, tile, model.stats[0], tokens, hero=True)
+        _solo_hero(slide, area, model.stats[0], tokens)
         return
     # First stat gets the hero (navy) tile — order stats by importance.
     tile_h = min(3.2, area.height_in - 0.3)
@@ -26,3 +23,34 @@ def render(slide, model: BigNumberSlide, ctx) -> None:
             zip(model.stats, columns(area, n, tokens.gutter_in), strict=True)):
         add_stat_tile(slide, vcenter(col, tile_h), stat, tokens,
                       hero=(i == 0), accent_index=i - 1)
+
+
+def _solo_hero(slide, area, stat, tokens) -> None:
+    """One stat = the whole stage: giant blue number, swash, delta chip."""
+    from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
+    from pptx.util import Pt
+
+    from ..infographics import ARROWS
+    from ..shapes import add_brand_art, add_chip
+    from ..text import add_text
+
+    cx = area.left_in
+    value_box = Box(cx, area.top_in + 0.25, area.width_in, 1.9)
+    shape = add_text(slide, value_box, stat.value, tokens, scale="big_number",
+                     role="heading", color="accent", bold=True,
+                     align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE,
+                     shrink_to_fit=True)
+    for para in shape.text_frame.paragraphs:
+        for run in para.runs:
+            run.font.size = Pt(120)
+    add_brand_art(slide, tokens, "swash_sky",
+                  Box(cx + area.width_in / 2 - 1.5, value_box.bottom_in + 0.05, 3.0, 0.38))
+    add_text(slide, Box(cx, value_box.bottom_in + 0.55, area.width_in, 0.5),
+             stat.label, tokens, scale="subtitle", color="neutral_dark",
+             align=PP_ALIGN.CENTER)
+    if stat.delta:
+        text = f"{ARROWS[stat.arrow]} {stat.delta}".strip()
+        chip_w = 0.105 * len(text) + 0.34
+        fill = {"good": "positive", "bad": "negative", "neutral": "neutral_mid"}[stat.sentiment]
+        add_chip(slide, cx + (area.width_in - chip_w) / 2, value_box.bottom_in + 1.15,
+                 text, tokens, fill=fill, text_color="white")

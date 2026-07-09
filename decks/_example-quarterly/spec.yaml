@@ -29,11 +29,17 @@ slides:
     type: section
     title: "Membership"
     number: 1
-    subtitle: "The longest growth streak since 2019"
+    subtitle: "The longest growth streak since 2019 — and where it comes from."
+    preview:
+      - {label: "Total members", value: "33,412", status: on_track}
+      - {label: "New FSAs YTD", value: "1,204", status: on_track}
+      - {label: "Lapse rate", value: "4.3%", status: on_track}
+      - {label: "Prelim sittings", value: "7,410", status: watch}
 
   - id: membership-kpis
     type: big_number
     title: "Membership grew for the 6th straight quarter"
+    kicker: "At a glance"
     animate: build
     stats:
       - value: "33,412"
@@ -41,16 +47,22 @@ slides:
         delta: "+2.1% vs Q1"
         arrow: up
         sentiment: good
+        target: "FY target 34.0K"
+        status: on_track
       - value: "1,204"
         label: "New FSAs YTD"
         delta: "+9% vs 2025 pace"
         arrow: up
         sentiment: good
+        target: "FY target 2.6K"
+        status: on_track
       - value: "4.3%"
         label: "Lapse rate"
         delta: "-0.4 pts"
         arrow: down
         sentiment: good
+        target: "FY target 4.5%"
+        status: on_track
     notes: >
       Emphasize this is the longest growth streak since 2019. If asked about
       drivers: international candidates and the new associate pathway.
@@ -58,6 +70,7 @@ slides:
   - id: exam-trend
     type: chart
     title: "Exam sittings dipped — but only in prelims"
+    kicker: "Exam volumes · 1 of 2"
     animate: fade
     chart:
       kind: bar_clustered
@@ -76,6 +89,7 @@ slides:
   - id: pipeline-mix
     type: chart
     title: "Two-thirds of new candidates now come through universities"
+    kicker: "Exam volumes · 2 of 2"
     chart:
       kind: doughnut
       categories: ["University programs", "Employer-sponsored", "Independent"]
@@ -105,11 +119,14 @@ slides:
     title: "Three pressures make this the right moment"
     animate: build
     items:
-      - heading: "Proctoring costs"
+      - icon: cost
+        heading: "Proctoring costs"
         text: "Vendor costs up 12% since 2024; current fees no longer cover delivery."
-      - heading: "Peer benchmark"
+      - icon: target
+        heading: "Peer benchmark"
         text: "Our exam fees sit 8-15% below comparable credentialing bodies."
-      - heading: "Member value"
+      - icon: people
+        heading: "Member value"
         text: "Revenue funds the new digital study platform members asked for."
 
   - id: fee-comparison
@@ -137,6 +154,17 @@ slides:
       - {label: "Member communication", date: "Sep 2026", done: false}
       - {label: "Registration opens", date: "Nov 2026", done: false}
       - {label: "New fees effective", date: "Jan 2027", done: false}
+
+  - id: readiness
+    type: progress
+    title: "Rollout workstreams are already moving"
+    kicker: "Execution readiness"
+    animate: build
+    items:
+      - {label: "Fee model & pricing", percent: 90}
+      - {label: "Member comms plan", percent: 65}
+      - {label: "Registration systems", percent: 40}
+    caption: "Percent complete as of July 2026 — all workstreams on schedule for the January effective date."
 
   - id: ask
     type: quote

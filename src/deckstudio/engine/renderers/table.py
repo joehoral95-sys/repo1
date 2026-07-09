@@ -14,7 +14,7 @@ from ._common import add_title_band
 @renderer("table")
 def render(slide, model: TableSlide, ctx) -> None:
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
     nrows = len(model.rows) + 1
     ncols = len(model.columns)
     # Short tables get roomier rows so they don't huddle under the title.

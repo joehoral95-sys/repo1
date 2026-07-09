@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.util import Emu, Inches, Pt
 
@@ -47,8 +48,22 @@ def add_accent_bar(slide, left_in: float, top_in: float, width_in: float,
 
 
 def fill_background(slide, tokens: Tokens, color: str) -> None:
-    """Solid slide background (used by title/section/quote slides)."""
+    """Dark slide background with a subtle diagonal gradient (deep navy
+    lifting toward blue) — reads richer than a flat fill. Falls back to
+    solid if the gradient API is unavailable."""
     bg = slide.background
+    if color == "primary":
+        try:
+            bg.fill.gradient()
+            stops = bg.fill.gradient_stops
+            stops[0].color.rgb = RGBColor.from_string("0A1F33")
+            stops[0].position = 0.0
+            stops[1].color.rgb = RGBColor.from_string("15355C")
+            stops[1].position = 1.0
+            bg.fill.gradient_angle = 65.0
+            return
+        except Exception:
+            pass
     bg.fill.solid()
     bg.fill.fore_color.rgb = tokens.color(color)
 
@@ -65,6 +80,29 @@ def add_logo(slide, tokens: Tokens, *, dark_bg: bool = False,
     pic = slide.shapes.add_picture(str(path), left, Emu(0), height=Inches(height_in))
     pic.top = Inches(bottom_in) - pic.height
     return pic
+
+
+def add_chip(slide, left_in: float, top_in: float, text: str, tokens: Tokens, *,
+             fill: str = "accent_warm", text_color: str = "primary",
+             height_in: float = 0.3):
+    """A small pill badge ('RECOMMENDED', '▼ 7.1% vs Q1'). Returns the shape."""
+    from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
+
+    from .text import add_text
+
+    width_in = 0.105 * len(text) + 0.34
+    pill = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(left_in), Inches(top_in),
+        Inches(width_in), Inches(height_in))
+    pill.adjustments[0] = 0.5
+    pill.fill.solid()
+    pill.fill.fore_color.rgb = tokens.color(fill)
+    pill.line.fill.background()
+    pill.shadow.inherit = False
+    add_text(slide, Box(left_in, top_in + 0.02, width_in, height_in - 0.04),
+             text, tokens, scale="caption", color=text_color, bold=True,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    return pill
 
 
 def add_brand_art(slide, tokens: Tokens, name: str, box: Box, *, stretch: bool = False):

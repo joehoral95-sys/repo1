@@ -7,6 +7,7 @@ from . import (  # noqa: F401
     comparison,
     content,
     icon_row,
+    progress,
     quote,
     section,
     table,

@@ -47,6 +47,9 @@ class SlideBase(StrictModel):
     id: str = Field(pattern=r"^[a-z0-9][a-z0-9\-]*$",
                     description="Stable handle, e.g. 'exam-trend'")
     title: str | None = None
+    kicker: str | None = Field(
+        None, description="Small letter-spaced eyebrow above the title, "
+        "e.g. 'AT A GLANCE' or 'KPI METRICS · 2 OF 2'")
     notes: str | None = Field(None, description="Speaker notes")
     animate: Animate = "none"
 
@@ -81,11 +84,20 @@ class TitleSlide(SlideBase):
     presenter: str | None = None
 
 
+class PreviewMetric(StrictModel):
+    label: str
+    value: str
+    status: Literal["on_track", "watch", "pending"] | None = None
+
+
 class SectionSlide(SlideBase):
     type: Literal["section"]
     title: str
     subtitle: str | None = None
     number: int | None = Field(None, ge=1, le=20, description="Optional big section number")
+    preview: list[PreviewMetric] = Field(
+        default_factory=list, max_length=6,
+        description="Optional right-side teaser of the metrics this section covers")
 
 
 class AgendaSlide(SlideBase):
@@ -119,7 +131,6 @@ class ContentSlide(SlideBase):
 
     type: Literal["content"]
     title: str
-    kicker: str | None = Field(None, description="Small eyebrow label above the title")
     bullets: list[str | Bullet] = Field(min_length=1, max_length=6)
 
     @field_validator("bullets")
@@ -137,6 +148,10 @@ class Stat(StrictModel):
     sentiment: Literal["good", "bad", "neutral"] = Field(
         "neutral", description="Colors the delta: good=green, bad=red. "
         "A falling lapse rate is arrow=down, sentiment=good.")
+    target: str | None = Field(
+        None, description="Context line under the value, e.g. 'YTD target 34.0K · FY 81.0K'")
+    status: Literal["on_track", "watch", "pending"] | None = Field(
+        None, description="Status dot in the card corner: green/amber/gray")
 
 
 class BigNumberSlide(SlideBase):
@@ -176,7 +191,9 @@ class TimelineSlide(SlideBase):
 
 
 class IconItem(StrictModel):
-    icon: str | None = Field(None, description="Filename in brand/assets/icons/, e.g. 'growth.png'")
+    icon: str | None = Field(
+        None, description="Icon name from brand/assets/icons/: growth, people, "
+        "cost, clock, target, shield, idea, alert, doc, globe (or a filename)")
     heading: str
     text: str = Field(max_length=MAX_BULLET_CHARS)
 
@@ -191,6 +208,20 @@ class QuoteSlide(SlideBase):
     type: Literal["quote"]
     text: str = Field(max_length=280)
     attribution: str | None = None
+
+
+class ProgressItem(StrictModel):
+    label: str
+    percent: float = Field(ge=0, le=100)
+
+
+class ProgressSlide(SlideBase):
+    """Progress rings — 'how far along are we' as a visual, not a number list."""
+
+    type: Literal["progress"]
+    title: str
+    items: list[ProgressItem] = Field(min_length=1, max_length=4)
+    caption: str | None = Field(None, max_length=160)
 
 
 class TableSlide(SlideBase):
@@ -287,13 +318,13 @@ class ThanksSlide(SlideBase):
 
 
 Slide = Annotated[
-    TitleSlide | SectionSlide | AgendaSlide | ContentSlide | BigNumberSlide | ComparisonSlide | TimelineSlide | IconRowSlide | QuoteSlide | TableSlide | ChartSlide | ThanksSlide,
+    TitleSlide | SectionSlide | AgendaSlide | ContentSlide | BigNumberSlide | ComparisonSlide | TimelineSlide | IconRowSlide | QuoteSlide | TableSlide | ChartSlide | ProgressSlide | ThanksSlide,
     Field(discriminator="type"),
 ]
 
 SLIDE_TYPES = [
     "title", "section", "agenda", "content", "big_number", "comparison",
-    "timeline", "icon_row", "quote", "table", "chart", "thanks",
+    "timeline", "icon_row", "quote", "table", "chart", "progress", "thanks",
 ]
 
 

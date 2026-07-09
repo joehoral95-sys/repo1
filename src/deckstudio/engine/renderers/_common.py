@@ -19,7 +19,8 @@ def add_title_band(slide, tokens: Tokens, title: str, *, kicker: str | None = No
     top = tokens.title_top_in
     if kicker:
         add_text(slide, Box(m, top - 0.05, SLIDE_W_IN - 2 * m, 0.28), kicker.upper(),
-                 tokens, scale="kicker", color="primary", bold=True)
+                 tokens, scale="kicker", color="primary", bold=True,
+                 letter_spacing_pt=1.6)
         top += 0.3
     add_text(slide, Box(m, top, SLIDE_W_IN - 2 * m, 0.85), title, tokens,
              scale="slide_title", role="heading", color="accent", bold=True,

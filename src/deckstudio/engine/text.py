@@ -46,7 +46,8 @@ def strip_markup(text: str) -> str:
 
 
 def set_runs(paragraph, text: str, *, font: str, size: Pt, color: RGBColor,
-             accent_color: RGBColor, bold: bool = False) -> None:
+             accent_color: RGBColor, bold: bool = False,
+             letter_spacing_pt: float | None = None) -> None:
     """Fill a paragraph with runs parsed from markup, clearing existing runs."""
     # paragraph may come with an empty default run; clear text first
     for run in list(paragraph.runs):
@@ -58,6 +59,9 @@ def set_runs(paragraph, text: str, *, font: str, size: Pt, color: RGBColor,
         run.font.size = size
         run.font.bold = bold or seg.bold
         run.font.color.rgb = accent_color if seg.accent else color
+        if letter_spacing_pt:
+            # DrawingML spc is in 1/100 pt
+            run.font._rPr.set("spc", str(int(letter_spacing_pt * 100)))
 
 
 def add_text(
@@ -74,6 +78,7 @@ def add_text(
     anchor: MSO_ANCHOR = MSO_ANCHOR.TOP,
     line_spacing: float | None = None,
     shrink_to_fit: bool = False,
+    letter_spacing_pt: float | None = None,
 ):
     """Add a text box at `box` with brand styling. Returns the shape."""
     shape = slide.shapes.add_textbox(box.left, box.top, box.width, box.height)
@@ -93,7 +98,7 @@ def add_text(
             p.line_spacing = line_spacing
         set_runs(p, line, font=font, size=tokens.pt(scale),
                  color=tokens.color(color), accent_color=tokens.color("accent"),
-                 bold=bold)
+                 bold=bold, letter_spacing_pt=letter_spacing_pt)
     if shrink_to_fit:
         _enable_shrink(tf)
     return shape

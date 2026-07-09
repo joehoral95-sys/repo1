@@ -34,9 +34,11 @@ def render(slide, model: IconRowSlide, ctx) -> None:
         icon_top = col.top_in + 0.25
         icon_path = None
         if item.icon:
-            candidate = tokens.brand_dir / "assets" / "icons" / item.icon
-            if candidate.exists():
-                icon_path = candidate
+            icons_dir = tokens.brand_dir / "assets" / "icons"
+            for candidate in (icons_dir / item.icon, icons_dir / f"{item.icon}.png"):
+                if candidate.exists():
+                    icon_path = candidate
+                    break
             else:
                 ctx.warn(f"icon '{item.icon}' not found in brand/assets/icons — using fallback disc")
         if icon_path:

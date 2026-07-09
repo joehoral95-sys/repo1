@@ -34,12 +34,18 @@ def render(slide, model: AgendaSlide, ctx) -> None:
     items_area = Box(BAND_W + 0.55, 0.9, SLIDE_W_IN - BAND_W - 0.55 - m, SLIDE_H_IN - 1.8)
     item_rows = rows(items_area, max(len(model.items), 3), 0.12)
     for i, (item, row) in enumerate(zip(model.items, item_rows, strict=False), start=1):
-        add_text(slide, Box(row.left_in, row.top_in, 0.75, row.height_in), f"{i:02d}",
-                 tokens, scale="slide_title", role="heading", color="accent",
-                 bold=True, anchor=MSO_ANCHOR.MIDDLE)
-        add_text(slide, Box(row.left_in + 0.95, row.top_in, row.width_in - 0.95,
-                            row.height_in), item, tokens, scale="subtitle",
-                 color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+        # numbered sky squares, app-icon style
+        sq = 0.62
+        sq_top = row.top_in + (row.height_in - sq) / 2
+        add_rect(slide, Box(row.left_in, sq_top, sq, sq), tokens,
+                 fill="accent_tint", rounded=True, corner=0.25)
+        add_text(slide, Box(row.left_in, sq_top + 0.02, sq, sq - 0.04), f"{i:02d}",
+                 tokens, scale="subtitle", role="heading", color="accent",
+                 bold=True, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        add_text(slide, Box(row.left_in + sq + 0.4, row.top_in,
+                            row.width_in - sq - 0.4, row.height_in), item, tokens,
+                 scale="subtitle", color="neutral_dark", anchor=MSO_ANCHOR.MIDDLE,
+                 shrink_to_fit=True)
 
     # This slide draws its own chrome (it's in FULL_BLEED_TYPES): just the
     # page number, kept in the template's spot.

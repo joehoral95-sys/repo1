@@ -18,62 +18,65 @@ from .geometry import Box, inset
 from .shapes import add_rect
 from .text import add_text
 
-ARROWS = {"up": "▲", "down": "▼", "flat": "▬", "none": ""}
+ARROWS = {"up": "\u25b2", "down": "\u25bc", "flat": "\u25ac", "none": ""}
 SENTIMENT_COLOR = {"good": "positive", "bad": "negative", "neutral": "neutral_mid"}
-
-
-TILE_ACCENTS = ["accent", "accent_warm", "primary", "accent"]
+STATUS_COLOR = {"on_track": "positive", "watch": "warning", "pending": "neutral_mid"}
 
 
 def add_stat_tile(slide, box: Box, stat: Stat, tokens: Tokens, *, hero: bool = False,
                   accent_index: int = 0) -> None:
-    """A KPI tile: big number, label, optional delta with arrow.
+    """A KPI status card (the SOA board-deck pattern): metric label on top,
+    big value, delta and target context lines, status dot in the corner.
 
-    hero=True renders the tile on the primary brand color (used when a slide
-    has a single stat to make it the star). Non-hero tiles carry a short
-    accent tick (color cycles per tile) so a row reads designed, not cloned.
+    hero=True renders the card on the primary brand color (the headline stat).
     """
-    fill = "primary" if hero else "neutral_light"
+    del accent_index  # cards differentiate via status dots now
+    if hero:
+        add_rect(slide, box, tokens, fill="primary", rounded=True, corner=0.06)
+    else:
+        add_rect(slide, box, tokens, fill="neutral_light", rounded=True, corner=0.06,
+                 outline="border")
+    label_color = "accent_warm" if hero else "neutral_mid"
     value_color = "white" if hero else "primary"
-    label_color = "white" if hero else "neutral_dark"
-    add_rect(slide, box, tokens, fill=fill, rounded=True, corner=0.06)
-    if not hero:
-        tick_w = 0.55
-        tick = slide.shapes.add_shape(
-            MSO_SHAPE.ROUNDED_RECTANGLE,
-            Inches(box.left_in + (box.width_in - tick_w) / 2),
-            Inches(box.top_in + 0.22), Inches(tick_w), Inches(0.055))
-        tick.adjustments[0] = 0.5
-        tick.fill.solid()
-        tick.fill.fore_color.rgb = tokens.color(TILE_ACCENTS[accent_index % len(TILE_ACCENTS)])
-        tick.line.fill.background()
-        tick.shadow.inherit = False
-    pad = inset(box, x_in=0.25, y_in=0.2)
 
-    # Vertical stack: value (dominant), label, delta.
-    value_h = box.height_in * 0.48
-    label_h = box.height_in * 0.20
-    delta_h = box.height_in * 0.14
+    if stat.status:
+        dot_d = 0.14
+        dot = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL, Inches(box.right_in - 0.32 - dot_d),
+            Inches(box.top_in + 0.26), Inches(dot_d), Inches(dot_d))
+        dot.fill.solid()
+        dot.fill.fore_color.rgb = tokens.color(STATUS_COLOR[stat.status])
+        dot.line.fill.background()
+        dot.shadow.inherit = False
 
-    value_box = Box(pad.left_in, pad.top_in + box.height_in * 0.04, pad.width_in, value_h)
+    pad = inset(box, x_in=0.3, y_in=0.24)
+    add_text(slide, Box(pad.left_in, pad.top_in, pad.width_in - 0.25, 0.55),
+             stat.label.upper(), tokens, scale="caption",
+             color=label_color, bold=True, letter_spacing_pt=1.0,
+             shrink_to_fit=True)
+
+    value_top = pad.top_in + box.height_in * 0.24
+    value_h = box.height_in * 0.34
     scale = "big_number" if box.width_in > 2.6 else "section_title"
-    add_text(slide, value_box, stat.value, tokens, scale=scale, role="heading",
-             color=value_color, bold=True, align=PP_ALIGN.CENTER,
-             anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+    add_text(slide, Box(pad.left_in, value_top, pad.width_in, value_h),
+             stat.value, tokens, scale=scale, role="heading",
+             color=value_color, bold=True, anchor=MSO_ANCHOR.MIDDLE,
+             shrink_to_fit=True)
 
-    label_box = Box(pad.left_in, value_box.bottom_in + 0.05, pad.width_in, label_h)
-    add_text(slide, label_box, stat.label, tokens, scale="stat_label",
-             color=label_color, align=PP_ALIGN.CENTER, shrink_to_fit=True)
-
+    line_y = value_top + value_h + 0.14
     if stat.delta:
-        arrow = ARROWS[stat.arrow]
-        delta_text = f"{arrow} {stat.delta}".strip()
+        delta_text = f"{ARROWS[stat.arrow]} {stat.delta}".strip()
         delta_color = SENTIMENT_COLOR[stat.sentiment]
         if hero:
             delta_color = "accent_warm" if stat.sentiment != "neutral" else "white"
-        delta_box = Box(pad.left_in, label_box.bottom_in + 0.02, pad.width_in, delta_h)
-        add_text(slide, delta_box, delta_text, tokens, scale="stat_delta",
-                 color=delta_color, bold=True, align=PP_ALIGN.CENTER)
+        add_text(slide, Box(pad.left_in, line_y, pad.width_in, 0.26), delta_text,
+                 tokens, scale="stat_delta", color=delta_color, bold=True)
+        line_y += 0.32
+    if stat.target:
+        add_text(slide, Box(pad.left_in, line_y, pad.width_in, 0.26), stat.target,
+                 tokens, scale="caption",
+                 color="neutral_light" if hero else "neutral_mid",
+                 shrink_to_fit=True)
 
 
 def add_progress_ring(slide, box: Box, fraction: float, label: str, tokens: Tokens) -> None:

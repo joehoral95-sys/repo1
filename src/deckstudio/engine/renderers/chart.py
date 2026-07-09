@@ -14,7 +14,7 @@ from ...spec.schema import ChartSlide
 from ..charts import add_chart
 from ..geometry import Box, inset
 from ..registry import renderer
-from ..shapes import add_accent_bar, add_rect
+from ..shapes import add_accent_bar, add_chip, add_rect
 from ..text import add_text
 from ._common import add_title_band
 
@@ -22,13 +22,14 @@ from ._common import add_title_band
 @renderer("chart")
 def render(slide, model: ChartSlide, ctx) -> None:
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
 
     if model.insight:
         panel_w = 3.4
         chart_box = Box(area.left_in, area.top_in,
                         area.width_in - panel_w - 0.35, area.height_in - 0.3)
         add_chart(slide, model.chart, chart_box, tokens)
+        _annotate_highlight(slide, model, chart_box, tokens)
         _takeaway_panel(slide, model, tokens,
                         Box(area.right_in - panel_w, area.top_in, panel_w, area.height_in - 0.3))
         return
@@ -40,6 +41,25 @@ def render(slide, model: ChartSlide, ctx) -> None:
         add_text(slide, Box(area.left_in, area.bottom_in - 0.22, area.width_in, 0.22),
                  f"Source: {model.source}", tokens, scale="caption",
                  color="neutral_mid", align=PP_ALIGN.RIGHT)
+
+
+def _annotate_highlight(slide, model: ChartSlide, chart_box: Box, tokens) -> None:
+    """When a point is highlighted, pin an auto-computed delta chip to the
+    chart's top-right — the editorial 'look here' annotation."""
+    hl = model.chart.highlight
+    if hl is None or hl.point == 0:
+        return
+    series = next(s for s in model.chart.series if s.name == hl.series)
+    curr, prev = series.values[hl.point], series.values[hl.point - 1]
+    if curr is None or prev is None or prev == 0:
+        return
+    pct = (curr - prev) / abs(prev) * 100
+    arrow = "▼" if pct < 0 else "▲"
+    label = model.chart.categories[hl.point]
+    text = f"{label}: {arrow} {abs(pct):.1f}%"
+    width_est = 0.105 * len(text) + 0.34
+    add_chip(slide, chart_box.right_in - width_est - 0.1, chart_box.top_in + 0.02,
+             text, tokens, fill="highlight", text_color="primary")
 
 
 def _takeaway_panel(slide, model: ChartSlide, tokens, box: Box) -> None:

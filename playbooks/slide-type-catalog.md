@@ -143,6 +143,32 @@ eyebrow. If you're using it three slides in a row, redesign.
   contact: "questions@soa.org"
 ```
 
+## progress — how far along are we
+1-4 donut gauges. Use for execution status, plan completion, adoption.
+```yaml
+- id: readiness
+  type: progress
+  title: "Rollout workstreams are already moving"
+  items:
+    - {label: "Fee model & pricing", percent: 90}
+    - {label: "Member comms plan", percent: 65}
+  caption: "Percent complete as of July 2026"
+```
+
 ## Universal fields
-Every slide: `id` (unique kebab-case, stable), optional `notes:` (speaker
-notes — put the detail here), optional `animate: none|fade|build`.
+Every slide: `id` (unique kebab-case, stable), optional `kicker:` (small
+letter-spaced eyebrow, e.g. "AT A GLANCE" or "KPI METRICS · 1 OF 2"),
+optional `notes:` (speaker notes — put the detail here), optional
+`animate: none|fade|build`.
+
+## Status & context extras
+- `big_number` stats take `target:` ("FY target 34.0K") and
+  `status: on_track|watch|pending` (colored dot in the card corner).
+- `section` slides take `preview:` — up to 6 `{label, value, status}` rows
+  rendered as a right-side teaser panel of the section's metrics.
+- `chart.highlight` renders the data point in SOA yellow AND pins an
+  auto-computed delta chip to the chart.
+- `comparison.emphasize` adds the navy panel, a RECOMMENDED chip, and a
+  "vs" badge on the seam.
+- `icon_row` icons by name: growth, people, cost, clock, target, shield,
+  idea, alert, doc, globe.

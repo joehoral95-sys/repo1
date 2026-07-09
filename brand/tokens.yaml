@@ -18,10 +18,13 @@ colors:
   neutral_mid: "#64748B"    # captions, footers, muted labels
   neutral_light: "#F0F3F7"  # panel/tile backgrounds (light blue-gray tint)
   accent_tint: "#DDF1FF"    # pale sky — highlighted table cells, soft emphasis
+  warning: "#E9A13B"        # amber — 'watch' status
+  border: "#DCE3EB"         # hairline card borders
+  highlight: "#FFD61A"      # SOA yellow — THE 'look here' color for data points
   white: "#FFFFFF"
   # Chart series colors, applied in order. First = hero series.
-  # SOA theme accents: bright blue, navy, sky, periwinkle, lime, deep blue.
-  chart_series: ["#0051B8", "#0E2841", "#51C8FF", "#8F88F8", "#B3CE36", "#092369"]
+  # SOA theme accents: bright blue, sky, navy, periwinkle, lime, deep blue.
+  chart_series: ["#0051B8", "#51C8FF", "#0E2841", "#8F88F8", "#B3CE36", "#092369"]
 
 fonts:
   # Exactly as named in the SOA theme (Microsoft cloud font family).
