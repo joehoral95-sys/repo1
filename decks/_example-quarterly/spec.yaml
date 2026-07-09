@@ -39,6 +39,7 @@ slides:
     type: big_number
     title: "Membership grew for the 6th straight quarter"
     kicker: "At a glance"
+    animate: build
     stats:
       - value: "33,412"
         label: "Total members"
@@ -69,6 +70,7 @@ slides:
     type: chart
     title: "Exam sittings dipped — but only in prelims"
     kicker: "Exam volumes · 1 of 2"
+    animate: fade
     chart:
       kind: bar_clustered
       categories: ["Q3 25", "Q4 25", "Q1 26", "Q2 26"]
@@ -114,6 +116,7 @@ slides:
   - id: why-now
     type: icon_row
     title: "Three pressures make this the right moment"
+    animate: build
     items:
       - icon: cost
         heading: "Proctoring costs"
@@ -156,6 +159,7 @@ slides:
     type: progress
     title: "Rollout workstreams are already moving"
     kicker: "Execution readiness"
+    animate: build
     items:
       - {label: "Fee model & pricing", percent: 90}
       - {label: "Member comms plan", percent: 65}

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pptx.enum.shapes import MSO_SHAPE
-from pptx.enum.text import PP_ALIGN
+from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
 from ...spec.schema import TimelineSlide
@@ -56,11 +56,18 @@ def render(slide, model: TimelineSlide, ctx) -> None:
         label_left = cx + node_d / 2 - label_w / 2
         label_left = min(max(label_left, area.left_in), area.right_in - label_w)
         above = i % 2 == 0
+        # Date hugs the spine; the label is anchored to grow AWAY from the
+        # date so multi-line labels can never collide with it.
         if ms.date:
-            date_top = spine_y - 0.75 if above else spine_y + 0.35
+            date_top = spine_y - 0.58 if above else spine_y + 0.3
             add_text(slide, Box(label_left, date_top, label_w, 0.3), ms.date, tokens,
                      scale="caption", color="accent", bold=True, align=PP_ALIGN.CENTER)
-        label_top = spine_y - 1.35 if above else spine_y + 0.68
-        add_text(slide, Box(label_left, label_top, label_w, 0.85), ms.label, tokens,
+        if above:
+            label_box = Box(label_left, spine_y - 1.85, label_w, 1.2)
+            anchor = MSO_ANCHOR.BOTTOM
+        else:
+            label_box = Box(label_left, spine_y + 0.64, label_w, 1.2)
+            anchor = MSO_ANCHOR.TOP
+        add_text(slide, label_box, ms.label, tokens,
                  scale="stat_label", color="neutral_dark", align=PP_ALIGN.CENTER,
-                 shrink_to_fit=True)
+                 anchor=anchor, shrink_to_fit=True)

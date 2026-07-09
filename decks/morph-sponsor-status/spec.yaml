@@ -1,0 +1,78 @@
+deck:
+  title: "Project Morph & Personify Upgrade — Executive Sponsor Status"
+  audience: "Executive sponsors (session with Rose)"
+  intent: "Frame the December sponsor discussion: risks to align on, held-code go-live plans, and where the live plans live"
+  tone: "working session, candid"
+  date: "December 2025"
+  footer: "Society of Actuaries · Executive Sponsor Status"
+
+slides:
+  - id: cover
+    type: title
+    title: "Project Morph & Personify Upgrade"
+    subtitle: "Executive Sponsor Status · December 2025"
+    presenter: "Prepared for discussion with Rose"
+
+  - id: agenda
+    type: agenda
+    title: "Today"
+    items:
+      - "Risks & issues — to align with Rose"
+      - "Held code: go-live plans"
+      - "Where the live plans live"
+
+  - id: risks
+    type: comparison
+    title: "Risk registers are the December alignment item"
+    kicker: "Risks & issues"
+    left:
+      heading: "Project Morph"
+      bullets:
+        - "Risk/issue register **to be populated with Rose** in this session"
+        - "Capture: description, owner, mitigation"
+    right:
+      heading: "Personify Upgrade"
+      bullets:
+        - "Same structure, same session"
+        - "Decide which risks rise to sponsor visibility"
+    notes: >
+      Source deck contained empty Risk/Issue/Mitigation tables marked "to
+      discuss with Rose what goes here" for both projects — this slide makes
+      that discussion the explicit agenda item rather than presenting empty
+      tables.
+
+  - id: heldcode
+    type: table
+    title: "Held code: the go-live queue"
+    kicker: "Bonus for December"
+    columns: ["Workstream", "Status note"]
+    rows:
+      - ["Sales Tax", "—"]
+      - ["Certificates", "—"]
+      - ["Global Access Pricing", "On pre-QA, ready for testing"]
+      - ["Membership Future Features", "—"]
+      - ["PDE+ eCommerce", "—"]
+      - ["Profile Permissions", "More people into SF; ready to move up"]
+      - ["PDE Badging Fixes", "OC fix for nested badges"]
+      - ["ListServ fix + ConnectBot change", "Communities"]
+    emphasize_col: 1
+    notes: >
+      Expected go-live dates were blank in the source deck — populate from
+      the Morph project plan before circulating. Original also listed
+      Join/Leave ListServ and ConnectBot as separate rows (combined here).
+
+  - id: references
+    type: table
+    title: "The live plans are on Monday.com"
+    kicker: "Relevant scorecard data"
+    columns: ["Reference", "Where"]
+    rows:
+      - ["Morph Project Plan", "soactuaries.monday.com · board 5435706824"]
+      - ["Personify Upgrade Project Plan", "soactuaries.monday.com · board 18375038914"]
+      - ["Lisa 2025 EI Board", "soactuaries.monday.com · board 7863529593"]
+      - ["Lisa 2026 EI Board", "soactuaries.monday.com · board 18359176527"]
+
+  - id: close
+    type: thanks
+    title: "Thank you"
+    message: "Risk registers to be completed in-session; go-live dates from the project plan."

@@ -1,0 +1,83 @@
+deck:
+  title: morph-status
+  audience: TODO — ask Joe
+  intent: TODO — ask Joe
+slides:
+- id: slide-1
+  type: table
+  title: Project Morph Executive Sponsor Status
+  columns:
+  - Risk/Issue
+  - Description
+  - Mitigation
+  rows:
+  - - To discuss with Rose what goes here
+    - ''
+    - ''
+  - - ''
+    - ''
+    - ''
+- id: slide-2
+  type: table
+  title: Personify Upgrade Executive Sponsor Status
+  columns:
+  - Risk/Issue
+  - Description
+  - Mitigation
+  rows:
+  - - To discuss with Rose what goes here
+    - ''
+    - ''
+  - - ''
+    - ''
+    - ''
+- id: slide-3
+  type: table
+  title: Relevant Scorecard Data
+  columns:
+  - Reference
+  - Link
+  rows:
+  - - Morph Project Plan
+    - https://soactuaries.monday.com/boards/5435706824
+  - - Personify Upgrade Project Plan
+    - https://soactuaries.monday.com/boards/18375038914
+  - - Lisa 2025 EI Board
+    - https://soactuaries.monday.com/boards/7863529593
+  - - Lisa 2026 EI Board
+    - https://soactuaries.monday.com/boards/18359176527
+- id: slide-4
+  type: table
+  title: "Bonus Slide for December:\vGo-Live Plans for Held Code"
+  columns:
+  - Workstream
+  - Expected Go-Live
+  - Comments
+  rows:
+  - - Sales Tax
+    - ''
+    - '3'
+  - - Certificates
+    - ''
+    - '2'
+  - - Global Access Pricing
+    - ''
+    - On pre QA ready for testing 1
+  - - Membership Future Features
+    - ''
+    - ''
+  - - PDE+ eCommerce
+    - ''
+    - ''
+  - - Profile Permissions
+    - ''
+    - more ppl into SF (engagement permissions etc) – ready to move up
+  - - PDE Badging Fixes
+    - ''
+    - OC fix for nested badges
+  - - Join/Leave ListServ Fix for Communities
+    - ''
+    - ''
+  - - ConnectBot Change
+    - ''
+    - ''

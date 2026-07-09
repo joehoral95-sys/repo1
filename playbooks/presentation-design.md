@@ -35,14 +35,13 @@ per comparison/table.
 
 ## Animation discipline
 
-**Animations are OFF by default and opt-in per deck** (`animations: subtle`).
-Hard compatibility fact: renderers other than desktop PowerPoint — iOS
-Quick Look, phone previews, some web viewers — mis-composite animated
-slides (ghosted shapes, hidden panels). Only enable animations for a deck
-that will be PRESENTED from desktop PowerPoint, never for anything that
-will be emailed, previewed on a phone, or read as a document.
+Subtle animations are on by default. Hard compatibility fact: renderers
+other than desktop PowerPoint — iOS Quick Look, phone previews, some web
+viewers — mis-composite animated slides (ghosted shapes, hidden panels).
+Set `animations: off` for any deck that will be read on a phone, emailed
+as a document, or printed.
 
-When they are enabled:
+Per-slide choices:
 - `build` when the *sequence* is the point — options revealed one at a time,
   KPIs landing one by one, a list where each item deserves its beat.
 - `fade` for gentle polish on a slide whose content arrives as one thought.

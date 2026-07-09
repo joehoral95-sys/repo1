@@ -1,0 +1,141 @@
+deck:
+  title: "AI Strategy in 2026: Three Areas of Focus"
+  audience: "SOA Strategy & Execution Team (SET)"
+  intent: "Align SET on the 2026 AI focus areas, activities, and board-facing deliverables"
+  tone: "confident, forward-looking"
+  date: "December 2, 2025"
+  footer: "Society of Actuaries · AI Strategy 2026"
+
+slides:
+  - id: cover
+    type: title
+    title: "AI Strategy in 2026: Three Areas of Focus"
+    subtitle: "Exams · Learning Content · Operations"
+    presenter: "Dale Hall · Alice Locatelli · Ryan Silhavy"
+
+  - id: focus-map
+    type: icon_row
+    title: "Three focus areas, one strategy"
+    animate: build
+    items:
+      - icon: target
+        heading: "Exam & Candidate"
+        text: "Use AI to enhance the exam lifecycle — delivery, grading, and especially candidate feedback."
+      - icon: idea
+        heading: "Learning Content"
+        text: "Expand SOA's position as the trusted hub for actuarial AI thought leadership and learning."
+      - icon: growth
+        heading: "Operations & Staff"
+        text: "Adopt secure off-the-shelf AI tools that measurably improve productivity, with ongoing training."
+
+  - id: sec-focus1
+    type: section
+    title: "Exam Administration & Candidate Success"
+    number: 1
+    subtitle: "Improve learning outcomes, exam experience, and operational efficiency."
+
+  - id: f1-activities
+    type: content
+    title: "2026 is about understanding before buying"
+    kicker: "Focus 1 · Activities"
+    bullets:
+      - "Map exam workflows across **staff and volunteers** and the **candidate journey**"
+      - "Prioritize pain points by impact and what SOA can solve"
+      - "Scan the **ed-tech vendor landscape**"
+      - "Bring a mix of potential partners to SET for evaluation"
+      - "Align on strategic direction and next steps for the board"
+
+  - id: f1-timeline
+    type: timeline
+    title: "Focus 1 builds to a partner recommendation by October"
+    kicker: "Focus 1 · Deliverables"
+    milestones:
+      - {label: "Candidate insights, process map, early vendor scan", date: "Mar 2026"}
+      - {label: "Market research, volunteer report, SET vendor deep-dives", date: "Jun 2026"}
+      - {label: "Unified recommendations + technology partner proposal", date: "Oct 2026"}
+    notes: >
+      March: initial candidate insights report from existing research; exam
+      administration process maps. June: market research with concept stimuli;
+      volunteer process and insights report. October: unified volunteer +
+      candidate report; SET recommendation for technology partner, proposed
+      business model, metrics, timeline, outcomes.
+
+  - id: sec-focus2
+    type: section
+    title: "Learning Content Leadership"
+    number: 2
+    subtitle: "The trusted hub for actuarial AI research, insights, and learning."
+
+  - id: f2-portfolio
+    type: big_number
+    title: "A full-year AI research and content portfolio"
+    kicker: "Focus 2 · Deliverables"
+    animate: build
+    stats:
+      - value: "8"
+        label: "AI research releases"
+        target: "Incl. university-partnered projects"
+        status: on_track
+      - value: "4"
+        label: "Actuarial Intelligence Bulletins"
+        target: "Quarterly employer AI summaries"
+        status: on_track
+      - value: "8"
+        label: "Get Plugged In podcasts on AI"
+        status: on_track
+      - value: "$100K"
+        label: "AI Insights virtual event"
+        target: "Gross revenue target · 255 attendees"
+        status: on_track
+
+  - id: f2-frameworks
+    type: content
+    title: "Research culminates in a future-of-work story for the board"
+    kicker: "Focus 2 · Milestones"
+    bullets:
+      - "**AI Skills & Role Framework** from 50+ professionals — June board meeting"
+      - "**Future-of-actuarial-work report** concludes in October"
+      - "AI programming at all six major meetings; four new PD Edge+ courses"
+      - "Standards voice with **NIST, NAIC, MIT, IAA**"
+    notes: >
+      Framework built on dialogue with technologists, educators, employers,
+      and actuarial leaders; presented with the research team in June.
+      Also: ImpACT workshops, usage & feedback report across PD and Research
+      for the October board meeting.
+
+  - id: sec-focus3
+    type: section
+    title: "Off-Shelf Tools + Staff Training"
+    number: 3
+    subtitle: "Operational excellence through secure, measurable AI adoption."
+
+  - id: f3-deliverables
+    type: content
+    title: "Adoption with guardrails, not experiments"
+    kicker: "Focus 3 · Deliverables"
+    bullets:
+      - "**Standardized adoption playbook** — evaluate, pilot, scale with clear decision criteria"
+      - "**Tool & use-case portfolio** — prioritized pipeline; retire tools that stop earning their keep"
+      - "**Staff training & change support** — raise adoption, reduce change fatigue"
+      - "**Governance & data stewardship** — privacy, security, acceptable use, exam-standard alignment"
+      - "**Operational impact metrics** — time saved, quality, stakeholder satisfaction"
+
+  - id: board-rhythm
+    type: timeline
+    title: "Three board touchpoints anchor the year"
+    kicker: "Looking ahead"
+    milestones:
+      - {label: "Candidate insights & early scans land", date: "Mar 2026"}
+      - {label: "Future-of-work presentation to board", date: "Jun 2026"}
+      - {label: "Partner recommendation + impact report", date: "Oct 2026"}
+
+  - id: takeaway
+    type: quote
+    text: "By October 2026, SET brings the board a technology-partner recommendation and a measured read on AI's impact across exams, learning, and operations."
+    attribution: "AI Strategy 2026"
+
+  - id: close
+    type: thanks
+    title: "Thank you"
+    message: "Full activity detail by focus area available from the strategy team."
+    contact: "Dale Hall · Alice Locatelli · Ryan Silhavy"

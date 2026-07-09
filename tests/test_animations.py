@@ -1,6 +1,6 @@
-"""Animations are OPT-IN (deck.animations: subtle). Default decks ship with
-no timing XML at all — several renderers (iOS Quick Look, web previews)
-mis-composite animated slides, so static is the safe default."""
+"""Animations are on by default (subtle) and disabled per deck with
+animations: off — required for decks read on phones/web previews, whose
+renderers mis-composite animated slides."""
 
 from lxml import etree
 from pptx import Presentation
@@ -29,9 +29,13 @@ def _timing_elements(pptx_path):
     return [sl._element.find(f"{{{P_NS}}}timing") for sl in prs.slides]
 
 
-def test_default_decks_have_no_timing(built_example):
-    """The golden deck opts out (default) — zero timing XML anywhere."""
-    assert all(t is None for t in _timing_elements(built_example.output_path))
+def test_golden_deck_animates_marked_slides_only(built_example, example_spec):
+    timings = _timing_elements(built_example.output_path)
+    for i, model in enumerate(example_spec.slides):
+        if model.animate != "none":
+            assert timings[i] is not None, f"slide '{model.id}' should have timing"
+        else:
+            assert timings[i] is None, f"slide '{model.id}' should NOT have timing"
 
 
 def test_opt_in_animations_present_only_on_animated_slides(tmp_path):

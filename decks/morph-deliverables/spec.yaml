@@ -1,0 +1,63 @@
+deck:
+  title: "Project Morph — Steering Committee"
+  audience: "Project Morph steering committee (Carla Carry, Rose Fealy, Greg Heidrich, Ken Guthrie, Courtney Nashan)"
+  intent: "Walk the committee through the risk-reduction pathway and its workstreams"
+  tone: "steering-committee, factual"
+  date: "October 21, 2025"
+  footer: "Society of Actuaries · Project Morph Steering Committee"
+
+slides:
+  - id: cover
+    type: title
+    title: "Project Morph: The Risk-Reduction Pathway"
+    subtitle: "Steering Committee Update"
+    presenter: "Alice Locatelli, Managing Director, Experience"
+
+  - id: committee
+    type: icon_row
+    title: "Who steers this work"
+    items:
+      - icon: people
+        heading: "Steering committee"
+        text: "Carla Carry, Rose Fealy, Greg Heidrich, Ken Guthrie, Courtney Nashan."
+      - icon: doc
+        heading: "This deck"
+        text: "The overall plan as a pathway of workstreams, from open items to the optional Personify upgrade."
+      - icon: clock
+        heading: "Horizon"
+        text: "Q4 2025 through 2027, with future items parked explicitly."
+
+  - id: pathway
+    type: table
+    title: "Eight workstreams, sequenced to reduce risk first"
+    kicker: "Overall project plan"
+    columns: ["Workstream", "Lead"]
+    rows:
+      - ["Complete open items: Membership, Sales Tax, eCommerce, Exam Sales, GAP", "Tech Team"]
+      - ["Document detailed prioritization list with complete info", "Tech Leadership"]
+      - ["Mobilize team & vendors for LMS1/Meridian move", "Tech Leadership"]
+      - ["eCommerce", "—"]
+      - ["Plan & implement high-priority features", "—"]
+      - ["Plan & implement medium/low/future features", "—"]
+      - ["Manual workarounds for key business processes", "—"]
+      - ["Personify upgrade (if needed)", "—"]
+    notes: >
+      The source slide showed these as a quarter-by-quarter Gantt (Q4 2025
+      through Q4 2027 + TBD/Future); the bar timings were drawn as shapes and
+      did not survive extraction. Re-attach quarter ranges from the Morph
+      project plan on Monday.com before presenting — do not improvise them.
+
+  - id: sequencing
+    type: content
+    title: "Read the pathway as risk retired early, value layered after"
+    bullets:
+      - "First: **close open items** and lock a complete, prioritized backlog"
+      - "In parallel: **mobilize for the LMS1/Meridian move** — the long pole"
+      - "Then: features in priority order, with **manual workarounds** protecting key processes"
+      - "The **Personify upgrade stays conditional** — an option, not a commitment"
+
+  - id: close
+    type: thanks
+    title: "Thank you"
+    message: "Quarter-level timing lives in the Morph project plan on Monday.com."
+    contact: "Alice Locatelli · Managing Director, Experience"

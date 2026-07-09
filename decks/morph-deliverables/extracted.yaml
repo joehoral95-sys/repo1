@@ -1,0 +1,118 @@
+deck:
+  title: morph-deliverables
+  audience: TODO — ask Joe
+  intent: TODO — ask Joe
+slides:
+- id: slide-1
+  type: content
+  title: "Project Morph\vSteering Committee"
+  bullets:
+  - Alice Locatelli
+  - Managing Director, Experience
+  - October 21, 2025
+  - 'PROJECT STEERING COMMITTEE:'
+  - Carla Carry, Rose Fealy, Greg Heidrich, Ken Guthrie, Courtney Nashan
+- id: slide-2
+  type: table
+  title: Overall Project Plan – Risk Reduction Pathway
+  columns:
+  - ''
+  - Q4 2025
+  - Q1 2026
+  - Q2 2026
+  - Q3 2026
+  - Q4 2026
+  - Q1 2027
+  - Q2 2027
+  - Q3 2027
+  - Q4 2027
+  - TBD/ Future
+  rows:
+  - - 'Complete open items: Membership, Sales Tax, eCommerce, Exam Sales, GAP, etc. (Tech Team)'
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Document detailed list for prioritization with complete info (Tech Leadership)
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Mobilize team and vendors for LMS1/Meridian move (Tech Leadership)
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - eCommerce
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Plan & Implement High Priority Features
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Plan & Implement Medium; Low; Future Features
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Plan & Implement Manual Workarounds for key business processes
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - - Personify Upgrade (if needed)
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''

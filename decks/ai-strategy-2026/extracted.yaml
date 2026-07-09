@@ -1,0 +1,144 @@
+deck:
+  title: ai-strategy
+  audience: TODO — ask Joe
+  intent: TODO — ask Joe
+slides:
+- id: slide-1
+  type: content
+  title: "AI Strategy in 2026\vAreas of Focus"
+  bullets:
+  - December 2, 2025
+  - Dale Hall
+  - Alice Locatelli
+  - Ryan Silhavy
+  - AI Strategy in 2026 Areas of Focus
+  - December 2, 2025
+  - Dale Hall
+  - Alice Locatelli
+  - Ryan Silhavy
+- id: slide-2
+  type: content
+  title: 'AI Strategy: Focus 1'
+  bullets:
+  - Explore how AI can enhance the exam lifecycle (delivery, grading, and especially candidate 
+    feedback) to improve learning outcomes, exam experience, and operational efficiency.
+  - Exam Administration & Candidate Success
+  - Map exam workflows (staff and volunteers)
+  - Document the candidate journey
+  - Prioritize pain points based on impact and what SOA can solve
+  - Scan the ed-tech vendor landscape
+  - Identify mix of potential partners for evaluation by SET
+  - Align on strategic direction, next steps to present to board
+  - Objective
+  - Activities
+- id: slide-3
+  type: content
+  title: 'AI Strategy: Focus 1'
+  bullets:
+  - Exam Administration & Candidate Success
+  - Deliverables
+  - March 2026
+  - Initial candidate insights report (pain points, needs, ideas, etc.) based on existing research
+  - Map exam administration processes (volunteers, staff, etc.) and uncover insights (pain points, 
+    needs, ideas, etc.)
+  - Early vendor market scan
+  - June 2026
+  - Market research for candidate insights (including concept stimuli)
+  - Volunteer process and insights report
+  - SET deep-dives with potential technology vendors
+  - October 2026
+  - Unified volunteer + candidate insights report with recommendations
+  - SET recommendation for technology partner + development next steps
+  - Proposed business model, metrics, timeline, outcomes
+- id: slide-4
+  type: content
+  title: 'AI Strategy: Focus 2'
+  bullets:
+  - Continue to expand SOA’s position as a trusted hub for actuarial AI thought leadership, industry
+    research/insights and learning content.
+  - Learning Content Leadership
+  - Conduct / publish AI-focuses research and participate in future-looking technology groups
+  - Determine how AI is reshaping actuarial roles
+  - Align professional development (and ultimately, credentialing) with AI use in industry
+  - Translate research and insights into valuable learning experiences
+  - Help stakeholders navigate risks and opportunities that AI brings
+  - Objective
+  - Activities
+- id: slide-5
+  type: content
+  title: 'AI Strategy: Focus 2'
+  bullets:
+  - June 2026
+  - October 2026
+  - Learning Content Leadership
+  - Deliverables
+  - AI Skills & Role Framework and Future of Work
+  - Defined “AI skills for actuaries” and future-role scenarios based on dialogue with 
+    technologists, educators, employers, and actuarial leaders (50+ professionals).
+  - Quarterly summaries on AI usage, opportunities, and work impact by key actuarial employers
+  - Presentation in conjunction with research team at June Board Meeting
+  - Concluding Report on Implication on Future of Actuarial Work
+  - Research & Thought Leadership Portfolio
+  - Expanded library of AI-related research reports, essays, and case studies, including 
+    partnerships with AI research universities collaborators.
+  - 8 AI research project releases
+  - 4 Actuarial Intelligence Bulletins
+  - 8 new Get Plugged In podcasts on AI
+  - 2 University-Partnered Projects on future AI tools
+- id: slide-6
+  type: content
+  title: 'AI Strategy: Focus 2'
+  bullets:
+  - Learning Content Leadership
+  - Deliverables
+  - Integrated Learning Experiences
+  - AI-related at each of our six major actuarial meetings, and workshop(s) at ImpACT
+  - Successful AI Insights virtual event with at least $100K in gross revenue; target of 255 
+    attendees;
+  - Four additional new AI-related courses on PD Edge+
+  - Global Influence & Standards Engagement
+  - Contributions to implementation, explainability, and governance discussions with bodies such as 
+    NIST, NAIC, MIT, and IAA, bringing an actuarial lens to AI standards.
+  - Impact & Engagement Metrics
+  - Targets and tracking for participation, content usage, and stakeholder feedback to continually 
+    refine our AI learning portfolio.
+  - Usage and Feedback report across all PD and Research for October 2026 Board Meeting
+- id: slide-7
+  type: content
+  title: 'AI Strategy: Focus 3'
+  bullets:
+  - Drive operational excellence by adopting secure, off-the-shelf AI tools that measurably improve 
+    productivity and stakeholder experiences. Provide ongoing training opportunities on effective, 
+    responsible use of these tools.
+  - Off-Shelf Tool Adoption + Staff Training
+  - Ongoing training, coaching, and sharing throughout the SOA
+  - Consistent evaluation, piloting, and implementation of new tools / uses
+  - Prioritize high-impact, low-risk use cases
+  - Ensure off-shelf tools integrate effectively with SOA’s core systems and data strategy
+  - Feedback loops (surveys, usage)
+  - Objective
+  - Activities
+- id: slide-8
+  type: content
+  title: 'AI Strategy: Focus 3'
+  bullets:
+  - June 2026
+  - October 2026
+  - Off-Shelf Tool Adoption + Staff Training
+  - Deliverables
+  - Standardized Adoption Playbook
+  - Documented process for evaluating, piloting, and scaling tools (e.g., productivity assistants, 
+    customer service automation, creative tools) with clear decision criteria.
+  - Tool & Use-Case Portfolio
+  - Prioritized pipeline of off-the-shelf tools that reduce manual work, speed up processes, and 
+    enhance member/candidate experience, retiring/eliminating tools no longer driving organizational
+    value
+  - Staff Training & Change Support
+  - Ongoing training programs and guidance materials to increase adoption, ensure responsible use, 
+    and reduce change fatigue.
+  - Governance & Data Stewardship
+  - Guardrails for data privacy, security, and acceptable use; alignment with broader responsible AI
+    principles and exam-related standards.
+  - Operational Impact Metrics
+  - Measures of time saved, quality improvements, and stakeholder satisfaction to inform future 
+    investments.
