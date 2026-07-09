@@ -18,8 +18,9 @@ from ._common import add_title_band
 def render(slide, model: ComparisonSlide, ctx) -> None:
     """Variants: panels (filled cards) | open (airy, divider line only)."""
     tokens = ctx.tokens
-    variant = ctx.variant(model)
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    variant, chrome = ctx.variant_parts(model)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     left_col, right_col = columns(area, 2, tokens.gutter_in + 0.35)
     if variant == "open":
         _open_side(slide, left_col, model.left, tokens,

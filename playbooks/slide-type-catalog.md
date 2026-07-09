@@ -161,26 +161,37 @@ letter-spaced eyebrow, e.g. "AT A GLANCE" or "KPI METRICS · 1 OF 2"),
 optional `notes:` (speaker notes — put the detail here), optional
 `animate: none|fade|build` (build reveals in at most 3 clicks).
 
-## Layout variants (`variant:`)
-Every type has multiple compositions. OMIT the field and the engine picks a
-deck-deterministic default — different decks automatically look different.
-Set it only when a specific look serves the slide:
+## Layout variants (`variant:`) — 101 total
+Two axes: a **composition** per type, and for the eight standard-chrome
+types a **title chrome** (`left`, `centered`, `banner` = navy title band,
+`tint` = pale-sky title band), written `composition/chrome` (a bare
+composition auto-picks the chrome).
 
-| type | variants (first = canonical) |
-|---|---|
-| title | band, band-left, watermark, minimal |
-| section | chip, giant, band, minimal |
-| agenda | band, list, grid |
-| big_number | cards (navy hero first), uniform, dark |
-| chart | exhibit (panel right), panel-left, strip |
-| comparison | panels, open |
-| icon_row | centered, rows |
-| quote | card, dark, light |
-| table | banded, open |
-| timeline | spine, vertical (best for long labels) |
-| content | bullets, columns, numbered |
-| progress | rings, bars |
-| thanks | circle, band, minimal |
+OMIT the field and the engine chooses SMARTLY: it filters to compositions
+that suit the content (long timeline labels → vertical; 4 stats → no hero
+card; wordy icon rows → stacked; long quotes → card; dense comparisons →
+panels; 6+ table rows → banded; section with preview → chip/band...) and a
+deck-seeded hash breaks the tie so different decks still look different.
+Set it only when a specific look serves the slide.
+
+| type | compositions | chrome axis |
+|---|---|---|
+| title | band, band-left, watermark, minimal | — |
+| section | chip, giant, band, minimal | — |
+| agenda | band, list, grid | — |
+| quote | card, dark, light | — |
+| thanks | circle, band, minimal | — |
+| big_number | cards (navy hero first), uniform, dark | ×4 |
+| chart | exhibit (panel right), panel-left, strip | ×4 |
+| comparison | panels, open | ×4 |
+| icon_row | columns, rows, cards | ×4 |
+| table | banded, open | ×4 |
+| timeline | spine, vertical | ×4 |
+| content | bullets, columns, numbered, cards | ×4 |
+| progress | rings, bars | ×4 |
+
+Example: `variant: exhibit/banner`, `variant: numbered/tint`, or just
+`variant: vertical` (chrome auto-picked).
 
 ## Status & context extras
 - `big_number` stats take `target:` ("FY target 34.0K") and

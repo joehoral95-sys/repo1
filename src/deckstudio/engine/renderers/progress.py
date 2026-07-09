@@ -16,10 +16,12 @@ from ._common import add_title_band
 def render(slide, model: ProgressSlide, ctx) -> None:
     """Variants: rings (donut gauges) | bars (horizontal percent bars)."""
     tokens = ctx.tokens
-    if ctx.variant(model) == "bars":
-        _bars(slide, model, ctx)
+    comp, chrome = ctx.variant_parts(model)
+    if comp == "bars":
+        _bars(slide, model, ctx, chrome)
         return
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     n = len(model.items)
     caption_pad = 0.55 if model.caption else 0.0
     ring_area = Box(area.left_in, area.top_in, area.width_in,
@@ -34,7 +36,7 @@ def render(slide, model: ProgressSlide, ctx) -> None:
                  align=PP_ALIGN.CENTER, shrink_to_fit=True)
 
 
-def _bars(slide, model: ProgressSlide, ctx) -> None:
+def _bars(slide, model: ProgressSlide, ctx, chrome: str = "left") -> None:
     from pptx.enum.shapes import MSO_SHAPE
     from pptx.enum.text import MSO_ANCHOR
     from pptx.util import Inches
@@ -42,7 +44,8 @@ def _bars(slide, model: ProgressSlide, ctx) -> None:
     from ..geometry import rows as grid_rows
 
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     caption_pad = 0.55 if model.caption else 0.0
     bar_area = Box(area.left_in, area.top_in + 0.3, area.width_in,
                    area.height_in - caption_pad - 0.5)

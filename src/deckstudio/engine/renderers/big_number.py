@@ -13,8 +13,9 @@ from ._common import add_title_band
 def render(slide, model: BigNumberSlide, ctx) -> None:
     """Variants: cards (navy hero first), uniform (all light), dark (all navy)."""
     tokens = ctx.tokens
-    variant = ctx.variant(model)
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    variant, chrome = ctx.variant_parts(model)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     n = len(model.stats)
     if n == 1:
         _solo_hero(slide, area, model.stats[0], tokens)

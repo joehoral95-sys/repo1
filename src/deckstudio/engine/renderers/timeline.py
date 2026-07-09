@@ -17,10 +17,12 @@ from ._common import add_title_band
 def render(slide, model: TimelineSlide, ctx) -> None:
     """Variants: spine (horizontal) | vertical (stacked rows, long labels)."""
     tokens = ctx.tokens
-    if ctx.variant(model) == "vertical":
-        _vertical(slide, model, ctx)
+    comp, chrome = ctx.variant_parts(model)
+    if comp == "vertical":
+        _vertical(slide, model, ctx, chrome)
         return
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     n = len(model.milestones)
     spine_y = area.top_in + area.height_in * 0.42
     node_d = 0.34
@@ -77,11 +79,12 @@ def render(slide, model: TimelineSlide, ctx) -> None:
                  anchor=anchor, shrink_to_fit=True)
 
 
-def _vertical(slide, model: TimelineSlide, ctx) -> None:
+def _vertical(slide, model: TimelineSlide, ctx, chrome: str = "left") -> None:
     from ..geometry import rows as grid_rows
 
     tokens = ctx.tokens
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     node_d = 0.3
     rail_x = area.left_in + 2.15
     next_idx = next((i for i, ms in enumerate(model.milestones) if not ms.done), None)

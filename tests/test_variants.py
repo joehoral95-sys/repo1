@@ -59,7 +59,8 @@ def test_variant_builds(slide_type, variant, tmp_path):
                  "animations": "off"},
         "slides": [body],
     })
-    result = build_deck(spec, output_dir=tmp_path, deck_name=f"{slide_type}-{variant}")
+    safe = variant.replace("/", "-")
+    result = build_deck(spec, output_dir=tmp_path, deck_name=f"{slide_type}-{safe}")
     assert result.output_path.exists()
     assert result.warnings == [], result.warnings
 
@@ -77,3 +78,57 @@ def test_defaults_differ_across_decks():
     picks_b = tuple(resolve_variant(t, None, "Deck Bravo") for t in VARIANTS)
     picks_c = tuple(resolve_variant(t, None, "Deck Charlie") for t in VARIANTS)
     assert len({picks_a, picks_b, picks_c}) >= 2
+
+
+def test_variant_count_at_least_100():
+    from deckstudio.engine.variants import TOTAL_VARIANTS
+
+    assert TOTAL_VARIANTS >= 100, TOTAL_VARIANTS
+
+
+def _resolve_for(slide_type, body, title="Smart Deck"):
+    from deckstudio.spec.schema import DeckSpec
+
+    spec = DeckSpec.model_validate({
+        "deck": {"title": title, "audience": "a", "intent": "i"},
+        "slides": [dict(body, id="s1", type=slide_type)],
+    })
+    return resolve_variant(slide_type, None, title, model=spec.slides[0])
+
+
+def test_smart_long_timeline_labels_go_vertical():
+    v = _resolve_for("timeline", {
+        "title": "T", "milestones": [
+            {"label": "A very long milestone label that would wrap badly", "date": "Q1"},
+            {"label": "Another verbose milestone description here", "date": "Q2"}]})
+    assert v.startswith("vertical/")
+
+
+def test_smart_four_stats_never_hero():
+    stat = {"value": "1", "label": "x"}
+    v = _resolve_for("big_number", {"title": "T", "stats": [stat] * 4})
+    assert v.split("/")[0] in ("uniform", "dark")
+
+
+def test_smart_wordy_icon_row_goes_rows():
+    v = _resolve_for("icon_row", {"title": "T", "items": [
+        {"heading": "A", "text": "x" * 120},
+        {"heading": "B", "text": "short"}]})
+    assert v.startswith("rows/")
+
+
+def test_smart_long_quote_uses_card():
+    v = _resolve_for("quote", {"text": "q" * 200})
+    assert v == "card"
+
+
+def test_smart_section_with_preview_supports_it():
+    v = _resolve_for("section", {
+        "title": "T", "number": 1,
+        "preview": [{"label": "m", "value": "1"}]})
+    assert v in ("chip", "band")
+
+
+def test_smart_choices_stable_across_builds():
+    body = {"title": "T", "stats": [{"value": "1", "label": "x"}] * 3}
+    assert _resolve_for("big_number", body) == _resolve_for("big_number", body)

@@ -22,8 +22,9 @@ from ._common import add_title_band
 @renderer("content")
 def render(slide, model: ContentSlide, ctx) -> None:
     tokens = ctx.tokens
-    variant = ctx.variant(model)
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    variant, chrome = ctx.variant_parts(model)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     items: list = []
     for b in model.bullets:
         if isinstance(b, Bullet):
@@ -55,6 +56,25 @@ def render(slide, model: ContentSlide, ctx) -> None:
                                 row.width_in - sq - 0.35, row.height_in),
                      text, tokens, scale="body", color="neutral_dark",
                      anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+        return
+
+    if variant == "cards":
+        flat = [(i[0] if isinstance(i, tuple) else i) for i in items]
+        ncols = 2
+        nrows = (len(flat) + ncols - 1) // ncols
+        idx = 0
+        for r in grid_rows(Box(area.left_in, area.top_in + 0.1, area.width_in,
+                               area.height_in - 0.2), max(nrows, 2), 0.25):
+            for col in grid_columns(r, ncols, 0.25):
+                if idx >= len(flat):
+                    break
+                add_rect(slide, col, tokens, fill="neutral_light", rounded=True,
+                         corner=0.08, outline="border")
+                add_text(slide, Box(col.left_in + 0.3, col.top_in + 0.15,
+                                    col.width_in - 0.6, col.height_in - 0.3),
+                         flat[idx], tokens, scale="body", color="neutral_dark",
+                         anchor=MSO_ANCHOR.MIDDLE, shrink_to_fit=True)
+                idx += 1
         return
 
     add_bullets(slide, area, items, tokens)

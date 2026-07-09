@@ -35,10 +35,17 @@ class RenderContext:
 
     def variant(self, model) -> str:
         """The layout variant to render for this slide (spec override or
-        deck-deterministic default)."""
+        smart content-aware default)."""
         from .variants import resolve_variant
 
-        return resolve_variant(model.type, model.variant, self.deck.title, self.warn)
+        return resolve_variant(model.type, model.variant, self.deck.title,
+                               model=model, warn=self.warn)
+
+    def variant_parts(self, model) -> tuple[str, str]:
+        """(composition, chrome) for standard-chrome slide types."""
+        from .variants import split_variant
+
+        return split_variant(model.type, self.variant(model))
 
 
 @dataclass

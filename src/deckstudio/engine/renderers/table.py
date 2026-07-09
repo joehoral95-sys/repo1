@@ -15,8 +15,10 @@ from ._common import add_title_band
 def render(slide, model: TableSlide, ctx) -> None:
     """Variants: banded (striped rows) | open (clean white rows)."""
     tokens = ctx.tokens
-    banding = ctx.variant(model) == "banded"
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    comp, chrome = ctx.variant_parts(model)
+    banding = comp == "banded"
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
     nrows = len(model.rows) + 1
     ncols = len(model.columns)
     # Short tables get roomier rows so they don't huddle under the title.

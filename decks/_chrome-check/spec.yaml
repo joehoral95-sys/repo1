@@ -1,0 +1,37 @@
+deck:
+  title: "Chrome Check"
+  audience: "internal"
+  intent: "qa"
+  animations: off
+slides:
+  - id: banner-demo
+    type: big_number
+    variant: uniform/banner
+    title: "Banner chrome puts the title on navy"
+    kicker: "Chrome · banner"
+    stats:
+      - {value: "1", label: "one", status: on_track}
+      - {value: "2", label: "two", status: watch}
+      - {value: "3", label: "three", status: pending}
+  - id: tint-demo
+    type: content
+    variant: numbered/tint
+    title: "Tint chrome uses the pale sky band"
+    kicker: "Chrome · tint"
+    bullets: ["First point", "Second point", "Third point"]
+  - id: centered-demo
+    type: progress
+    variant: bars/centered
+    title: "Centered chrome centers the title"
+    kicker: "Chrome · centered"
+    items:
+      - {label: "One", percent: 70}
+      - {label: "Two", percent: 30}
+  - id: cards-demo
+    type: icon_row
+    variant: cards/left
+    title: "Icon cards composition"
+    items:
+      - {icon: growth, heading: "Growth", text: "Card one text."}
+      - {icon: shield, heading: "Safety", text: "Card two text."}
+      - {icon: idea, heading: "Ideas", text: "Card three text."}

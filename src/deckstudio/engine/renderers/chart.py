@@ -24,8 +24,9 @@ def render(slide, model: ChartSlide, ctx) -> None:
     """Variants (with insight): exhibit (panel right), panel-left, strip
     (insight strip under a full-width chart). Without insight: full-width."""
     tokens = ctx.tokens
-    variant = ctx.variant(model)
-    area = add_title_band(slide, tokens, model.title, kicker=model.kicker)
+    variant, chrome = ctx.variant_parts(model)
+    area = add_title_band(slide, tokens, model.title, kicker=model.kicker,
+                          style=chrome)
 
     if model.insight and variant == "strip":
         strip_pad = 0.6 + (0.25 if model.source else 0.0)
