@@ -1,0 +1,180 @@
+deck:
+  title: "Q2 2026 Membership & Exam Fee Proposal"
+  audience: "SOA Board of Directors"
+  intent: "Get Board approval of the 4% exam-fee adjustment effective January 2027"
+  tone: "confident, decision-first"
+  date: "July 2026"
+  footer: "Society of Actuaries · Board Meeting · July 2026"
+
+slides:
+  - id: cover
+    type: title
+    title: "Membership Is Strong – The Fee Decision Is Today"
+    subtitle: "Q2 2026 Update · July Board Meeting"
+    presenter: "Prepared by the CEO's Office"
+
+  - id: agenda
+    type: agenda
+    title: "Today"
+    items:
+      - "Membership trend"
+      - "Exam volumes"
+      - "Fee proposal"
+      - "Decision needed"
+
+  - id: sec-membership
+    type: section
+    title: "Membership"
+    number: 1
+    subtitle: "The longest growth streak since 2019 – and where exam volumes softened."
+    preview:
+      - {label: "Total members", value: "33,412", status: on_track}
+      - {label: "New FSAs YTD", value: "1,204", status: on_track}
+      - {label: "Lapse rate", value: "4.3%", status: on_track}
+      - {label: "Prelim sittings", value: "7,410", status: watch}
+
+  - id: membership-kpis
+    type: big_number
+    title: "Membership grew for the 6th straight quarter"
+    kicker: "At a glance"
+    animate: build
+    stats:
+      - value: "33,412"
+        label: "Total members"
+        delta: "+2.1% vs Q1"
+        arrow: up
+        sentiment: good
+        target: "FY target 34.0K"
+        status: on_track
+      - value: "1,204"
+        label: "New FSAs YTD"
+        delta: "+9% vs 2025 pace"
+        arrow: up
+        sentiment: good
+        target: "FY target 2.6K"
+        status: on_track
+      - value: "4.3%"
+        label: "Lapse rate"
+        delta: "-0.4 pts"
+        arrow: down
+        sentiment: good
+        target: "FY target 4.5%"
+        status: on_track
+    notes: >
+      Longest growth streak since 2019. If asked about drivers: international
+      candidates and the associate pathway. Numbers from
+      q2-2026-membership-exam-volumes and the fee-proposal memo.
+
+  - id: exam-trend
+    type: chart
+    title: "Exam sittings dipped – but only in prelims"
+    kicker: "Exam volumes · 1 of 2"
+    animate: fade
+    chart:
+      kind: bar_clustered
+      categories: ["Q3 25", "Q4 25", "Q1 26", "Q2 26"]
+      series:
+        - name: "Preliminary exams"
+          values: [8120, 8340, 7980, 7410]
+        - name: "Fellowship exams"
+          values: [2210, 2190, 2260, 2300]
+      highlight: {series: "Preliminary exams", point: 3}
+      number_format: "#,##0"
+    insight: "Fellowship demand is rising – the dip is an entry-pipeline issue, not retention."
+    source: "SOA exam registration system, 2026-06-30"
+    notes: "If asked: prelim dip correlates with the university calendar shift."
+
+  - id: pipeline-mix
+    type: chart
+    title: "Two-thirds of new candidates now come through universities"
+    kicker: "Exam volumes · 2 of 2"
+    chart:
+      kind: doughnut
+      categories: ["University programs", "Employer-sponsored", "Independent"]
+      series:
+        - name: "Candidates"
+          values: [66, 24, 10]
+    insight: "University partnerships are the front door – protect them, and the calendar shift explains the prelim dip."
+    source: "SOA candidate intake analysis, Q2 2026"
+
+  - id: exam-detail
+    type: table
+    title: "Prelim volumes by exam: P and FM carry the dip"
+    columns: ["Exam", "Q1 26", "Q2 26", "Change"]
+    rows:
+      - ["Exam P",   "2,410", "2,180", "-9.5%"]
+      - ["Exam FM",  "2,205", "1,990", "-9.8%"]
+      - ["Exam FAM", "1,830", "1,780", "-2.7%"]
+      - ["Exam ALTAM", "790", "775",   "-1.9%"]
+    emphasize_col: 3
+    notes: "P and FM are ~62% of Q2 prelim volume – concentration finding from insights.md."
+
+  - id: sec-proposal
+    type: section
+    title: "The fee proposal"
+    number: 2
+    subtitle: "Cover rising delivery cost without pricing above peers."
+
+  - id: why-now
+    type: icon_row
+    title: "Three pressures make this the right moment"
+    animate: build
+    items:
+      - icon: cost
+        heading: "Proctoring costs"
+        text: "Vendor costs up 12% since 2024; current fees no longer cover delivery."
+      - icon: target
+        heading: "Peer benchmark"
+        text: "Our exam fees sit 8-15% below comparable credentialing bodies."
+      - icon: people
+        heading: "Member value"
+        text: "Revenue funds the digital study platform members asked for."
+
+  - id: fee-comparison
+    type: comparison
+    title: "Two paths on exam fees"
+    left:
+      heading: "Hold fees flat"
+      bullets:
+        - "No candidate friction"
+        - "**-$1.2M** vs plan in 2027"
+        - "Revisit under pressure in Q4"
+    right:
+      heading: "Raise 4% (recommended)"
+      bullets:
+        - "Covers proctoring cost growth"
+        - "Still below peer bodies"
+        - "**+$0.9M** to plan, funds study platform"
+    emphasize: right
+    badge: "Recommended"
+
+  - id: rollout
+    type: timeline
+    title: "Approval today puts new fees in place for the spring sitting"
+    milestones:
+      - {label: "Board approval", date: "Jul 2026", done: false}
+      - {label: "Member communication", date: "Sep 2026", done: false}
+      - {label: "Registration opens", date: "Nov 2026", done: false}
+      - {label: "New fees effective", date: "Jan 2027", done: false}
+
+  - id: readiness
+    type: progress
+    title: "Rollout workstreams are already moving"
+    kicker: "Execution readiness"
+    animate: build
+    items:
+      - {label: "Fee model & pricing", percent: 90}
+      - {label: "Member comms plan", percent: 65}
+      - {label: "Registration systems", percent: 40}
+    caption: "Percent complete as of July 2026 – all workstreams on schedule for the January effective date."
+
+  - id: ask
+    type: quote
+    text: "We ask the Board to approve the 4% exam-fee adjustment effective January 2027."
+    attribution: "Decision requested today"
+
+  - id: close
+    type: thanks
+    title: "Thank you"
+    message: "Full financial model and sensitivity analysis available in the appendix pack."
+    contact: "questions@soa.org"
